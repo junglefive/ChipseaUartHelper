@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace ChipseaUartHelper
 {
@@ -46,7 +49,7 @@ namespace ChipseaUartHelper
         *function:初始化串口部分
         *by:junglefive
         **/
-        private User_initiate_serialPort(){
+        private void User_initiate_serialPort(){
             //serialPortNames
             ports = SerialPort.GetPortNames(); //获取当前可用串口
             if(ports.Length>0){
@@ -61,24 +64,103 @@ namespace ChipseaUartHelper
            
             //baudRate
             string[] baudRates = {"1200","2400","4800","9600","14400","19200","28800","57600","115200" };
-            foreach( string baudrate in baudRates){
+            foreach (string baudrate in baudRates)
+            {
                 box_baudRate.Items.Add(baudrate);
             }
+
+            //databits
+            string[] strDataBits = {"5","6","7","8" };
+            foreach (string str in strDataBits) {
+                box_dataBits.Items.Add(str);
+            }
             //parity
-            Hashtable htParity = new Hashtable();
-            htParity.add("none" , 0);
-            htParity.add("odd"  , 1);
-            htParity.add("even" , 2);
-            htParity.add("mark" , 3);
-            htParity.add("space", 4);
-            string[] strParity = null;
-            ;//此处如果能够遍历Key，就可不用数组中转
-            htParity.Keys.CopyTo(strParity, 0);
-            foreach(string parity in strParity){
-                box_Parity.Items.add(parity);
+            Dictionary<string, int> dicParity = new Dictionary<string, int>();
+            dicParity.Add("none" , 0);
+            dicParity.Add("odd"  , 1);
+            dicParity.Add("even" , 2);
+            dicParity.Add("mark" , 3);
+            dicParity.Add("space", 4);
+            foreach (KeyValuePair<string, int> dic in dicParity) {
+                box_parity.Items.Add(dic.Key);
+            }
+            //StopBits
+            String[] strStopBits = { "1","1.5", "2"};
+            foreach (string str in strStopBits) {
+                box_stopBits.Items.Add(str);
+            }
+           
+
+        }
+        private void user_initiate_default() {
+            //box_default
+            box_portName.Text = "COM1";
+            box_baudRate.Text = "9600";
+            box_dataBits.Text = "8";
+            box_stopBits.Text = "1";
+            box_parity.Text = "none";
+            //btn_default
+            ComPort.DataReceived +=new SerialDataReceivedEventHandler( ComPort_DataReceived);
+            
+
+        }
+
+        private void ComPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            User_initiate_serialPort();
+            user_initiate_default();
+        }
+
+        private void btn_open_close_Click(object sender, RoutedEventArgs e)
+        {
+            if (ComPort.IsOpen)
+            {
+                
+                 
+                ComPort.Close();
+                btn_open_close.Content = "Open";
             }
 
+            else {
+                    try
+                    {
+                        ComPort.PortName = box_portName.SelectedValue.ToString();
+                        ComPort.BaudRate = Convert.ToInt32(box_baudRate.SelectedValue.ToString());
+                        ComPort.DataBits = Convert.ToInt32(box_dataBits.SelectedValue.ToString());
+                        ComPort.StopBits = (StopBits)Convert.ToDouble(box_stopBits.SelectedValue.ToString());
+                        ComPort.Parity = (Parity)Convert.ToInt32(box_parity.SelectedValue.ToString());
+                        ComPort.Open();
+                        btn_open_close.Content = "Close";
+                    }
+                    catch{
+                        MessageBox.Show("Can't Open "+ComPort.PortName, "Warnning");
 
+                    }    
+            }
+        }
+
+        private void btn_Send_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_clear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_reset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_help_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
