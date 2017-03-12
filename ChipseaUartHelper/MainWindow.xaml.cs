@@ -56,7 +56,7 @@ namespace ChipseaUartHelper
 
             }
             else{
-                MessageBox.Show("There is no avalible serialport");
+                MessageBox.Show("There is no availble serialport");
             }
            
             //baudRate
@@ -73,7 +73,7 @@ namespace ChipseaUartHelper
             htParity.add("space", 4);
             string[] strParity = null;
             ;//此处如果能够遍历Key，就可不用数组中转
-            htParity.Keys.CopyTo(strParity, 4);
+            htParity.Keys.CopyTo(strParity, 0);
             foreach(string parity in strParity){
                 box_Parity.Items.add(parity);
             }
