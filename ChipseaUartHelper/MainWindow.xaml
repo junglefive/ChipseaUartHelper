@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:ChipseaUartHelper"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+    <Grid Grid.Row = "4" Grid.Colum = "4" VerticalAlignment = "Center">
+    <ComboBox Name="box_portName"   VerticalAlignment="Top" Margin="0,5,0,0"/>
+    <ComboBox Name="box_baudRate"   VerticalAlignment="Top" Margin="0,5,0,0"/>
+    <ComboBox Name="box_dataBits"   VerticalAlignment="Top" Margin="0,5,0,0"/>
+    <ComboBox Name="box_Parity"     VerticalAlignment="Top" Margin="0,5,0,0"/>
+    <ComboBox Name="box_stopBits"   VerticalAlignment="Top" Margin="0,5,0,0"/>
     </Grid>
 </Window>
