@@ -16,6 +16,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Microsoft.Research.DynamicDataDisplay;
+using Microsoft.Research.DynamicDataDisplay.DataSources;
+using Microsoft.Research.DynamicDataDisplay.PointMarkers;
+using Microsoft.Research.DynamicDataDisplay.Charts.Navigation;
 
 namespace ChipseaUartHelper
 {
@@ -82,7 +86,7 @@ namespace ChipseaUartHelper
             dicParity.Add("mark" , 3);
             dicParity.Add("space", 4);
             foreach (KeyValuePair<string, int> dic in dicParity) {
-                box_parity.Items.Add(dic.Key);
+                box_parityBits.Items.Add(dic.Key);
             }
             //StopBits
             String[] strStopBits = { "1","1.5", "2"};
@@ -98,7 +102,7 @@ namespace ChipseaUartHelper
             box_baudRate.Text = "9600";
             box_dataBits.Text = "8";
             box_stopBits.Text = "1";
-            box_parity.Text = "none";
+            box_parityBits.Text = "none";
             //btn_default
             ComPort.DataReceived +=new SerialDataReceivedEventHandler( ComPort_DataReceived);
             
@@ -133,7 +137,7 @@ namespace ChipseaUartHelper
                         ComPort.BaudRate = Convert.ToInt32(box_baudRate.SelectedValue.ToString());
                         ComPort.DataBits = Convert.ToInt32(box_dataBits.SelectedValue.ToString());
                         ComPort.StopBits = (StopBits)Convert.ToDouble(box_stopBits.SelectedValue.ToString());
-                        ComPort.Parity = (Parity)Convert.ToInt32(box_parity.SelectedValue.ToString());
+                        ComPort.Parity = (Parity)Convert.ToInt32(box_parityBits.SelectedValue.ToString());
                         ComPort.Open();
                         btn_open_close.Content = "Close";
                     }

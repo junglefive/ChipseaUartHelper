@@ -35,6 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamicDataDisplay">
+      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay\DynamicDataDisplay.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Coastline">
+      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Coastline\DynamicDataDisplay.Coastline.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Controls">
+      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Controls\DynamicDataDisplay.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Maps">
+      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Maps\DynamicDataDisplay.Maps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
