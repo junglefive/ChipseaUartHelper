@@ -53,6 +53,7 @@ namespace ChipseaUartHelper
         *function:初始化串口部分
         *by:junglefive
         **/
+        Dictionary<string, int> dicParity = new Dictionary<string, int>();
         private void User_initiate_serialPort(){
             //serialPortNames
             ports = SerialPort.GetPortNames(); //获取当前可用串口
@@ -79,7 +80,7 @@ namespace ChipseaUartHelper
                 box_dataBits.Items.Add(str);
             }
             //parity
-            Dictionary<string, int> dicParity = new Dictionary<string, int>();
+            //Dictionary<string, int> dicParity = new Dictionary<string, int>();
             dicParity.Add("none" , 0);
             dicParity.Add("odd"  , 1);
             dicParity.Add("even" , 2);
@@ -93,7 +94,11 @@ namespace ChipseaUartHelper
             foreach (string str in strStopBits) {
                 box_stopBits.Items.Add(str);
             }
-           
+            //
+            ComPort.ReadBufferSize = 128;
+            dataSource = new EnumerableDataSource<int>(dataSourceQueue);
+            dataSource = new EnumerableDataSource<int>(dataSourceQueue);
+            chartPlotter.AddLineGraph(dataSource, Colors.Red, 1, "data");
 
         }
         private void user_initiate_default() {
@@ -105,14 +110,102 @@ namespace ChipseaUartHelper
             box_parityBits.Text = "none";
             //btn_default
             ComPort.DataReceived +=new SerialDataReceivedEventHandler( ComPort_DataReceived);
-            
+            Thread recData = new Thread(new ThreadStart(DecodeBytes));
+            recData.Start();
 
         }
 
+        private Queue dataBytesArrQueue= new Queue();
+        private Queue<byte> dataBytesQueue = new Queue<byte>();
+        private Queue<int> dataIntQueue = new Queue<int>();
+        private byte[] dataArrBuffer = new byte[4];
+        private String hex;
+        private int iValue;
+        private delegate void DataProcessEventHander(string  str);
+        private delegate void TipsSendEventHander(string str);
         private void ComPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+            //System.Threading.Thread.Sleep(1);
+            byte[] recBuffer;//接收缓冲区  
+            try
+            {
+                recBuffer = new byte[ComPort.BytesToRead];//接收数据缓存大小  
+                ComPort.Read(recBuffer, 0, recBuffer.Length);//读取数据  
+                dataBytesArrQueue.Enqueue(recBuffer);//读取数据入列Enqueue（全局）  
+            }
+            catch {
+                    MessageBox.Show("无法接收数据，原因未知！");
+            }     
         }
+
+        private void DecodeBytes() {
+            while (true) {
+                    //recive =adoh+adol+adoll+parity(xor)+0xAA
+                    if (dataBytesArrQueue.Count > 0)
+                    {      
+                        byte[] tmpByteArr = (byte[])dataBytesArrQueue.Dequeue();
+                        for (int k = 0; k < tmpByteArr.Length; k++)
+                        {
+                            dataBytesQueue.Enqueue(tmpByteArr[k]);
+                        }
+                        //head
+                     
+                        }              
+                    if (dataBytesQueue.Count > 0) {
+
+                        byte tmpByte = dataBytesQueue.Dequeue();
+                        if (tmpByte == 0xAA && dataArrBuffer[0] == (byte)(dataArrBuffer[1] ^ dataArrBuffer[2] ^ dataArrBuffer[3]))
+                        {
+                            //说明得到正确的数据
+                            byte[] bytesValue = new byte[4];
+                            bytesValue[0] = 0x00;
+                            for (int i = 1; i < 4; i++)
+                            {
+                                bytesValue[i] = dataArrBuffer[4 - i];
+                            }
+                            hex = BitConverter.ToString(bytesValue).Replace("-", string.Empty);
+                            iValue = Convert.ToInt32(hex, 16);
+                            this.Dispatcher.Invoke(new DataProcessEventHander(DataProcessUpdate), hex);
+                        //Display
+                        //this.Dispatcher.Invoke(new DisplayEventHander(DataProcessUpdate), iValue);
+                           // ChartPlotterDisplay(iValue);
+                        }
+                        //moving one  byte
+                        dataArrBuffer[3] = dataArrBuffer[2];
+                        dataArrBuffer[2] = dataArrBuffer[1];
+                        dataArrBuffer[1] = dataArrBuffer[0];
+                        dataArrBuffer[0] = tmpByte;
+                }
+
+                    Thread.Sleep(1);
+            }
+
+        }
+        //call back
+        private delegate void DisplayEventHander(string str);
+        private void DataProcessUpdate(string hex) {
+            //box_data.Add(new LineBreak());
+            //box_data.Add("0X"+hex);
+            ChartPlotterDisplay(hex);
+            box_data.AppendText("\n");
+            string str = hex.Remove(0, 1);
+            box_data.AppendText(str+"H");
+            //btn_adoh.Content = hex.Substring(0, 1);
+            //btn_adol.Content = hex.Substring(2, 3);
+            //btn_adoll.Content = hex.Substring(4, 5);
+            
+        }
+        //ChartPlotterDisplay
+        private EnumerableDataSource<int> dataSource = null;
+        Queue<int> dataSourceQueue = new Queue<int>();
+        
+        private void ChartPlotterDisplay(string str) {
+            int i = Convert.ToInt32(str,16);
+            dataSourceQueue.Enqueue(i);
+            //chartPlotter.Viewport.FitToView();
+        }
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -122,6 +215,7 @@ namespace ChipseaUartHelper
 
         private void btn_open_close_Click(object sender, RoutedEventArgs e)
         {
+            if (ComPort == null) { ComPort = new SerialPort(); }
             if (ComPort.IsOpen)
             {
                 
@@ -132,12 +226,12 @@ namespace ChipseaUartHelper
 
             else {
                     try
-                    {
+                    { 
                         ComPort.PortName = box_portName.SelectedValue.ToString();
                         ComPort.BaudRate = Convert.ToInt32(box_baudRate.SelectedValue.ToString());
                         ComPort.DataBits = Convert.ToInt32(box_dataBits.SelectedValue.ToString());
                         ComPort.StopBits = (StopBits)Convert.ToDouble(box_stopBits.SelectedValue.ToString());
-                        ComPort.Parity = (Parity)Convert.ToInt32(box_parityBits.SelectedValue.ToString());
+                        ComPort.Parity   = (Parity)Convert.ToInt32(dicParity[box_parityBits.SelectedValue.ToString()]);                     
                         ComPort.Open();
                         btn_open_close.Content = "Close";
                     }
@@ -164,6 +258,11 @@ namespace ChipseaUartHelper
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

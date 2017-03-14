@@ -36,3 +36,8 @@ E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\Dyn
 E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.xml
 E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Maps.xml
 E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\ru-ru\DynamicDataDisplay.resources.dll
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.xml
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Coastline.xml
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.xml
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Maps.xml
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\ru-ru\DynamicDataDisplay.resources.dll
