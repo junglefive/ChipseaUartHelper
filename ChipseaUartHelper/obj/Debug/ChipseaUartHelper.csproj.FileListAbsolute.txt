@@ -68,3 +68,9 @@ E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.dll
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.dll
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Maps.dll
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.g.cs
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.g.cs
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\TextWindow.g.cs
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.baml
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.baml
+E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\TextWindow.baml
