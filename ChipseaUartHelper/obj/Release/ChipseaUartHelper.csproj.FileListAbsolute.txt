@@ -1,3 +1,4 @@
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Release\App.g.cs
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Release\ChipseaUartHelper_MarkupCompile.cache
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Release\ChipseaUartHelper.exe.config
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Release\ChipseaUartHelper.exe.config

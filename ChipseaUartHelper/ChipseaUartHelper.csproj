@@ -39,16 +39,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamicDataDisplay">
-      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay\DynamicDataDisplay.dll</HintPath>
+      <HintPath>source\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay\DynamicDataDisplay.dll</HintPath>
     </Reference>
     <Reference Include="DynamicDataDisplay.Coastline">
-      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Coastline\DynamicDataDisplay.Coastline.dll</HintPath>
+      <HintPath>source\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Coastline\DynamicDataDisplay.Coastline.dll</HintPath>
     </Reference>
     <Reference Include="DynamicDataDisplay.Controls">
-      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Controls\DynamicDataDisplay.Controls.dll</HintPath>
+      <HintPath>source\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Controls\DynamicDataDisplay.Controls.dll</HintPath>
     </Reference>
     <Reference Include="DynamicDataDisplay.Maps">
-      <HintPath>..\..\..\..\wpf\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Maps\DynamicDataDisplay.Maps.dll</HintPath>
+      <HintPath>source\DynamicDataDisplay v0.3 Binaries &amp; Samples\DynamicDataDisplay.Maps\DynamicDataDisplay.Maps.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -70,6 +70,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChartWindow.xaml.cs">
+      <DependentUpon>ChartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextWindow.xaml.cs">
+      <DependentUpon>TextWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,6 +92,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TextWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

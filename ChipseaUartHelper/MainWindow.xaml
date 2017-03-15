@@ -6,70 +6,58 @@
         xmlns:local="clr-namespace:ChipseaUartHelper"
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" x:Name="window_main" x:Class="ChipseaUartHelper.MainWindow"
         mc:Ignorable="d"
-        Title="ChipseaUartHelper" Height="493.5" Width="801.5" Loaded="Window_Loaded" HorizontalContentAlignment="Center" MaxHeight="600" MaxWidth="800" WindowStartupLocation="Manual" Opacity="0.95" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
-    <Grid RenderTransformOrigin="0.557,0.54" Margin="10,-14,0,9" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+        Title="ChipseaUartHelper" Height="493.5" Width="807.5" Loaded="Window_Loaded" HorizontalContentAlignment="Center" MaxHeight="600" MaxWidth="800" WindowStartupLocation="Manual" Opacity="0.95" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Closing="window_main_Closing">
+    <Grid RenderTransformOrigin="0.557,0.54" Margin="10,-14,36,9" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
-            <RowDefinition Height="136*"/>
+            <RowDefinition Height="86*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="51*"/>
             <RowDefinition Height="45*"/>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="42*"/>
             <RowDefinition Height="41*"/>
             <RowDefinition Height="48*"/>
-            <RowDefinition Height="37*"/>
+            <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="102"/>
-            <ColumnDefinition Width="97"/>
-            <ColumnDefinition Width="81"/>
-            <ColumnDefinition Width="95"/>
             <ColumnDefinition Width="91"/>
-            <ColumnDefinition Width="95"/>
-            <ColumnDefinition Width="112"/>
-            <ColumnDefinition Width="109"/>
+            <ColumnDefinition Width="101"/>
+            <ColumnDefinition Width="93"/>
+            <ColumnDefinition Width="97"/>
+            <ColumnDefinition Width="93"/>
+            <ColumnDefinition Width="92"/>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="textBlock" Grid.Column="2" Grid.Row="2" Text="888.88" FontSize="72" TextDecorations="{x:Null}" FontWeight="Bold" TextOptions.TextFormattingMode="Display" VerticalAlignment="Center" Margin="10,7,10,10" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontFamily="DigifaceWide" HorizontalAlignment="Center" TextAlignment="Center" Height="79" Width="342" Cursor="None" Foreground="#FF0E9784" Grid.ColumnSpan="4" Grid.RowSpan="2">
+        <TextBlock x:Name="textBlock" Grid.Column="2" Grid.Row="1" FontSize="72" TextDecorations="{x:Null}" FontWeight="Bold" TextOptions.TextFormattingMode="Display" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" FontFamily="DigifaceWide" TextAlignment="Center" Cursor="None" Foreground="#FFCF6020" Grid.ColumnSpan="4" Margin="0,0,10,0">
             <TextBlock.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
-            </TextBlock.OpacityMask>
-        </TextBlock>
-        <Button x:Name="button2" Content="Anti-shake" Grid.Column="1" HorizontalAlignment="Left" Margin="20,17,0,0" Grid.Row="4" VerticalAlignment="Top" Width="67" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button3" Content="Calibrate" Grid.Column="2" HorizontalAlignment="Left" Margin="10,17,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button4" Content="GetZero" Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="67" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button5" Content="TrackZero" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="64" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button6" Content="Save" Grid.Column="3" HorizontalAlignment="Left" Margin="20,17,0,0" Grid.Row="4" VerticalAlignment="Top" Width="66" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button7" Content="AddChart" Grid.Column="3" HorizontalAlignment="Left" Margin="20,11,0,0" Grid.Row="5" VerticalAlignment="Top" Width="66" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <d3:ChartPlotter x:Name="chartPlotter" Grid.ColumnSpan="7" Grid.Row="1" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" Margin="90,2,10,49" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="136" Width="573"/>
-        <ScrollViewer Grid.Row="7" Grid.ColumnSpan="4" Grid.Column="2" Grid.RowSpan="2">
-            <TextBlock x:Name="box_tips" TextWrapping="Wrap" Text="Log"/>
+            </TextBlock.OpacityMask><Run Background="#FFD9E6D0" Text=" "/><Run Background="#FFD9E6D0" Text="888.88"/><Run Background="#FFD9E6D0" Text="  "/></TextBlock>
+        <Button x:Name="button2" Content="Anti-shake" Grid.Column="1" HorizontalAlignment="Left" Margin="20,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="67" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="button3" Content="Calibrate" Grid.Column="2" HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="4" VerticalAlignment="Top" Width="64" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="button4" Content="GetZero" Grid.Column="1" HorizontalAlignment="Left" Margin="20,21,0,0" Grid.Row="5" VerticalAlignment="Top" Width="67" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="button5" Content="TrackZero" Grid.Column="2" HorizontalAlignment="Left" Margin="12,27,0,0" Grid.Row="5" VerticalAlignment="Top" Width="64" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="button6" Content="Save" Grid.Column="3" HorizontalAlignment="Left" Margin="19,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="66" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="button7" Content="AddChart" Grid.Column="3" HorizontalAlignment="Left" Margin="19,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="66" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <ScrollViewer Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
+            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="TextBlock"/>
         </ScrollViewer>
-        <Button x:Name="btn_adoh" Content="ADOH" Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="67" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="btn_adol" Content="ADOL" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.209,0.381" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="btn_adoll" Content="ADOLL" Grid.Column="3" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="66" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <TextBox x:Name="box_data" TextWrapping="Wrap" FontSize="11" Margin="0,0,10,10" Grid.RowSpan="6" Grid.Row="1"/>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="6" Grid.Row="1">
-            <ScrollViewer.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.335"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ScrollViewer.RenderTransform>
-        </ScrollViewer>
-        <Button x:Name="button10" Content="Button" Grid.Column="4" HorizontalAlignment="Left" Margin="14,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="66" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button12" Content="Button" Grid.Column="4" HorizontalAlignment="Left" Margin="14,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="66" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
-        <Button x:Name="button14" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="76" Height="28" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
-        <Button x:Name="button15" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="67" Height="28" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
-        <Button x:Name="button16" Content="Button" HorizontalAlignment="Left" Margin="10,8,0,0" Grid.Row="8" VerticalAlignment="Top" Width="75" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Height="19"/>
-        <Button x:Name="button17" Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="20,8,0,0" Grid.Row="8" VerticalAlignment="Top" Width="67" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Height="19"/>
-        <Menu x:Name="menu" Grid.ColumnSpan="3" Grid.Column="1" HorizontalAlignment="Left" Height="43" Margin="84,-130,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btn_open_close" Content="Open" HorizontalAlignment="Left" Margin="22,17,0,14" VerticalAlignment="Center" Width="61" Click="btn_open_close_Click" RenderTransformOrigin="0.056,0.476" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="4" Grid.Row="4">
+        <Button x:Name="btn_adoh" Content="ADOH" Grid.Column="1" HorizontalAlignment="Left" Margin="20,11,0,0" Grid.Row="6" VerticalAlignment="Top" Width="67" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="btn_adol" Content="ADOL" Grid.Column="2" HorizontalAlignment="Left" Margin="12,15,0,0" Grid.Row="6" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.209,0.381" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="btn_adoll" Content="ADOLL" Grid.Column="3" HorizontalAlignment="Left" Margin="15,13,0,0" Grid.Row="6" VerticalAlignment="Top" Width="66" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="btn_chart" Content="Chart" Grid.Column="4" HorizontalAlignment="Left" Margin="10,0,0,10" Grid.Row="4" VerticalAlignment="Bottom" Width="66" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="btn_chart_Click"/>
+        <Button x:Name="btn_text" Content="Log" Grid.Column="4" HorizontalAlignment="Left" Margin="10,16,0,0" Grid.Row="5" VerticalAlignment="Top" Width="66" Height="21" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="btn_text_Click"/>
+        <Button x:Name="button14" Content="Button" HorizontalAlignment="Left" Margin="8,9,0,0" Grid.Row="6" VerticalAlignment="Top" Width="68" Height="28" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+        <Button x:Name="button15" Content="Button" HorizontalAlignment="Left" Margin="9,18,0,0" Grid.Row="5" VerticalAlignment="Top" Width="67" Height="28" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}"/>
+        <Button x:Name="button16" Content="Button" HorizontalAlignment="Left" Margin="9,14,0,0" Grid.Row="4" VerticalAlignment="Top" Width="68" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Height="19"/>
+        <Button x:Name="button17" Content="Button" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="3" VerticalAlignment="Top" Width="67" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Height="19"/>
+        <Menu x:Name="menu" Grid.Column="2" HorizontalAlignment="Left" Height="43" Margin="0,-130,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_open" Content="Open" HorizontalAlignment="Left" Margin="16,12,0,15" VerticalAlignment="Center" Width="62" Click="btn_open_Click" RenderTransformOrigin="0.056,0.476" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="7" Grid.Row="3">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -79,23 +67,27 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="button_Copy3" Content="Stop" HorizontalAlignment="Center" Margin="23,16,10,15" Grid.Row="4" VerticalAlignment="Center" Width="62" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="5"/>
-        <Button x:Name="btn_Send" Content="Send" HorizontalAlignment="Center" Margin="20,10,15,11" VerticalAlignment="Center" Width="62" RenderTransformOrigin="-0.067,0.263" Click="btn_Send_Click" Height="24" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="1"/>
-        <Button x:Name="button" Content="Hex" HorizontalAlignment="Center" Margin="20,19,15,8" Grid.Row="2" VerticalAlignment="Center" Width="62" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="1"/>
-        <Button x:Name="btn_help" Content="Help" HorizontalAlignment="Center" Margin="23,7,10,9" VerticalAlignment="Center" Width="62" RenderTransformOrigin="0.194,0.545" Height="26" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Row="5" Grid.Column="5"/>
-        <Button x:Name="btn_clear" Content="Clear" HorizontalAlignment="Center" Margin="23,9,10,8" VerticalAlignment="Center" Width="62" Click="btn_clear_Click" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" RenderTransformOrigin="1.059,0.333" Grid.Row="6" Grid.Column="5"/>
-        <ComboBox x:Name="box_portName" HorizontalAlignment="Center" Margin="28,11,24,18" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="#FFE0E0E0" Opacity="0.94" Text="COM1" Grid.Column="6" Grid.Row="2" />
-        <ComboBox x:Name="box_baudRate" HorizontalAlignment="Center" Margin="28,10,24,13" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="#FFE0E0E0" Text="9600" Grid.Column="6" Grid.Row="3" />
-        <ComboBox x:Name="box_dataBits" HorizontalAlignment="Center" Margin="28,23,24,10" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Text="8" Grid.Column="6" Grid.Row="4" />
-        <ComboBox x:Name="box_parityBits" HorizontalAlignment="Center" Margin="28,11,24,9" VerticalAlignment="Center" Width="60" Height="22" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Row="5" Text="none" Grid.Column="6" />
-        <ComboBox x:Name="box_stopBits" HorizontalAlignment="Center" Margin="28,10,24,9" VerticalAlignment="Center" Width="60" RenderTransformOrigin="0.269,0.318" Height="22" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="6" Text="1" Grid.Column="6" />
-        <Button x:Name="button_Copy" Content="Timing" HorizontalAlignment="Center" Margin="28,10,24,16" Grid.Row="7" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="6"/>
-        <Button x:Name="button_Copy1" Content="Average" HorizontalAlignment="Center" Margin="28,7,24,8" Grid.Row="8" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="6"/>
-        <Button x:Name="button1" Content="Moving" HorizontalAlignment="Left" Margin="10,12,0,0" Grid.Row="7" VerticalAlignment="Top" Width="62" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="7"/>
-        <Button x:Name="button_Copy2" Content="IIR" HorizontalAlignment="Center" Margin="10,5,37,10" Grid.Row="8" VerticalAlignment="Center" Width="62" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="7" RenderTransformOrigin="0.968,0.318"/>
-        <ScrollViewer Grid.Column="7" Grid.Row="1" Grid.RowSpan="6">
+        <Button x:Name="button_Copy3" Content="Stop" HorizontalAlignment="Center" Margin="17,13,13,14" Grid.Row="3" VerticalAlignment="Center" Width="62" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="5"/>
+        <Button x:Name="btn_Send" Content="Send" HorizontalAlignment="Center" Margin="25,15,14,12" VerticalAlignment="Center" Width="62" RenderTransformOrigin="-0.067,0.263" Click="btn_Send_Click" Height="24" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="1"/>
+        <Button x:Name="button" Content="Hex" HorizontalAlignment="Center" Margin="16,17,15,10" Grid.Row="3" VerticalAlignment="Center" Width="62" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="2"/>
+        <Button x:Name="btn_help" Content="Help" HorizontalAlignment="Center" Margin="17,9,13,10" VerticalAlignment="Center" Width="62" RenderTransformOrigin="0.194,0.545" Height="26" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Row="4" Grid.Column="5"/>
+        <Button x:Name="btn_clear" Content="Clear" HorizontalAlignment="Center" Margin="17,13,13,5" VerticalAlignment="Center" Width="62" Click="btn_clear_Click" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" RenderTransformOrigin="1.059,0.333" Grid.Row="6" Grid.Column="5"/>
+        <ComboBox x:Name="box_portName" HorizontalAlignment="Center" Margin="89,17,6,14" VerticalAlignment="Center" Width="72" Height="20" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="#FFE0E0E0" Opacity="0.94" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" />
+        <ComboBox x:Name="box_baudRate" HorizontalAlignment="Center" Margin="89,11,6,11" VerticalAlignment="Center" Width="72" Height="23" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="#FFE0E0E0" Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="2" />
+        <ComboBox x:Name="box_dataBits" HorizontalAlignment="Center" Margin="89,23,6,10" VerticalAlignment="Center" Width="72" Height="22" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" />
+        <ComboBox x:Name="box_parityBits" HorizontalAlignment="Center" Margin="11,15,57,8" VerticalAlignment="Center" Width="72" Height="22" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Row="4" Grid.Column="7" />
+        <ComboBox x:Name="box_stopBits" HorizontalAlignment="Center" Margin="11,21,57,11" VerticalAlignment="Center" Width="72" RenderTransformOrigin="0.269,0.318" Height="23" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="5" Grid.Column="7" />
+        <Button x:Name="button_Copy" Content="Timing" HorizontalAlignment="Center" Margin="17,15,16,14" Grid.Row="3" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="4"/>
+        <Button x:Name="button_Copy1" Content="Average" HorizontalAlignment="Center" Margin="19,11,14,9" Grid.Row="6" VerticalAlignment="Center" Width="60" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="4"/>
+        <Button x:Name="button1" Content="Moving" HorizontalAlignment="Left" Margin="19,14,0,0" Grid.Row="3" VerticalAlignment="Top" Width="62" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" Grid.Column="3"/>
+        <Button x:Name="button_Copy2" Content="IIR" HorizontalAlignment="Center" Margin="17,18,13,15" Grid.Row="5" VerticalAlignment="Center" Width="62" Height="22" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" RenderTransformOrigin="0.968,0.318" Grid.Column="5"/>
+        <d3:LineGraph Grid.Column="3" HorizontalAlignment="Left" Height="100" Margin="6,43,0,0" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
+        <d3:LineGraph Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="45,43,0,0" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_close" Content="Close" Grid.Column="7" HorizontalAlignment="Left" Margin="21,14,0,0" Grid.Row="6" VerticalAlignment="Top" Width="62" Height="23" Click="btn_close_Click"/>
+        <ScrollViewer Grid.ColumnSpan="4" Grid.Column="4" Grid.Row="7" Grid.RowSpan="3">
             <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock"/>
         </ScrollViewer>
+        <Button x:Name="button8" Content="Button" Grid.Column="6" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Height="22" Grid.ColumnSpan="2"/>
 
 
 
