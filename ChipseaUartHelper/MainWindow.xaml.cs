@@ -118,8 +118,24 @@ namespace ChipseaUartHelper
             ComPort.DataReceived += new SerialDataReceivedEventHandler(ComPort_DataReceived);
             Thread recData = new Thread(new ThreadStart(DecodeBytes));
             recData.Start();
-            //window
-     
+            //box
+            box_log.Document.Blocks.Clear();
+            box_recieve.Document.Blocks.Clear();
+
+        }
+    
+        private void AppendStringToLogBox(string str, bool newLine) {
+            if (newLine) {
+                box_log.AppendText("\n");
+            }
+            box_log.AppendText(DateTime.Now.ToString()+":  "+str);
+        }
+        private void AppendStringToRecieveBox(string str, bool newline) {
+            if (newline)
+            {
+                box_recieve.AppendText("\n");
+            }
+            box_recieve.AppendText(DateTime.Now.ToString() + ":  " + str);
         }
 
         private Queue dataBytesArrQueue = new Queue();
@@ -129,7 +145,7 @@ namespace ChipseaUartHelper
         private String hex;
         private int iValue;
         private delegate void DataProcessEventHander(string str);
-        private delegate void TipsSendEventHander(string str);
+        private delegate void SendStringEventHander(string str, bool newline);
         private void ComPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             System.Threading.Thread.Sleep(100);
@@ -191,13 +207,22 @@ namespace ChipseaUartHelper
                             // ChartPlotterDisplay(iValue);
                             if (chartWindow != null) { chartWindow.AddData(iValue); }
                             if (textWindow != null) { textWindow.updateSource(iValue); }
+                            if(iValue > 10000000)
+                            {
+
+
+                                int i = iValue;
+                            }
+                        }
+                        else {
+                            //moving one  byte
+                            dataArrBuffer[3] = dataArrBuffer[2];
+                            dataArrBuffer[2] = dataArrBuffer[1];
+                            dataArrBuffer[1] = dataArrBuffer[0];
+                            dataArrBuffer[0] = tmpByte;
 
                         }
-                        //moving one  byte
-                        dataArrBuffer[3] = dataArrBuffer[2];
-                        dataArrBuffer[2] = dataArrBuffer[1];
-                        dataArrBuffer[1] = dataArrBuffer[0];
-                        dataArrBuffer[0] = tmpByte;
+                        
                     }
 
                     Thread.Sleep(10);
@@ -248,6 +273,14 @@ namespace ChipseaUartHelper
 
         private void btn_open_Click(object sender, RoutedEventArgs e)
         {
+
+            if (ComPort.IsOpen) {
+
+                this.Dispatcher.Invoke(new SendStringEventHander(AppendStringToLogBox), "is open.", true);
+            }
+            else
+            {
+
                 if (ComPort == null) { ComPort = new SerialPort(); }
 
                 try
@@ -259,11 +292,15 @@ namespace ChipseaUartHelper
                     ComPort.Parity = (Parity)Convert.ToInt32(dicParity[box_parityBits.SelectedValue.ToString()]);
                     ComPort.Open();
                     comIsClosing = false;
+                    this.Dispatcher.Invoke(new SendStringEventHander(AppendStringToLogBox), "Open Successful.", true);
                 }
                 catch
                 {
                     MessageBox.Show("Can't Open " + ComPort.PortName, "Warnning");
                 }
+
+            }
+               
         }
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
@@ -273,12 +310,14 @@ namespace ChipseaUartHelper
 
         private void btn_clear_Click(object sender, RoutedEventArgs e)
         {
-
+            box_log.Document.Blocks.Clear();
+            box_recieve.Document.Blocks.Clear();
         }
 
         private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
-
+            box_log.Document.Blocks.Clear();
+            box_recieve.Document.Blocks.Clear();
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
@@ -341,20 +380,8 @@ namespace ChipseaUartHelper
 
         }
 
+      
     }
-    //public partial class ChartWindow : Window
-    //{
-
-    //    public ChartWindow() { }
-
-    //}
-
-
-    //public partial class LogWindow : Window {
-
-
-
-    //}
 
 }
 

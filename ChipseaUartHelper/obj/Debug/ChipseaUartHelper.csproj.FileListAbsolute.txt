@@ -74,3 +74,5 @@ E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\Tex
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.baml
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.baml
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\TextWindow.baml
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.g.cs
+E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.baml

@@ -24,14 +24,9 @@ namespace ChipseaUartHelper
     /// </summary>
     public partial class ChartWindow : Window
     {
-        private static long lCounterX = 0;
-        List<long> dataX = new List<long>();
-        List<int> dataListOriginY = new List<int>();
-        CompositeDataSource compositeDataSourceOriginY=null;
-        EnumerableDataSource<long> enumerableDataSourceX =null;
-        EnumerableDataSource<int> enumerableDataSourceOriginY = null;
-        //private DispatcherTimer timer = new DispatcherTimer();
-        private bool iClosingFlag = false; 
+        private ObservableDataSource<Point> dataSource_Y1 = new ObservableDataSource<Point>();
+        private double x1 = 0;
+        private bool isClosingFlag = false; 
         public ChartWindow()
         {
             InitializeComponent();
@@ -40,74 +35,43 @@ namespace ChipseaUartHelper
         public void AddData(int idata) {
 
 
-            if (iClosingFlag == false)
+            if (isClosingFlag == false)
             {
                 this.Dispatcher.Invoke(new UpdateDataSourceEventHander(updateDataSource), idata);
             }
             
         }
-        private int tmpData;
         private void updateDataSource(int idata) {
-            if (dataListOriginY != null && dataX != null && enumerableDataSourceX != null && enumerableDataSourceOriginY != null) {
-
-                //tmpData = idata;
-                dataListOriginY.Add(idata);
-                //DateTime tempDateTime = new DateTime();
-                lCounterX++;
-                //tempDateTime = DateTime.Now;
-                dataX.Add(lCounterX);
-                enumerableDataSourceX.RaiseDataChanged();
-                enumerableDataSourceOriginY.RaiseDataChanged();
-
+          
+            if (dataSource_Y1 != null) { 
+                dataSource_Y1.AppendAsync(base.Dispatcher, new Point(x1++, idata));
 
             }
             
         }
         
         private void updatePlotter(object sender, EventArgs e) {
-            //dataListOriginY.Add(tmpData);
-            ////DateTime tempDateTime = new DateTime();
-            //lCounterX++;
-            ////tempDateTime = DateTime.Now;
-            //dateTimeX.Add(lCounterX);
-            //enumerableDataSourceX.RaiseDataChanged();
-            //enumerableDataSourceOriginY.RaiseDataChanged();
+            
 
         }
 
         private void chart_window_Loaded(object sender, RoutedEventArgs e)
         {
-            //DateTime tempDateTime = new DateTime();
-            //tempDateTime = DateTime.Now;
-            dataX.Add(0);
-            dataListOriginY.Add(0);
-            enumerableDataSourceX = new EnumerableDataSource<long>(dataX);
-            enumerableDataSourceX.SetXMapping(x => Convert.ToDouble(x));
-            enumerableDataSourceOriginY = new EnumerableDataSource<int>(dataListOriginY);
-            enumerableDataSourceOriginY.SetYMapping(y => y);
-            //con
-            compositeDataSourceOriginY = new CompositeDataSource(enumerableDataSourceX, enumerableDataSourceOriginY);
-            plotter.AddLineGraph(compositeDataSourceOriginY, Colors.Red, 1,"Origin");
-            plotter.FitToView();
-
-            //timer.Interval = TimeSpan.FromMilliseconds(2);
-            //timer.Tick += new EventHandler(updatePlotter);
-            //timer.IsEnabled = true;
+           
+            plotter.AddLineGraph(dataSource_Y1, Colors.Red, 2, "Origin");
+            plotter.Viewport.FitToView();
+            
         }
 
         private void chart_window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
          
-            iClosingFlag = true;
+            isClosingFlag = true;
         }
 
         private void chart_window_Closed(object sender, EventArgs e)
         {
-            dataX.Clear();
-            dataListOriginY.Clear();
-            compositeDataSourceOriginY = null;
-            enumerableDataSourceX = null;
-            enumerableDataSourceOriginY = null;
+            dataSource_Y1 = null;
         }
     }
 }

@@ -8,8 +8,31 @@
         mc:Ignorable="d"
         Title="ChartWindow" Height="400" Width="800" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
     <Grid>
-        <d3:ChartPlotter Name="plotter">
-           
-        </d3:ChartPlotter>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <d3:ChartPlotter Name="plotter"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <CheckBox x:Name="checkBox" Content="Origin" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBox1" Content="Moving" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBox2" Content="IIR" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBox3" Content="CheckBox" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

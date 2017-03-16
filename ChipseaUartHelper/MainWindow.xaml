@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:ChipseaUartHelper"
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" x:Name="window_main" x:Class="ChipseaUartHelper.MainWindow"
         mc:Ignorable="d"
-        Title="ChipseaUartHelper" Height="588" Width="796" Loaded="Window_Loaded" HorizontalContentAlignment="Center" MaxHeight="600" MaxWidth="800" WindowStartupLocation="Manual" Opacity="0.95" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Closing="window_main_Closing">
-    <Grid RenderTransformOrigin="0.557,0.54" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+        Title="ChipseaUartHelper" Height="606" Width="787" Loaded="Window_Loaded" HorizontalContentAlignment="Center" MaxHeight="600" MaxWidth="800" WindowStartupLocation="Manual" Opacity="0.95" Closing="window_main_Closing">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="#FFBCBCBC" Offset="0.748"/>
+            <GradientStop Color="#FFC9C9C9" Offset="0.857"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid RenderTransformOrigin="0.557,0.54" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Margin="0,0,2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -29,21 +37,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button6" Content="Save" Grid.Column="5" HorizontalAlignment="Left" Margin="13,19,0,0" Grid.Row="8" VerticalAlignment="Top" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
         <Menu x:Name="menu" Grid.Column="2" HorizontalAlignment="Left" Height="43" Margin="0,-130,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_open" Content="Open" HorizontalAlignment="Left" Margin="13,14,0,14" VerticalAlignment="Center" Width="94" Click="btn_open_Click" RenderTransformOrigin="0.056,0.476" Height="28" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.038"/>
-                    <TranslateTransform Y="0.018"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
         <Button x:Name="button_Copy3" Content="Stop" HorizontalAlignment="Center" Margin="17,13,228,14" Grid.Row="3" VerticalAlignment="Center" Width="62" Height="24" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="5"/>
         <Button x:Name="btn_help" Content="Help" HorizontalAlignment="Center" Margin="17,9,228,10" VerticalAlignment="Center" Width="62" RenderTransformOrigin="0.194,0.545" Height="26" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Row="4" Grid.Column="5"/>
-        <Button x:Name="btn_clear" Content="Clear" HorizontalAlignment="Center" Margin="13,20,24,10" VerticalAlignment="Center" Width="94" Click="btn_clear_Click" Height="26" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" RenderTransformOrigin="1.059,0.333" Grid.Row="2" Grid.Column="3"/>
+        <Button x:Name="btn_clear" Content="Clear" HorizontalAlignment="Center" Margin="12,15,24,14" VerticalAlignment="Center" Width="94" Click="btn_clear_Click" Height="28" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" RenderTransformOrigin="1.059,0.333" Grid.Row="4" Grid.Column="3"/>
         <ComboBox x:Name="box_portName" HorizontalAlignment="Center" Margin="14,9,24,10" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="#FFE0E0E0" Opacity="0.94" Grid.Column="5" />
         <ComboBox x:Name="box_baudRate" HorizontalAlignment="Center" Margin="14,10,24,9" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="#FFE0E0E0" Grid.Column="5" Grid.Row="1" />
         <ComboBox x:Name="box_dataBits" HorizontalAlignment="Center" Margin="14,10,24,9" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.Column="5" Grid.Row="2" />
@@ -51,47 +48,57 @@
         <ComboBox x:Name="box_stopBits" HorizontalAlignment="Center" Margin="14,9,24,10" VerticalAlignment="Center" Width="94" RenderTransformOrigin="0.269,0.318" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="4" Grid.Column="5" />
         <d3:LineGraph Grid.Column="3" HorizontalAlignment="Left" Height="100" Margin="6,43,0,0" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
         <d3:LineGraph Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="45,43,0,0" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_close" Content="Close" Grid.Column="3" HorizontalAlignment="Left" Margin="13,19,0,0" Grid.Row="3" VerticalAlignment="Top" Width="94" Height="28" Click="btn_close_Click" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Button x:Name="btn_close" Content="Close" Grid.Column="2" HorizontalAlignment="Left" Margin="16,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="94" Height="28" Click="btn_close_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
         <Label x:Name="label" Grid.Column="4" HorizontalAlignment="Left" Margin="20,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Height="27"/>
         <Label x:Name="label_Copy" Content="BaudRate" Grid.Column="4" HorizontalAlignment="Center" Margin="32,9,0,0" Grid.Row="1" VerticalAlignment="Center" Width="94" Height="27" Foreground="#FFBFADAD"/>
         <Label x:Name="label_Copy1" Content="DataBits" Grid.Column="4" HorizontalAlignment="Center" Margin="32,10,0,0" Grid.Row="2" VerticalAlignment="Center" Width="94" Height="27" Foreground="#FFBFADAD"/>
         <Label x:Name="label_Copy3" Content="PrityBits" Grid.Column="4" HorizontalAlignment="Center" Margin="32,10,0,0" Grid.Row="3" VerticalAlignment="Center" Width="94" Height="26" Foreground="#FFBFADAD"/>
         <Label x:Name="label_Copy4" Content="StopBits" Grid.Column="4" HorizontalAlignment="Center" Margin="32,8,0,0" Grid.Row="4" VerticalAlignment="Center" Width="94" Height="28" Foreground="#FFBFADAD"/>
         <Label x:Name="label_Copy2" Content="PortName" HorizontalAlignment="Center" Width="94" Height="27" RenderTransformOrigin="0.436,2.185" Grid.Column="4" Margin="32,19,0,0" Foreground="#FFBFADAD" VerticalAlignment="Center"/>
-        <Button x:Name="button2" Content="Help" Grid.Column="5" HorizontalAlignment="Left" Margin="13,14,0,0" Grid.Row="9" VerticalAlignment="Top" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-        <Button x:Name="button_Copy" Content="Hex" HorizontalAlignment="Center" Margin="12,16,25,12" Grid.Row="5" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3"/>
-        <Button x:Name="button_Copy4" Content="Hex" HorizontalAlignment="Center" Margin="12,19,25,10" Grid.Row="6" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3"/>
-        <ScrollViewer Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
-        <ScrollViewer Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="4" Background="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}"/>
-        <Button x:Name="button_Copy6" Content="Hex" HorizontalAlignment="Center" Margin="12,18,25,11" Grid.Row="4" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3"/>
-        <Button x:Name="button_Copy8" Content="Hex" HorizontalAlignment="Center" Margin="12,19,25,9" Grid.Row="7" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3"/>
-        <CheckBox x:Name="checkBox" Content="Chart" Margin="0,20,27,0" Grid.Row="4" Width="94" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-        <CheckBox x:Name="checkBox_Copy" Content="Data" HorizontalAlignment="Center" Margin="10,18,27,10" Grid.Row="5" VerticalAlignment="Center" Width="94" Height="27"/>
-        <Button x:Name="btn_pasue" Content="Pause" HorizontalAlignment="Center" Margin="12,15,25,14" Grid.Row="1" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="3"/>
-        <Grid Grid.Column="5" Grid.Row="5" Grid.RowSpan="3">
+        <Button x:Name="button2" Content="Help" HorizontalAlignment="Left" Margin="18,15,0,0" Grid.Row="5" VerticalAlignment="Top" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+        <Button x:Name="button_Copy8" Content="Send" HorizontalAlignment="Center" Margin="12,18,24,12" Grid.Row="5" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Grid.Column="3" RenderTransformOrigin="0.298,-0.407"/>
+        <Button x:Name="btn_pasue" Content="Pause" HorizontalAlignment="Center" Margin="19,18,17,11" Grid.Row="4" VerticalAlignment="Center" Width="94" Height="28" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Grid.Column="1"/>
+        <Grid Grid.Column="5" Grid.Row="7" Grid.RowSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <RadioButton x:Name="radioButton" Content="Kitchen" HorizontalAlignment="Center" Margin="24,19,13,0" VerticalAlignment="Center" Width="94" Height="27" RenderTransformOrigin="0.362,0.333"/>
+            <RadioButton x:Name="radioButton" Content="Kitchen" HorizontalAlignment="Center" Margin="24,0,12,5" VerticalAlignment="Bottom" Width="94" Height="28" RenderTransformOrigin="0.362,0.333"/>
             <RadioButton x:Name="radioButton1" Content="Body" HorizontalAlignment="Center" Margin="24,22,13,0" VerticalAlignment="Center" Width="94" Height="27" Grid.Row="1"/>
-            <RadioButton x:Name="radioButton2" Content="Other" HorizontalAlignment="Center" Margin="24,21,13,4" VerticalAlignment="Center" Width="94" Height="28" Grid.Row="2"/>
+            <RadioButton x:Name="radioButton2" Content="Valuation" HorizontalAlignment="Center" Margin="24,19,12,10" VerticalAlignment="Center" Width="94" Height="28" Grid.Row="2"/>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="5" Grid.RowSpan="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <RadioButton x:Name="radioButton3" Content="Origin" HorizontalAlignment="Left" Margin="19,21,0,0" VerticalAlignment="Top" Width="94" Height="25"/>
-            <RadioButton x:Name="radioButton3_Copy" Content="Moving" HorizontalAlignment="Left" Margin="19,21,0,0" VerticalAlignment="Top" Width="94" Height="25" Grid.Row="1"/>
-            <RadioButton x:Name="radioButton3_Copy1" Content="FilterPlus" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top" Width="94" Height="25" Grid.Row="2"/>
+        <Button x:Name="btn_open" Content="open" HorizontalAlignment="Center" Margin="18,15" Grid.Row="4" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Click="btn_open_Click"/>
+        <TextBox x:Name="textBox" Grid.ColumnSpan="2" Grid.Row="5" TextWrapping="Wrap" Text="TextBox" Grid.Column="4" Margin="0,18,0,12"/>
+        <Button x:Name="button_Copy1" Content="Timed" HorizontalAlignment="Center" Margin="20,14,16,16" Grid.Row="6" VerticalAlignment="Center" Width="94" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Grid.Column="4"/>
+        <Button x:Name="button_Copy5" Content="Hex" HorizontalAlignment="Center" Margin="16,19,20,12" Grid.Row="5" VerticalAlignment="Center" Width="94" Height="26" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Grid.Column="2"/>
+        <Button x:Name="button_Copy6" Content="Hex" HorizontalAlignment="Center" Margin="19,18,17,12" Grid.Row="5" VerticalAlignment="Center" Width="94" Height="27" Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
+        <Grid Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="checkBox" Content="GetChart" Grid.Column="4" HorizontalAlignment="Left" Margin="26,20,0,0" Grid.Row="8" VerticalAlignment="Top" Width="94" Height="27"/>
+        <CheckBox x:Name="checkBox_Copy" Content="GetData" Grid.Column="4" HorizontalAlignment="Left" Margin="26,20,0,0" Grid.Row="9" VerticalAlignment="Top" Width="94" Height="27"/>
+        <CheckBox x:Name="checkBox1" Content="GetOther" Grid.Column="4" HorizontalAlignment="Left" Margin="26,24,0,0" Grid.Row="7" VerticalAlignment="Top"/>
+        <Grid Grid.Column="5" HorizontalAlignment="Left" Height="27" Margin="20,14,0,0" Grid.Row="6" VerticalAlignment="Top" Width="94">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="35*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="button" Content="ms" Background="#FFFDF8F8" Grid.Column="1" IsEnabled="False"/>
+            <Button x:Name="button1" Content="1000" TabIndex="2147483646"/>
         </Grid>
-        <Label x:Name="label_Copy5" Content="Rightshift" Grid.Column="3" HorizontalAlignment="Center" Margin="13,18,24,10" Grid.Row="8" VerticalAlignment="Center" Width="94" Height="28" Foreground="#FFBFADAD"/>
-        <Label x:Name="label_Copy6" Content="BufferLength" Grid.Column="3" HorizontalAlignment="Center" Margin="13,13,24,14" Grid.Row="9" VerticalAlignment="Center" Width="94" Height="28" Foreground="#FFBFADAD" RenderTransformOrigin="-0.91,8.661"/>
-        <ComboBox x:Name="box_rightshiftbits" HorizontalAlignment="Center" Margin="20,18,18,11" VerticalAlignment="Center" Width="94" RenderTransformOrigin="0.269,0.318" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="8" Grid.Column="4" />
-        <ComboBox x:Name="box_bufferlength" HorizontalAlignment="Center" Margin="20,13,18,15" VerticalAlignment="Center" Width="94" RenderTransformOrigin="0.269,0.318" Height="27" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="9" Grid.Column="4" />
+        <RichTextBox x:Name="box_recieve" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox x:Name="box_log" Grid.ColumnSpan="4" Grid.Row="6" Grid.RowSpan="4">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
 
 
