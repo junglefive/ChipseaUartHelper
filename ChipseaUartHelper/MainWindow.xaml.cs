@@ -40,17 +40,19 @@ namespace ChipseaUartHelper
         //private static Thread _ComSend;//发送数据线程
         //Queue recQueue = new Queue();//接收数据过程中，接收数据线程与数据处理线程直接传递的队列，先进先出
                                                       //Window
+                  
         ChartWindow chartWindow = null;
         TextWindow textWindow = null;
-
+        
         public MainWindow()
         {
             InitializeComponent();
-            Thread threadChartWindow=null;
+            Thread threadChartWindow = null;
+            Thread threadTextWindow = null;
             threadChartWindow = new Thread(new ThreadStart(startChartWindow));
             threadChartWindow.SetApartmentState(ApartmentState.STA);
             threadChartWindow.Start();
-            Thread threadTextWindow=null;
+           
             threadTextWindow = new Thread(new ThreadStart(startTextWindow));
             threadTextWindow.SetApartmentState(ApartmentState.STA);
             threadTextWindow.Start();
@@ -101,7 +103,7 @@ namespace ChipseaUartHelper
                 box_stopBits.Items.Add(str);
             }
             //
-            ComPort.ReadBufferSize = 128;
+            ComPort.ReadBufferSize = 1024;
             //dataSource = new EnumerableDataSource<int>(dataSourceQueue);
             //dataSource = new EnumerableDataSource<int>(dataSourceQueue);
             // chartPlotter.AddLineGraph(dataSource, Colors.Red, 1, "data");
@@ -125,10 +127,12 @@ namespace ChipseaUartHelper
         }
     
         private void AppendStringToLogBox(string str, bool newLine) {
+            //if(box_log)
             if (newLine) {
                 box_log.AppendText("\n");
             }
             box_log.AppendText(DateTime.Now.ToString()+":  "+str);
+            
         }
         private void AppendStringToRecieveBox(string str, bool newline) {
             if (newline)
@@ -138,23 +142,24 @@ namespace ChipseaUartHelper
             box_recieve.AppendText(DateTime.Now.ToString() + ":  " + str);
         }
 
-        private Queue dataBytesArrQueue = new Queue();
-        private Queue<byte> dataBytesQueue = new Queue<byte>();
-        private Queue<int> dataIntQueue = new Queue<int>();
-        private byte[] dataArrBuffer = new byte[4];
+        private volatile Queue dataBytesArrQueue = new Queue();
+        private volatile Queue<byte> dataBytesQueue = new Queue<byte>();
+        private volatile Queue<int> dataIntQueue = new Queue<int>();
+        private volatile byte[] dataArrBuffer = new byte[5];
         private String hex;
         private int iValue;
         private delegate void DataProcessEventHander(string str);
         private delegate void SendStringEventHander(string str, bool newline);
         private void ComPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(10);
             byte[] recBuffer;//接收缓冲区  
             if (ComPort.IsOpen)
             {
                 try
                 {
                     recBuffer = new byte[ComPort.BytesToRead];//接收数据缓存大小  
+                    this.Dispatcher.Invoke(new SendStringEventHander(AppendStringToLogBox),recBuffer.Length.ToString(), true);
                     ComPort.Read(recBuffer, 0, recBuffer.Length);//读取数据  
                     dataBytesArrQueue.Enqueue(recBuffer);//读取数据入列Enqueue（全局）  
                 }
@@ -167,7 +172,7 @@ namespace ChipseaUartHelper
             else { MessageBox.Show("COM is Closed", "warning"); }
 
         }
-
+        byte[] dataByteArr = new byte[4];
         private void DecodeBytes() {
             while (true) {
                 if (comIsClosing == false)
@@ -186,48 +191,51 @@ namespace ChipseaUartHelper
                         }
 
                     }
-                    if (dataBytesQueue.Count > 0)
+                    if (dataBytesQueue.Count >7)
                     {
 
-                        byte tmpByte = dataBytesQueue.Dequeue();
-                        if (tmpByte == 0xAA && dataArrBuffer[0] == (byte)(dataArrBuffer[1] ^ dataArrBuffer[2] ^ dataArrBuffer[3]))
-                        {
-                            //说明得到正确的数据
-                            byte[] bytesValue = new byte[4];
-                            bytesValue[0] = 0x00;
-                            for (int i = 1; i < 4; i++)
-                            {
-                                bytesValue[i] = dataArrBuffer[4 - i];
-                            }
-                            hex = BitConverter.ToString(bytesValue).Replace("-", string.Empty);
-                            iValue = Convert.ToInt32(hex, 16);
-                            this.Dispatcher.Invoke(new DataProcessEventHander(DataProcessUpdate), hex);
-                            //Display
-                            //this.Dispatcher.Invoke(new DisplayEventHander(DataProcessUpdate), iValue);
-                            // ChartPlotterDisplay(iValue);
-                            if (chartWindow != null) { chartWindow.AddData(iValue); }
-                            if (textWindow != null) { textWindow.updateSource(iValue); }
-                            if(iValue > 10000000)
-                            {
-
-
-                                int i = iValue;
-                            }
+                     
+                        if (dataBytesQueue.Dequeue() == 0xAB)
+                        {//0xAB+0xBA+DataH+DataL+DataLL+Parity+0x55
+                            if (dataBytesQueue.Dequeue() == 0xBA) {
+                                dataByteArr[0] = 0;
+                                dataByteArr[1] = dataBytesQueue.Dequeue();
+                                dataByteArr[2] = dataBytesQueue.Dequeue();
+                                dataByteArr[3] = dataBytesQueue.Dequeue();
+                                if (dataBytesQueue.Dequeue() == (byte)(dataByteArr[1] ^ dataByteArr[2] ^ dataByteArr[3])) {
+                                    if (dataBytesQueue.Dequeue() == 0x55) {
+                                        //说明得到正确的数据
+                                        hex = BitConverter.ToString(dataByteArr).Replace("-", string.Empty);
+                                        iValue = Convert.ToInt32(hex, 16);
+                                        this.Dispatcher.Invoke(new DataProcessEventHander(DataProcessUpdate), hex);
+                                        if (chartWindow != null) { chartWindow.AddData(iValue); }
+                                        if (textWindow != null) { textWindow.updateSource(iValue); }
+                                        if (iValue > 10000000)
+                                        {
+                                            //报错处理
+                                            int i = iValue;
+                                            while (true) { };
+                                        }
+                                    }
+                                }
+                            }  
                         }
-                        else {
-                            //moving one  byte
-                            dataArrBuffer[3] = dataArrBuffer[2];
-                            dataArrBuffer[2] = dataArrBuffer[1];
-                            dataArrBuffer[1] = dataArrBuffer[0];
-                            dataArrBuffer[0] = tmpByte;
+                        //else {
+                        //moving one  byte
+                            //dataArrBuffer[4] = dataArrBuffer[3];
+                            //dataArrBuffer[3] = dataArrBuffer[2];
+                            //dataArrBuffer[2] = dataArrBuffer[1];
+                            //dataArrBuffer[1] = dataArrBuffer[0];
+                            //dataArrBuffer[0] = tmpByte;
 
-                        }
+                       // }
                         
                     }
 
-                    Thread.Sleep(10);
                 }
-                else { Thread.Sleep(10); }
+                else {
+                    Thread.Sleep(1000);
+                }
             }
 
         }
@@ -334,6 +342,13 @@ namespace ChipseaUartHelper
         {
             chartWindow.Close();
             textWindow.Close();
+            //if (threadChartWindow.IsAlive) {
+            //    threadChartWindow.Abort();
+            //}
+            //if (threadTextWindow.IsAlive){
+            //    threadTextWindow.Abort();
+            //}
+           
         }
      
         private void btn_chart_Click(object sender, RoutedEventArgs e)
