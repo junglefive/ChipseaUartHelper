@@ -11,8 +11,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer x:Name="scroll_hex">
-            <RichTextBox x:Name="richTextBox_hex">
+        <ScrollViewer x:Name="scroll_dec">
+            <RichTextBox x:Name="richTextBox_hex" UndoLimit="0">
                 <FlowDocument>
                     <Paragraph>
 
@@ -20,8 +20,8 @@
                 </FlowDocument>
             </RichTextBox>
         </ScrollViewer>
-        <ScrollViewer Grid.Column="1">
-            <RichTextBox x:Name="richTextBox_dec" Grid.Column="1">
+        <ScrollViewer x:Name="scroll_hex" Grid.Column="1">
+            <RichTextBox x:Name="richTextBox_dec" Grid.Column="1" UndoLimit="0">
                 <FlowDocument>
                     <Paragraph>
 

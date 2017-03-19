@@ -24,27 +24,53 @@ namespace ChipseaUartHelper
             InitializeComponent();
         }
 
-
-        private delegate void UpdateTextEventHander(int i);
-        public  void updateSource(int idata) {
-            this.Dispatcher.Invoke(new UpdateTextEventHander(updateSourceCallBack), idata);
+        private bool isClosingFlag = false;
+        private Queue<int> iDataQueue = new Queue<int>();
+        private delegate void UpdateTextEventHander(Queue<int> DataQueue);
+        public  void updateSource(Queue<int> DataQueue) {
             
+            this.Dispatcher.Invoke(new UpdateTextEventHander(updateSourceCallBack),DataQueue);
+            //updateSourceCallBack(idata);
+        
+
+
         }
-        private void updateSourceCallBack(int idata)
+        private void updateSourceCallBack(Queue<int> iDataQueueBuf)
         {
-            if (richTextBox_hex != null && richTextBox_dec != null)
-            {
-                richTextBox_hex.AppendText("\n");
-                richTextBox_hex.AppendText((DateTime.Now.ToLongTimeString() + "：  " + Convert.ToString(idata, 10)));
-                richTextBox_dec.AppendText("\n");
-                richTextBox_dec.AppendText(DateTime.Now.ToLongTimeString() + ":   " + Convert.ToString(idata, 16) + "H");
+            iDataQueue = iDataQueueBuf;
+            if (!isClosingFlag) {
+                int idata;
+                for (int j = 0; j < iDataQueue.Count; j++) {
+
+                    idata = iDataQueue.Dequeue();
+                    if (richTextBox_hex != null && richTextBox_dec != null)
+                    {
+                            richTextBox_hex.AppendText("\n");
+                            richTextBox_hex.AppendText(Convert.ToString(idata, 10));
+                        if (richTextBox_dec.Document.Blocks.Count > 500)
+                        {
+
+                            richTextBox_dec.Document.Blocks.Remove(richTextBox_dec.Document.Blocks.FirstBlock);
+                            richTextBox_hex.Document.Blocks.Remove(richTextBox_hex.Document.Blocks.FirstBlock);
+                        }
+                        richTextBox_dec.AppendText("\n");
+                        richTextBox_dec.AppendText(Convert.ToString(idata, 16) + "H");
+                        
+                    }
+                }
+
+                //滚动条一直显示在底部
+                scroll_dec.ScrollToBottom();
+                scroll_hex.ScrollToBottom();
 
             }
+               
 
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            isClosingFlag = true;
             richTextBox_dec.Document.Blocks.Clear();
             richTextBox_hex.Document.Blocks.Clear();
         }

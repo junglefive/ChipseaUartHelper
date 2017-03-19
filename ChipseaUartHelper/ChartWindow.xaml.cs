@@ -37,17 +37,18 @@ namespace ChipseaUartHelper
 
             if (isClosingFlag == false)
             {
-                this.Dispatcher.Invoke(new UpdateDataSourceEventHander(updateDataSource), idata);
+                this.Dispatcher.BeginInvoke(new UpdateDataSourceEventHander(updateDataSource), idata);
             }
             
         }
         private void updateDataSource(int idata) {
-          
+
+            if (x1 > 1000) { x1 = 0; }
             if (dataSource_Y1 != null) { 
                 dataSource_Y1.AppendAsync(base.Dispatcher, new Point(x1++, idata));
-
             }
             
+          
         }
         
         private void updatePlotter(object sender, EventArgs e) {
