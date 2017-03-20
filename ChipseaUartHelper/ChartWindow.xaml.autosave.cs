@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -109,6 +109,7 @@ namespace ChipseaUartHelper
                         plotter.Children.Remove(lineIIR);
                         dataSource_Y5_IIR = new ObservableDataSource<Point>();
                         lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.Cyan, 2, "IIR");
+
                     }
                 }
                 if (dataSource_Y1_Origin != null && plotterDisplayOrigin)
