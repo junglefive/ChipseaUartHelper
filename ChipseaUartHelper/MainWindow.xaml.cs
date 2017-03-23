@@ -42,7 +42,7 @@ namespace ChipseaUartHelper
                                                       //Window
                   
         ChartWindow chartWindow = null;
-        TextWindow textWindow = null;
+        //TextWindow textWindow = null;
         Thread threadChartWindow = null;
         Thread threadTextWindow = null;
         Thread recData = null;
@@ -465,9 +465,7 @@ namespace ChipseaUartHelper
         {   if (chartWindow != null) {
                 chartWindow.Close();
             }
-            if (textWindow != null) {
-                textWindow.Close();
-            }
+          
           
         }
      
@@ -492,7 +490,7 @@ namespace ChipseaUartHelper
         private void showTextWindow()
         {
             //在此执行你的代码
-            textWindow = new TextWindow();
+            //textWindow = new TextWindow();
             // textWindow.ShowDialog();
             System.Windows.Threading.Dispatcher.Run();
         }

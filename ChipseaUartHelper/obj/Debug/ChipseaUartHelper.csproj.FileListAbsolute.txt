@@ -62,8 +62,6 @@ E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csproj.GenerateResource.Cache
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.g.cs
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.baml
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\TextWindow.g.cs
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\TextWindow.baml
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Coastline.dll
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.dll
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.dll

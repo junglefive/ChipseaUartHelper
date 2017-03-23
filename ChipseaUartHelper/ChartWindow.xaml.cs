@@ -29,6 +29,12 @@ namespace ChipseaUartHelper
         private ObservableDataSource<Point> dataSource_Y3_Average = null;
         private ObservableDataSource<Point> dataSource_Y4_Moving = null;
         private ObservableDataSource<Point> dataSource_Y5_IIR = null;
+        private Queue<Point> dataQueue_Origin = new Queue<Point>();
+        private Queue<Point> dataQueue_Shake = new Queue<Point>();
+        private Queue<Point> dataQueue_Average = new Queue<Point>();
+        private Queue<Point> dataQueue_Moving = new Queue<Point>();
+        private Queue<Point> dataQueue_IIR = new Queue<Point>();
+        DispatcherTimer refreshPlotterTimer = new DispatcherTimer();
         private double x1_origin = 0;
         private double x2_average = 0;
         private double x3_shake = 0;
@@ -57,7 +63,60 @@ namespace ChipseaUartHelper
             checkBox_iir.IsChecked = false;
             //
             textBox.Text = PlotterDataNumber.ToString();
+            //
+            refreshPlotterTimer.Interval = TimeSpan.FromMilliseconds(2);
+            refreshPlotterTimer.Tick += new EventHandler(RefreshPlotterEventHander);
+            refreshPlotterTimer.Start();
         }
+
+        private bool bNewDataComeFlag = false;
+        private void RefreshPlotterEventHander(object sender, EventArgs e) {
+            int iShakeData = 0;
+            int iAverageData = 0;
+            int iMovingData = 0;
+            int iIIRData = 0;
+            if (x1_origin== PlotterDataNumber) {
+                //dataQueue_Origin.Dequeue();
+                //dataQueue_Shake.Dequeue();
+                //dataQueue_Average.Dequeue();
+                //dataQueue_Moving.Dequeue();
+                //dataQueue_IIR.Dequeue();
+            }
+            //IEnumerable<Point> numerator = new 
+            if (bNewDataComeFlag) {
+                bNewDataComeFlag = false;
+                if (plotterDisplayOrigin && dataSource_Y1_Origin != null)
+                {
+                    dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
+                }
+                //get anti-shake  
+                if (plotterDisplayShake && dataSource_Y2_Shake != null)
+                {
+                    dataSource_Y2_Shake.AppendMany(dataQueue_Shake);
+                }
+                //iAverageData = AverageFilter(iShakeData, 4);
+                if (plotterDisplayAverage && dataSource_Y3_Average != null)
+                {
+                    dataSource_Y3_Average.AppendMany(dataQueue_Average);
+                }
+                //iMovingData = MovingFilter(iAverageData, 8);
+                if (plotterDisplayMoving && dataSource_Y4_Moving != null)
+                {
+                    dataSource_Y4_Moving.AppendMany(dataQueue_Moving);
+                }
+                //iIIRData = IIRFilter(iMovingData, 3, 3);
+
+                if (plotterDisplayIIR && dataSource_Y5_IIR != null)
+                {
+                    dataSource_Y5_IIR.AppendMany(dataQueue_IIR);
+                }
+
+            }
+
+
+        }
+
+
         private delegate void UpdateDataSourceEventHander(int i);
         public void AddData(int idata) {
 
@@ -69,71 +128,19 @@ namespace ChipseaUartHelper
 
         }
         private void updateDataSource(int idata) {
-            int iShakeData = 0;
-            int iAverageData = 0;
-            int iMovingData = 0;
-            int iIIRData = 0;
+           
             x1_origin++;
+            //if (x1_origin > PlotterDataNumber) {
+            //    x1_origin = 0;
+            //}
             if (!btn_pause_click) {
-                if (x1_origin > PlotterDataNumber)
-                {
-                    x1_origin = 0;
-                    if(plotterDisplayOrigin){
-                        
-                        plotter.Children.Remove(lineOrigin);
-                        dataSource_Y1_Origin = new ObservableDataSource<Point>();
-                        lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Red, 2, "Origin");
-                    }
-                    if(plotterDisplayShake){
-                        
-                        plotter.Children.Remove(lineShake);
-                        dataSource_Y2_Shake = new ObservableDataSource<Point>();
-                        lineShake = plotter.AddLineGraph(dataSource_Y2_Shake, Colors.HotPink, 2, "Shake");
-                    }
-                    if(plotterDisplayAverage){
-
-                        plotter.Children.Remove(lineAverage);
-                        dataSource_Y3_Average = new ObservableDataSource<Point>();
-                        lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Aqua, 2, "Average");
-                    }
-                    if(plotterDisplayMoving){
-
-                        plotter.Children.Remove(lineMoving);
-                        dataSource_Y4_Moving = new ObservableDataSource<Point>();
-                        lineMoving = plotter.AddLineGraph(dataSource_Y4_Moving, Colors.Brown, 2, "Moving");
-                        
-                    }
-
-                    if(plotterDisplayIIR){
-
-                        plotter.Children.Remove(lineIIR);
-                        dataSource_Y5_IIR = new ObservableDataSource<Point>();
-                        lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.Cyan, 2, "IIR");
-                    }
-                }
-                if (dataSource_Y1_Origin != null && plotterDisplayOrigin)
-                {
-                    dataSource_Y1_Origin.AppendAsync(base.Dispatcher, new Point(x1_origin, idata));
-                    //get anti-shake
-                    iShakeData = AntiShakeFilter(idata);
-                    if (plotterDisplayShake) {
-                        dataSource_Y2_Shake.AppendAsync(base.Dispatcher, new Point(x1_origin, iShakeData));
-                    }
-                    iAverageData = AverageFilter(iShakeData, 4);
-                    if (plotterDisplayAverage) {
-                        dataSource_Y3_Average.AppendAsync(base.Dispatcher, new Point(x1_origin, iAverageData));
-                    }
-                    iMovingData = MovingFilter(iAverageData, 8);
-                    if (plotterDisplayMoving){
-                        dataSource_Y4_Moving.AppendAsync(base.Dispatcher, new Point(x1_origin, iMovingData));
-                    }
-                    iIIRData = IIRFilter(iMovingData, 3, 3);
-
-                    if(plotterDisplayIIR){
-                        dataSource_Y5_IIR.AppendAsync(base.Dispatcher, new Point(x1_origin, iIIRData));
-                    }
-                }
-                // dataSource_Y1.
+                bNewDataComeFlag = true;
+                dataQueue_Origin.Enqueue(new Point(x1_origin, idata));
+                dataQueue_Shake.Enqueue(new Point(x1_origin, idata+ 100));
+                dataQueue_Average.Enqueue(new Point(x1_origin, idata+ 200));
+                dataQueue_Moving.Enqueue(new Point(x1_origin, idata + 300));
+                dataQueue_IIR.Enqueue(new Point(x1_origin, idata + 400));
+ 
             }//btn_pause_click
 
 
@@ -218,7 +225,7 @@ namespace ChipseaUartHelper
         private void checkBox_origin_Checked(object sender, RoutedEventArgs e)
         {
             plotter.Children.Remove(lineOrigin);
-            x1_origin = 0;
+            //x1_origin = 0;
             dataSource_Y1_Origin = new ObservableDataSource<Point>();
             lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Red, 2, "Origin");
             plotterDisplayOrigin = true;
@@ -226,7 +233,7 @@ namespace ChipseaUartHelper
 
         private void checkBox_origin_Unchecked(object sender, RoutedEventArgs e)
         {
-            x1_origin = 0;
+            //x1_origin = 0;
             dataSource_Y1_Origin = new ObservableDataSource<Point>();
             plotter.Children.Remove(lineOrigin);
             plotterDisplayOrigin = false;
@@ -234,19 +241,19 @@ namespace ChipseaUartHelper
         
         private void checkBox_shake_Checked(object sender, RoutedEventArgs e)
         {
-            if (dataSource_Y2_Shake == null)
+           // if (dataSource_Y2_Shake == null)
             {
               dataSource_Y2_Shake = new ObservableDataSource<Point>();
               lineShake = plotter.AddLineGraph(dataSource_Y2_Shake, Colors.HotPink, 2, "Shake");
             }
-         //   plotter.Children.Remove(lineShake);
+         //  plotter.Children.Remove(lineShake);
             plotterDisplayShake = true;
 
         }
 
         private void checkBox_shake_Unchecked(object sender, RoutedEventArgs e)
         {
-            x3_shake = 0;
+           // x3_shake = 0;
             dataSource_Y2_Shake = new ObservableDataSource<Point>();
             plotter.Children.Remove(lineShake);
             plotterDisplayShake = false;
@@ -254,8 +261,8 @@ namespace ChipseaUartHelper
 
         private void checkBox_average_Checked(object sender, RoutedEventArgs e)
         {
-            x2_average = 0;
-            if (dataSource_Y3_Average ==null) 
+           // x2_average = 0;
+           // if (dataSource_Y3_Average ==null) 
             {
                 dataSource_Y3_Average = new ObservableDataSource<Point>();
                 lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Aqua, 2, "Average");
@@ -266,15 +273,15 @@ namespace ChipseaUartHelper
 
         private void checkBox_average_Unchecked(object sender, RoutedEventArgs e)
         {
-            x2_average = 0;
+           // x2_average = 0;
             plotter.Children.Remove(lineAverage);
             plotterDisplayAverage = false;
         }
 
         private void checkBox_moving_Checked(object sender, RoutedEventArgs e)
         {
-              x4_moving = 0;
-            if (dataSource_Y4_Moving ==null)
+           //   x4_moving = 0;
+            //if (dataSource_Y4_Moving ==null)
             {
                 dataSource_Y4_Moving = new ObservableDataSource<Point>();
                 lineMoving = plotter.AddLineGraph(dataSource_Y4_Moving, Colors.Brown, 2, "Moving");
@@ -285,7 +292,7 @@ namespace ChipseaUartHelper
 
         private void checkBox_moving_Unchecked(object sender, RoutedEventArgs e)
         {
-            x4_moving = 0;
+           // x4_moving = 0;
             plotter.Children.Remove(lineMoving);
             plotterDisplayMoving = false;
         }
@@ -293,7 +300,7 @@ namespace ChipseaUartHelper
         private void checkBox_iir_Checked(object sender, RoutedEventArgs e)
         {
             x5_iir = 0;
-            if (dataSource_Y5_IIR == null)
+            //if (dataSource_Y5_IIR == null)
             {
                 dataSource_Y5_IIR = new ObservableDataSource<Point>();
                 lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.Cyan, 2, "IIR");

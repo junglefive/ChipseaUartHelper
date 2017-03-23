@@ -53,7 +53,14 @@
         <Button x:Name="btn_send" Content="Send" Margin="26,16,18,11" Grid.Row="5" Background="#FFE8E5E5" Grid.Column="4" RenderTransformOrigin="0.298,-0.407" BorderThickness="0" BorderBrush="#FFF58E7E" Click="btn_send_Click"/>
         <Button x:Name="btn_open" Content="open" Margin="0,19,30,11" Grid.Row="5" Click="btn_open_Click" BorderThickness="0" BorderBrush="#FFEC6F6F" Foreground="#FF2B2A2A" Background="#FFEBECE3" Grid.Column="1"/>
         <ScrollViewer x:Name="scroll_log" Grid.ColumnSpan="4" Grid.Row="6" Grid.RowSpan="4" Grid.Column="1">
-            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFEBF3EB" BorderThickness="1,3,1,1" Margin="5">
+            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFEBF3EB" BorderThickness="5" Margin="5,5,5,8">
+                <RichTextBox.BorderBrush>
+                    <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                        <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                        <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                        <GradientStop Color="#FFCDD0D3" Offset="1"/>
+                    </LinearGradientBrush>
+                </RichTextBox.BorderBrush>
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -62,7 +69,7 @@
             </RichTextBox>
         </ScrollViewer>
         <ScrollViewer x:Name="scroll_recieve" Grid.ColumnSpan="4" Grid.RowSpan="4" Grid.Column="1">
-            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFF9F1F1" BorderThickness="1,1,1,3" BorderBrush="#FFB0B5C3" Margin="5">
+            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFF9F1F1" BorderThickness="3,5" BorderBrush="#FFB0B5C3" Margin="5,5,5,8">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
