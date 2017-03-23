@@ -590,6 +590,8 @@ namespace ChipseaUartHelper
             {
                 bChartWindowIsOpen = true;
                 chartWindow = new ChartWindow();
+                // chartWindow.
+            
                 chartWindow.Show();
                 btn_chart.Content = "Close";
                 checkBox_decode.IsChecked = true;
@@ -660,6 +662,13 @@ namespace ChipseaUartHelper
             bSendTimedFlag = false;
         }
 
+        private void btn_save_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+        }
     }
 
 }

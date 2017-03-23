@@ -207,13 +207,7 @@ namespace ChipseaUartHelper
                 
         }
 
-        private void btn_reset_Click(object sender, RoutedEventArgs e)
-        {
-            x1_origin = 0;
-            dataSource_Y1_Origin = new ObservableDataSource<Point>();
-            plotter.Children.Remove(lineOrigin);
-            lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Red, 2, "Origin");
-        }
+  
         private int PlotterDataNumber = 1000;//默认1000
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
