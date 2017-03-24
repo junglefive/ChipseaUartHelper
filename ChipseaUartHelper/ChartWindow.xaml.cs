@@ -39,7 +39,7 @@ namespace ChipseaUartHelper
         private double x2_average = 0;
         private double x3_shake = 0;
         private double x4_moving = 0;
-        private double x5_iir = 0;
+        //private double x5_iir = 0;
         private bool isClosingFlag = false;
         LineGraph lineOrigin = new LineGraph();
         LineGraph lineAverage = new LineGraph();
@@ -62,54 +62,80 @@ namespace ChipseaUartHelper
             checkBox_shake.IsChecked = false;
             checkBox_iir.IsChecked = false;
             //
-            textBox.Text = PlotterDataNumber.ToString();
+            //textBox.Text = PlotterDataNumber.ToString();
             //
             refreshPlotterTimer.Interval = TimeSpan.FromMilliseconds(2);
             refreshPlotterTimer.Tick += new EventHandler(RefreshPlotterEventHander);
             refreshPlotterTimer.Start();
+            //初始化组件值
+            initiateDefaultValue();
+
+        }
+        private void initiateDefaultValue() {
+            iOriginRightShiftBits = 0;
+            iShakeCount = 5;
+            iShakeThreshold = 200;
+            iAverageTimes = 4;
+            iMovingLength = 8;
+            iIIROrder = 6;
+            iIIRThreshold = 20;
+            textBox_origin.Text = iOriginRightShiftBits.ToString();
+            textBox_shake_count.Text = iShakeCount.ToString();
+            textBox_shake_threshold.Text = iShakeThreshold.ToString();
+            textBox_moving_length.Text = iMovingLength.ToString();
+            textBox_average_times.Text =  iAverageTimes.ToString();
+            textBox_moving_length.Text =  iMovingLength.ToString();
+            textBox_iir_order.Text = iIIROrder.ToString();
+            textBox_iir_threshold.Text = iIIRThreshold.ToString();
         }
 
         private bool bNewDataComeFlag = false;
         private void RefreshPlotterEventHander(object sender, EventArgs e) {
-            int iShakeData = 0;
-            int iAverageData = 0;
-            int iMovingData = 0;
-            int iIIRData = 0;
-            if (x1_origin== PlotterDataNumber) {
-                //dataQueue_Origin.Dequeue();
-                //dataQueue_Shake.Dequeue();
-                //dataQueue_Average.Dequeue();
-                //dataQueue_Moving.Dequeue();
-                //dataQueue_IIR.Dequeue();
-            }
+            //int iShakeData = 0;
+            //int iAverageData = 0;
+            //int iMovingData = 0;
+            //int iIIRData = 0;
+            //if (x1_origin== PlotterDataNumber) {
+            //dataQueue_Origin.Dequeue();
+            //dataQueue_Shake.Dequeue();
+            //dataQueue_Average.Dequeue();
+            //dataQueue_Moving.Dequeue();
+            //dataQueue_IIR.Dequeue();
+            //}
             //IEnumerable<Point> numerator = new 
             if (bNewDataComeFlag) {
                 bNewDataComeFlag = false;
+                //update text
+                textBlock_max.Text   = "Max: "+iMax;
+                textBlock_min.Text   = "Min: "+iMin;
+                textBlock_delta.Text = "D-V: "+(iMax - iMin);
                 if (plotterDisplayOrigin && dataSource_Y1_Origin != null)
                 {
-                    dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
+                    //dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
+                    dataSource_Y1_Origin.AppendAsync(Dispatcher, dataPoint_Origin);
                 }
                 //get anti-shake  
                 if (plotterDisplayShake && dataSource_Y2_Shake != null)
                 {
-                    dataSource_Y2_Shake.AppendMany(dataQueue_Shake);
+                    dataSource_Y2_Shake.AppendAsync(Dispatcher, dataPoint_Shake);
                 }
                 //iAverageData = AverageFilter(iShakeData, 4);
                 if (plotterDisplayAverage && dataSource_Y3_Average != null)
                 {
-                    dataSource_Y3_Average.AppendMany(dataQueue_Average);
+                    dataSource_Y3_Average.AppendAsync(Dispatcher, dataPoint_Average);
                 }
                 //iMovingData = MovingFilter(iAverageData, 8);
                 if (plotterDisplayMoving && dataSource_Y4_Moving != null)
                 {
-                    dataSource_Y4_Moving.AppendMany(dataQueue_Moving);
+                    dataSource_Y4_Moving.AppendAsync(Dispatcher, dataPoint_Moving);
                 }
                 //iIIRData = IIRFilter(iMovingData, 3, 3);
 
                 if (plotterDisplayIIR && dataSource_Y5_IIR != null)
                 {
-                    dataSource_Y5_IIR.AppendMany(dataQueue_IIR);
+                    dataSource_Y5_IIR.AppendAsync(Dispatcher, dataPoint_IIR);
                 }
+         
 
             }
 
@@ -127,46 +153,133 @@ namespace ChipseaUartHelper
             }
 
         }
+        Point dataPoint_Origin = new Point();
+        Point dataPoint_Shake = new Point();
+        Point dataPoint_Average = new Point();
+        Point dataPoint_Moving = new Point();
+        Point dataPoint_IIR = new Point();
+        private int iMax = 0;
+        private int iMin = 16777215;
         private void updateDataSource(int idata) {
-           
+
             x1_origin++;
+            idata = OriginFilter(idata, iOriginRightShiftBits);
+            if (idata > iMax) { iMax = idata; };
+            if (idata < iMin) { iMin = idata; };
             //if (x1_origin > PlotterDataNumber) {
             //    x1_origin = 0;
             //}
+
             if (!btn_pause_click) {
+
                 bNewDataComeFlag = true;
-                dataQueue_Origin.Enqueue(new Point(x1_origin, idata));
-                dataQueue_Shake.Enqueue(new Point(x1_origin, idata+ 100));
-                dataQueue_Average.Enqueue(new Point(x1_origin, idata+ 200));
-                dataQueue_Moving.Enqueue(new Point(x1_origin, idata + 300));
-                dataQueue_IIR.Enqueue(new Point(x1_origin, idata + 400));
- 
+                //
+                dataPoint_Origin = (new Point(x1_origin, idata));
+                dataPoint_Shake = (new Point(x1_origin, AntiShakeFilter(idata,iShakeCount, iShakeThreshold)));
+                dataPoint_Average = (new Point(x1_origin, AverageFilter(idata, iAverageTimes)));
+                dataPoint_Moving = (new Point(x1_origin, MovingFilter(idata, iMovingLength)));
+                dataPoint_IIR = (new Point(x1_origin, IIRFilter(idata,iIIROrder, iIIRThreshold)));
+
             }//btn_pause_click
 
 
         }
-        private int AntiShakeFilter(int idata) {
+        private int OriginFilter(int idata, int rightshift) {
 
-            return idata+100;
+            return idata >> rightshift;
         }
 
+
+        private int iShakeCounter = 0;
+        private int iShakeLastSample = 0;
+        private int AntiShakeFilter(int idata, int counter, int threshold) {
+
+            if (Math.Abs(idata - iShakeLastSample) > threshold)
+            {
+                iShakeCounter++;
+                if (iShakeCounter < counter)
+                {
+                    return iShakeLastSample;
+                }
+                else
+                {
+                    iShakeLastSample = idata;
+                    return iShakeLastSample;
+                }
+
+            }
+            else {
+
+                iShakeCounter = 0;
+                return idata;
+            }
+
+
+           
+        }
+        private int iAverageCounter = 0;
+        private int iAverageSum = 0;
+        private int iAverageLastValue = 0;
         private int AverageFilter(int idata, int times) {
+            int iTmp = 0;
+            iAverageCounter++;
+            iAverageSum += idata;
+            if (iAverageCounter == times)
+            {
+                iTmp =  iAverageSum / times;
+                iAverageCounter = 0;
+                iAverageSum = 0;
+                iAverageLastValue = iTmp;
+            }
+            else {
 
-
-            return idata+200;
+                iTmp =  iAverageLastValue;
+            }
+            
+            return iTmp;
         }
+        Queue<int> iMovingQueue = new Queue<int>();
+        private int iMovingLastValue = 0;
         private int MovingFilter(int idata, int bufferLength) {
+            int sum = 0;
+            int getData = 0;
+            iMovingQueue.Enqueue(idata);
+            if (iMovingQueue.Count == bufferLength + 1)
+            {
+                iMovingQueue.Dequeue();
+                foreach (int i in iMovingQueue)
+                {
+                    sum += i;
+                }
+                getData = sum / bufferLength;
+                iMovingLastValue = getData;
+            }
+            else {
+                getData = idata;
+            }
 
-            return idata+300;
+            return getData;
         }
-        private int IIRFilter(int idata, int order, int threshold) {
+        private  int iLastValue = 0;
+        private  int iLastSample = 0;
+        private  int iCurValue = 0;
+        private  int IIRFilter(int idata, int order, int threshold) {
+            int iTmp = 0;
 
-            return idata+400;
+            iTmp = (int)((idata + iLastSample + iLastValue*Math.Pow(2, order) - 2 * iLastValue)/(Math.Pow(2, order)));
+            if (Math.Abs(iTmp - iLastValue) > threshold)
+            {
+                iCurValue = idata;
+            }
+            else {
+                iCurValue = iTmp;
+            }
+
+            iLastValue = iCurValue;
+            iLastSample = idata;
+            return iCurValue;
         }
-
-
-
-        
+ 
         private void updatePlotter(object sender, EventArgs e) {
             
 
@@ -195,23 +308,23 @@ namespace ChipseaUartHelper
      
         private void btn_pause_Click(object sender, RoutedEventArgs e)
         {
-            if (btn_pause_click)
+            if (!btn_pause_click)
             {
-                btn_pause_click = false;
+                btn_pause_click = true;
                 btn_pause.Content = "pausing";
             }
             else {
-                btn_pause_click = true;
+                btn_pause_click = false;
                 btn_pause.Content = "pause";
             }
                 
         }
 
   
-        private int PlotterDataNumber = 1000;//默认1000
+        //private int PlotterDataNumber = 1000;//默认1000
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            PlotterDataNumber = Convert.ToInt32(textBox.Text.ToString());
+          //  PlotterDataNumber = Convert.ToInt32(textBox.Text.ToString());
                
         }
 
@@ -221,7 +334,7 @@ namespace ChipseaUartHelper
             plotter.Children.Remove(lineOrigin);
             //x1_origin = 0;
             dataSource_Y1_Origin = new ObservableDataSource<Point>();
-            lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Red, 2, "Origin");
+            lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Gray, 2, "Origin");
             plotterDisplayOrigin = true;
         }
 
@@ -259,7 +372,7 @@ namespace ChipseaUartHelper
            // if (dataSource_Y3_Average ==null) 
             {
                 dataSource_Y3_Average = new ObservableDataSource<Point>();
-                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Aqua, 2, "Average");
+                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Firebrick, 2, "Average");
             }
            // plotter.Children.Remove(lineAverage);
             plotterDisplayAverage = true;
@@ -293,11 +406,11 @@ namespace ChipseaUartHelper
 
         private void checkBox_iir_Checked(object sender, RoutedEventArgs e)
         {
-            x5_iir = 0;
+            //x5_iir = 0;
             //if (dataSource_Y5_IIR == null)
             {
                 dataSource_Y5_IIR = new ObservableDataSource<Point>();
-                lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.Cyan, 2, "IIR");
+                lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.DodgerBlue, 2, "IIR");
             }
             //plotter.Children.Remove(lineIIR);
             plotterDisplayIIR = true;
@@ -306,10 +419,132 @@ namespace ChipseaUartHelper
 
         private void checkBox_iir_Unchecked(object sender, RoutedEventArgs e)
         {
-            x5_iir= 0;
+            //x5_iir= 0;
             plotter.Children.Remove(lineIIR);
             plotterDisplayIIR = false;
 
+        }
+
+        private void btn_reset_Click(object sender, RoutedEventArgs e)
+        {
+            x1_origin = 0;
+            if (plotterDisplayOrigin == true) {
+                plotter.Children.Remove(lineOrigin);
+                dataSource_Y1_Origin = new ObservableDataSource<Point>();
+                lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Gray, 2, "Origin");
+            }
+
+            //plotterDisplayOrigin = true;
+            //plotter.Children.Remove(lineShake);
+            if (plotterDisplayShake == true) {
+                plotter.Children.Remove(lineShake);
+                dataSource_Y2_Shake = new ObservableDataSource<Point>();
+                lineShake = plotter.AddLineGraph(dataSource_Y2_Shake, Colors.HotPink, 2, "Shake");
+            }
+
+            //plotterDisplayShake = true;
+            //
+            if (plotterDisplayAverage == true) {
+                plotter.Children.Remove(lineAverage);
+                dataSource_Y3_Average = new ObservableDataSource<Point>();
+                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Firebrick, 2, "Average");
+            }
+
+
+            //plotterDisplayAverage = true;
+            //
+            if (plotterDisplayMoving == true) {
+                plotter.Children.Remove(lineMoving);
+                dataSource_Y4_Moving = new ObservableDataSource<Point>();
+                lineMoving = plotter.AddLineGraph(dataSource_Y4_Moving, Colors.Brown, 2, "Moving");
+            }
+
+
+            //plotterDisplayMoving = false;
+            //if (dataSource_Y5_IIR == null)
+            if (plotterDisplayIIR == true) {
+                plotter.Children.Remove(lineIIR);
+                dataSource_Y5_IIR = new ObservableDataSource<Point>();
+                lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.DodgerBlue, 2, "IIR");
+            }
+           
+            //plotterDisplayIIR = false;
+            iMax = 0;
+            iMin = 16777215;
+            textBlock_max.Text = "";
+            textBlock_min.Text = "";
+            textBlock_delta.Text = "";
+        }
+
+        private int iOriginRightShiftBits = 0;
+        private void textBox_origin_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+            iOriginRightShiftBits = Convert.ToInt32(textBox_origin.Text);
+            }
+            catch { }
+        }
+        private int iShakeCount = 0;
+        private void textBox_shake_count_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+            iShakeCount = Convert.ToInt32(textBox_shake_count.Text);
+
+            }
+            catch { }
+        }
+        private int iShakeThreshold = 0;
+        private void textBox_shake_threshold_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+            iShakeThreshold = Convert.ToInt32(textBox_shake_threshold.Text);
+            }
+            catch { }
+        }
+        private int iAverageTimes = 0;
+        private void textBox_average_times_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+            iAverageTimes = Convert.ToInt32(textBox_average_times.Text);
+
+            }
+            catch { }
+        }
+        private int iMovingLength = 0;
+        private void textBox_moving_length_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+            iMovingLength = Convert.ToInt32(textBox_moving_length.Text);
+            }
+            catch { }
+        }
+        private int iIIROrder = 0;
+        private void textBox_iir_order_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+            iIIROrder = Convert.ToInt32(textBox_iir_order.Text);
+            }
+            catch { }
+        }
+        private int iIIRThreshold = 0;
+        private void textBox_iir_threshold_DataContextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+
+            iIIRThreshold = Convert.ToInt32(textBox_iir_threshold);
+            }
+            catch { }
         }
 
     }

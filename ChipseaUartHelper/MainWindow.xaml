@@ -40,11 +40,11 @@
             <ColumnDefinition Width="22*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btn_clear" Content="Clear" Margin="29,19,22,11" Click="btn_clear_Click" Background="#FFEAE3E3" RenderTransformOrigin="1.059,0.333" Grid.Row="6" Grid.Column="3" BorderThickness="0" BorderBrush="#FFF76868"/>
-        <ComboBox x:Name="box_portName" Margin="22,13,6,15" Background="{x:Null}" BorderBrush="#FFE0E0E0" Opacity="0.94" Grid.Column="6" SelectionChanged="box_portName_SelectionChanged" BorderThickness="1" Grid.Row="1" />
-        <ComboBox x:Name="box_baudRate" Margin="22,15,6,14" Background="{x:Null}" BorderBrush="#FFE0E0E0" Grid.Column="6" Grid.Row="2" />
-        <ComboBox x:Name="box_dataBits" Margin="22,16,6,15" Background="{x:Null}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.Column="6" Grid.Row="3" />
-        <ComboBox x:Name="box_parityBits" Margin="22,17,6,14" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Background="{x:Null}" Grid.Row="4" Grid.Column="6" />
-        <ComboBox x:Name="box_stopBits" Margin="22,15,6,16" RenderTransformOrigin="0.269,0.318" Background="{x:Null}" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.Row="5" Grid.Column="6" />
+        <ComboBox x:Name="box_portName" Margin="22,13,6,15" Background="{x:Null}" BorderBrush="#FFD37171" Opacity="0.94" Grid.Column="6" SelectionChanged="box_portName_SelectionChanged" BorderThickness="1" Grid.Row="1" />
+        <ComboBox x:Name="box_baudRate" Margin="22,15,6,14" Background="{x:Null}" BorderBrush="#FFE07676" Grid.Column="6" Grid.Row="2" />
+        <ComboBox x:Name="box_dataBits" Margin="22,16,6,15" Background="{x:Null}" BorderBrush="#FFEA7070" Grid.Column="6" Grid.Row="3" />
+        <ComboBox x:Name="box_parityBits" Margin="22,17,6,14" BorderBrush="#FFEA8282" Background="{x:Null}" Grid.Row="4" Grid.Column="6" />
+        <ComboBox x:Name="box_stopBits" Margin="22,15,6,16" RenderTransformOrigin="0.269,0.318" Background="{x:Null}" BorderBrush="#FFF37373" Grid.Row="5" Grid.Column="6" />
         <Button x:Name="btn_close" Content="Close" Grid.Column="2" Margin="29,19,31,11" Grid.Row="6" Click="btn_close_Click" Background="#FFE4DFDF" BorderThickness="0" Foreground="#FF0F0707" RenderTransformOrigin="0.29,0.611" BorderBrush="#FFFD8888"/>
         <Label x:Name="label_Copy" Content="BaudRate" Grid.Column="5" Margin="27,15,16,14" Grid.Row="2" Foreground="#FF080808" Background="{x:Null}"/>
         <Label x:Name="label_Copy1" Content="DataBits" Grid.Column="5" Margin="27,20,16,10" Grid.Row="3" Foreground="#FF080808" Background="{x:Null}"/>
@@ -55,14 +55,7 @@
         <Button x:Name="btn_send" Content="Send" Margin="26,19,25,11" Grid.Row="6" Background="#FFE8E5E5" Grid.Column="4" RenderTransformOrigin="0.298,-0.407" BorderThickness="0" BorderBrush="#FFF58E7E" Click="btn_send_Click"/>
         <Button x:Name="btn_open" Content="open" Margin="10,19,30,11" Grid.Row="6" Click="btn_open_Click" BorderThickness="0" BorderBrush="#FFEC6F6F" Foreground="#FF2B2A2A" Background="#FFEBECE3" Grid.Column="1"/>
         <ScrollViewer x:Name="scroll_log" Grid.ColumnSpan="4" Grid.Row="7" Grid.RowSpan="5" Grid.Column="1">
-            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFEBF3EB" BorderThickness="5" Padding="5,5,5,8" Height="218" Margin="5">
-                <RichTextBox.BorderBrush>
-                    <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
-                        <GradientStop Color="#FFABADB3" Offset="0.05"/>
-                        <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
-                        <GradientStop Color="#FFB0B5B9" Offset="1"/>
-                    </LinearGradientBrush>
-                </RichTextBox.BorderBrush>
+            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFEBF3EB" BorderThickness="5" Padding="5,5,5,8" Height="218" Margin="5" BorderBrush="#FFC7C1C1">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -71,7 +64,7 @@
             </RichTextBox>
         </ScrollViewer>
         <ScrollViewer x:Name="scroll_recieve" Grid.ColumnSpan="4" Grid.RowSpan="4" Grid.Column="1" Margin="0,4,0,0" Grid.Row="1">
-            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFF9F1F1" BorderThickness="5" BorderBrush="#FFB0B5C3" Margin="5" Padding="5,8,5,5">
+            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFF9F1F1" BorderThickness="5" BorderBrush="#FFADB0BB" Margin="5" Padding="5,8,5,5">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
@@ -92,15 +85,7 @@
             <RadioButton x:Name="radioButton_Copy1" Content="Valuation" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.086,0.571" Width="92" Grid.Row="2" Height="27" VerticalContentAlignment="Center"/>
         </Grid>
         <ScrollViewer Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="5" Margin="5,0,0,0">
-            <TextBox x:Name="textBox_send" TextWrapping="Wrap" Text="AB-BA" VerticalContentAlignment="Center" Padding="5" BorderThickness="5,5,8,5" Margin="0,0,5,0">
-                <TextBox.BorderBrush>
-                    <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
-                        <GradientStop Color="#FFABADB3" Offset="0.05"/>
-                        <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
-                        <GradientStop Color="#FFC2D3E4" Offset="1"/>
-                    </LinearGradientBrush>
-                </TextBox.BorderBrush>
-            </TextBox>
+            <TextBox x:Name="textBox_send" TextWrapping="Wrap" Text="AB-BA-01-02-03-00" VerticalContentAlignment="Center" Padding="5" BorderThickness="5,5,8,5" Margin="0,0,5,0" BorderBrush="#FFDEC7C7"/>
         </ScrollViewer>
         <CheckBox x:Name="checkBox_hex" Content="Hex" Grid.Column="5" HorizontalAlignment="Left" Margin="19,23,0,0" Grid.Row="6" VerticalAlignment="Top" Unchecked="checkBox_hex_Unchecked" Checked="checkBox_hex_Checked" Height="16" Width="80"/>
         <CheckBox x:Name="checkBox_decode" Content="Decode" Grid.Column="5" HorizontalAlignment="Left" Margin="19,25,0,0" Grid.Row="7" VerticalAlignment="Top" Checked="checkBox_decode_Checked" Unchecked="checkBox_decode_Unchecked" Height="16" Width="80" RenderTransformOrigin="0.639,0.375"/>

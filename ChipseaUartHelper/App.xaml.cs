@@ -13,5 +13,6 @@ namespace ChipseaUartHelper
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
