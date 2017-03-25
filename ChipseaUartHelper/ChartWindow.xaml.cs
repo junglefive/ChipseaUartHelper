@@ -36,9 +36,9 @@ namespace ChipseaUartHelper
         private Queue<Point> dataQueue_IIR = new Queue<Point>();
         DispatcherTimer refreshPlotterTimer = new DispatcherTimer();
         private double x1_origin = 0;
-        private double x2_average = 0;
-        private double x3_shake = 0;
-        private double x4_moving = 0;
+        //private double x2_average = 0;
+        //private double x3_shake = 0;
+        //private double x4_moving = 0;
         //private double x5_iir = 0;
         private bool isClosingFlag = false;
         LineGraph lineOrigin = new LineGraph();
@@ -387,7 +387,7 @@ namespace ChipseaUartHelper
            // if (dataSource_Y3_Average ==null) 
             {
                 dataSource_Y3_Average = new ObservableDataSource<Point>();
-                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Firebrick, 2, "Average");
+                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.LimeGreen, 2, "Average");
             }
            // plotter.Children.Remove(lineAverage);
             plotterDisplayAverage = true;
@@ -462,7 +462,7 @@ namespace ChipseaUartHelper
             if (plotterDisplayAverage == true) {
                 plotter.Children.Remove(lineAverage);
                 dataSource_Y3_Average = new ObservableDataSource<Point>();
-                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.Firebrick, 2, "Average");
+                lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.LimeGreen, 2, "Average");
             }
 
 

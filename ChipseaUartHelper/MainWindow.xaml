@@ -13,7 +13,7 @@
             <GradientStop Color="White"/>
         </LinearGradientBrush>
     </Window.Background>
-    <Grid RenderTransformOrigin="0.557,0.54" Margin="0,0,2,1" Background="#FFD6E1E2">
+    <Grid RenderTransformOrigin="0.557,0.54" Margin="0,0,2,1" Background="#FFF1F1F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="6*"/>
@@ -41,18 +41,18 @@
             <ColumnDefinition Width="115*"/>
             <ColumnDefinition Width="22*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="box_portName" Margin="10,10,27,17" Background="{x:Null}" BorderBrush="#FFD37171" Opacity="0.94" Grid.Column="6" SelectionChanged="box_portName_SelectionChanged" BorderThickness="1" Grid.Row="2" />
-        <ComboBox x:Name="box_baudRate" Margin="10,16,27,13" Background="{x:Null}" BorderBrush="#FFE07676" Grid.Column="6" Grid.Row="3" />
-        <ComboBox x:Name="box_dataBits" Margin="10,20,27,9" Background="{x:Null}" BorderBrush="#FFEA7070" Grid.Column="6" Grid.Row="4" />
-        <ComboBox x:Name="box_parityBits" Margin="10,20,27,9" BorderBrush="#FFEA8282" Background="{x:Null}" Grid.Row="5" Grid.Column="6" />
+        <ComboBox x:Name="box_portName" Margin="10,10,27,10" Background="{x:Null}" BorderBrush="#FFD37171" Opacity="0.94" Grid.Column="6" SelectionChanged="box_portName_SelectionChanged" BorderThickness="1" Grid.Row="2" />
+        <ComboBox x:Name="box_baudRate" Margin="10,15,27,13" Background="{x:Null}" BorderBrush="#FFE07676" Grid.Column="6" Grid.Row="3" />
+        <ComboBox x:Name="box_dataBits" Margin="10,19,27,10" Background="{x:Null}" BorderBrush="#FFEA7070" Grid.Column="6" Grid.Row="4" />
+        <ComboBox x:Name="box_parityBits" Margin="10,19,27,10" BorderBrush="#FFEA8282" Background="{x:Null}" Grid.Row="5" Grid.Column="6" />
         <ComboBox x:Name="box_stopBits" Margin="10,18,27,12" RenderTransformOrigin="0.269,0.318" Background="{x:Null}" BorderBrush="#FFF37373" Grid.Row="6" Grid.Column="6" />
         <Label x:Name="label_Copy" Content="BaudRate" Grid.Column="5" Margin="27,15,16,14" Grid.Row="3" Foreground="#FF080808" Background="{x:Null}"/>
         <Label x:Name="label_Copy1" Content="DataBits" Grid.Column="5" Margin="27,20,16,10" Grid.Row="4" Foreground="#FF080808" Background="{x:Null}"/>
         <Label x:Name="label_Copy3" Content="ParityBits" Grid.Column="5" Margin="27,21,16,10" Grid.Row="5" Foreground="#FF080808" Background="{x:Null}"/>
-        <Label x:Name="label_Copy4" Content="StopBits" Grid.Column="5" Margin="33,17,10,12" Grid.Row="6" Foreground="#FF080808" Background="{x:Null}"/>
+        <Label x:Name="label_Copy4" Content="StopBits" Grid.Column="5" Margin="27,17,16,12" Grid.Row="6" Foreground="#FF080808" Background="{x:Null}"/>
         <Label x:Name="label_Copy2" Content="PortName" RenderTransformOrigin="0.436,2.185" Grid.Column="5" Margin="27,5,23,10" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" ScrollViewer.CanContentScroll="True" Background="{x:Null}" Grid.Row="2"/>
         <ScrollViewer x:Name="scroll_log" Grid.ColumnSpan="4" Grid.Row="8" Grid.RowSpan="5" Grid.Column="1">
-            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFEBF3EB" BorderThickness="5" Padding="5,5,5,8" BorderBrush="#FFC7C1C1" Margin="0,10">
+            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFF9F9F9" BorderThickness="5" Padding="5,5,5,8" BorderBrush="#FFC7C1C1" Margin="0,10">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -61,7 +61,7 @@
             </RichTextBox>
         </ScrollViewer>
         <ScrollViewer x:Name="scroll_recieve" Grid.ColumnSpan="4" Grid.RowSpan="5" Grid.Column="1" Grid.Row="2" BorderThickness="5">
-            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFF9F1F1" BorderThickness="5" BorderBrush="#FFADB0BB" Padding="5,8,5,5" Margin="0,2,0,10">
+            <RichTextBox x:Name="box_recieve" UndoLimit="0" Background="#FFFFF9F9" BorderThickness="5" BorderBrush="#FFADB0BB" Padding="5,8,5,5" Margin="0,2,0,10">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
@@ -81,24 +81,24 @@
             <TextBox x:Name="textBox_send" TextWrapping="Wrap" Text="AB BA 01 02 03 00" VerticalContentAlignment="Center" Padding="5" BorderThickness="5,5,5,4.8" Margin="0" BorderBrush="#FFDEC7C7"/>
         </ScrollViewer>
         <CheckBox x:Name="checkBox_decode" Content="Decode" Grid.Column="5" HorizontalAlignment="Left" Margin="27,25,0,0" Grid.Row="9" VerticalAlignment="Top" Checked="checkBox_decode_Checked" Unchecked="checkBox_decode_Unchecked" Height="16" Width="73" RenderTransformOrigin="0.639,0.375"/>
-        <CheckBox x:Name="checkBox_timed" Content="Timed" Grid.Column="5" HorizontalAlignment="Left" Margin="27,26,0,0" Grid.Row="10" VerticalAlignment="Top" Checked="checkBox_timed_Checked" Unchecked="checkBox_timed_Unchecked" Height="16" Width="53"/>
+        <CheckBox x:Name="checkBox_timed" Content="Timed" Grid.Column="5" HorizontalAlignment="Left" Margin="27,26,0,0" Grid.Row="10" VerticalAlignment="Top" Checked="checkBox_timed_Checked" Unchecked="checkBox_timed_Unchecked" Height="16" Width="72"/>
         <Grid Grid.Column="6" Grid.Row="7" Grid.RowSpan="5">
             <WrapPanel HorizontalAlignment="Left" Width="100" Margin="0,0,0,2">
-                <Button x:Name="btn_open" Content="open" Click="btn_open_Click" BorderThickness="0" BorderBrush="#FFEC6F6F" Foreground="#FF2B2A2A" Background="#FFEBECE3" Height="27" Width="78" Margin="10"/>
-                <Button x:Name="btn_close" Content="Close" Click="btn_close_Click" Background="#FFE4DFDF" BorderThickness="0" Foreground="#FF0F0707" RenderTransformOrigin="0.29,0.611" BorderBrush="#FFFD8888" Height="27" Width="78" Margin="10"/>
-                <Button x:Name="btn_clear" Content="Clear" Click="btn_clear_Click" Background="#FFEAE3E3" RenderTransformOrigin="1.059,0.333" BorderThickness="0" BorderBrush="#FFF76868" Height="27" Width="78" Margin="10"/>
-                <Button x:Name="btn_send" Content="Send" Background="#FFE8E5E5" RenderTransformOrigin="0.298,-0.407" BorderThickness="0" BorderBrush="#FFF58E7E" Click="btn_send_Click" Height="27" Width="78" Margin="10"/>
-                <Button x:Name="btn_chart" Content="Chart" Background="#FFE0DEDE" Click="btn_chart_Click" BorderThickness="0" BorderBrush="#FF3E859B" Height="29" Width="78" Margin="10"/>
-                <Button x:Name="btn_save" Content="Save" Background="#FFE4DCDC" BorderThickness="0" BorderBrush="#FF50AAA6" Click="btn_save_Click" Height="27" Width="78" Margin="10"/>
+                <Button x:Name="btn_open" Content="open" Click="btn_open_Click" BorderThickness="0" BorderBrush="#FFEC6F6F" Foreground="#FF2B2A2A" Background="#FFD6D8C5" Height="27" Width="78" Margin="10"/>
+                <Button x:Name="btn_close" Content="Close" Click="btn_close_Click" Background="#FFCDC0C0" BorderThickness="0" Foreground="#FF0F0707" RenderTransformOrigin="0.29,0.611" BorderBrush="#FFFD8888" Height="27" Width="78" Margin="10"/>
+                <Button x:Name="btn_clear" Content="Clear" Click="btn_clear_Click" Background="#FFEAC9C9" RenderTransformOrigin="1.059,0.333" BorderThickness="0" BorderBrush="#FFF76868" Height="27" Width="78" Margin="10"/>
+                <Button x:Name="btn_send" Content="Send" Background="#FF9ACFAF" RenderTransformOrigin="0.298,-0.407" BorderThickness="0" BorderBrush="#FFF58E7E" Click="btn_send_Click" Height="27" Width="78" Margin="10"/>
+                <Button x:Name="btn_chart" Content="Chart" Background="#FFCFB1B1" Click="btn_chart_Click" BorderThickness="0" BorderBrush="#FF3E859B" Height="29" Width="78" Margin="10"/>
+                <Button x:Name="btn_save" Content="Save" Background="#FFABD8D2" BorderThickness="0" BorderBrush="#FF50AAA6" Click="btn_save_Click" Height="27" Width="78" Margin="10"/>
             </WrapPanel>
         </Grid>
-        <Grid Grid.Column="5" Grid.Row="7" Grid.RowSpan="2">
+        <Grid Grid.Column="5" Grid.Row="7" Grid.RowSpan="2" Background="#FFF2F3E4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="58*"/>
                 <RowDefinition Height="57*"/>
             </Grid.RowDefinitions>
-            <RadioButton x:Name="radioButton_ascii" Content="Char" HorizontalAlignment="Left" Margin="30,21,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="radioButton_ascii_Checked"/>
-            <RadioButton x:Name="radioButton_hex" Content="Hex" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Checked="radioButton_hex_Checked"/>
+            <RadioButton x:Name="radioButton_ascii" Content="Char" HorizontalAlignment="Left" Margin="30,22,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="radioButton_ascii_Checked" Height="25" Width="58"/>
+            <RadioButton x:Name="radioButton_hex" Content="Hex" HorizontalAlignment="Left" Margin="30,26,0,0" VerticalAlignment="Top" Checked="radioButton_hex_Checked" Height="31" Width="58"/>
         </Grid>
 
 
