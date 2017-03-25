@@ -51,7 +51,6 @@ E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.xml
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Maps.xml
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\ru-ru\DynamicDataDisplay.resources.dll
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\MainWindow.g.cs
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\App.g.cs
 E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper_MarkupCompile.cache
@@ -72,8 +71,6 @@ E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\Tex
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.baml
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.baml
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\obj\Debug\TextWindow.baml
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.g.cs
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\KitchenScaleWindow.baml
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\ChipseaUartHelper.exe.config
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.exe
 E:\workspace\ChipseaUartHelper\ChipseauartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.pdb

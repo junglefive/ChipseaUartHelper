@@ -144,7 +144,8 @@ namespace ChipseaUartHelper
             //box
             box_log.Document.Blocks.Clear();
             box_recieve.Document.Blocks.Clear();
-            
+            //btn
+            radioButton_hex.IsChecked = true;
         }
     
         private void AppendStringToLogBox(string str, bool newLine) {
@@ -194,7 +195,7 @@ namespace ChipseaUartHelper
                     }
                     else {
                         try {
-                            box_recieve.AppendText("\n" + "      " + Convert.ToString(Convert.ToInt32(hex), 16));
+                            box_recieve.AppendText("\n" + "      " + (char)(Convert.ToInt32(hex, 16)));
                         }
                         catch {
 
@@ -224,7 +225,7 @@ namespace ChipseaUartHelper
                         box_recieve.AppendText("    " + hex);
                     }
                     else {
-                        box_recieve.AppendText("    " + hex );
+                        box_recieve.AppendText("    " + (char)(Convert.ToInt32(hex, 16)));
                     }
                    
                 }
@@ -233,6 +234,8 @@ namespace ChipseaUartHelper
             //保持lScroll在底部
             scroll_recieve.ScrollToBottom();
         }
+     
+
         private delegate void SendSting2EventHander(string hex, string dec);
         private void AppendDecHex(int iValue, string hex) {
 
@@ -404,7 +407,7 @@ namespace ChipseaUartHelper
 
         private void btn_open_Click(object sender, RoutedEventArgs e)
         {
-
+            comIsClosing = false;
             if (ComPort.IsOpen) {
 
                 this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "is open.", true);
@@ -557,19 +560,7 @@ namespace ChipseaUartHelper
 
         }
         private bool bDecodeFlag = false;
-        private bool bHexDisplayFlag = false;
-
-        private void checkBox_hex_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bHexDisplayFlag = false;
-            Thread.Sleep(1);
-        }
-
-        private void checkBox_hex_Checked(object sender, RoutedEventArgs e)
-        {
-            bHexDisplayFlag = true;
-            Thread.Sleep(1);
-        }
+   
 
         private void checkBox_decode_Checked(object sender, RoutedEventArgs e)
         {
@@ -607,45 +598,63 @@ namespace ChipseaUartHelper
         DispatcherTimer sendTimer = null;
         private void btn_send_Click(object sender, RoutedEventArgs e)
         {
-            //bArrSendBuffer = System.Text.Encoding.Default.GetBytes(textBox_send.Text);
-            string[] strArr = textBox_send.Text.Split('-');
-            bArrSendBuffer = new byte[strArr.Length];
-            for (int i = 0; i < strArr.Length; i++)
-            {
-                try
+            if (ComPort.IsOpen) {
+                if (btn_send.Content.Equals("sending") && bSendTimedFlag)
                 {
-                    bArrSendBuffer[i] = Convert.ToByte(strArr[i], 16);
-                }
-                catch
-                {
-                    // AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
 
+                    btn_send.Content = "send";
+                    sendTimer.Stop();
+                    AppendStringToLogBox("colse sending", true);
                 }
+                else {
+                    string[] strArr = textBox_send.Text.Split(' ');
+                    bArrSendBuffer = new byte[strArr.Length];
+                    for (int i = 0; i < strArr.Length; i++)
+                    {
+                        try
+                        {
+                            bArrSendBuffer[i] = Convert.ToByte(strArr[i], 16);
+                        }
+                        catch
+                        {
+                            // AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
 
+                        }
+
+                    }
+                    sendTimer = new DispatcherTimer();
+                    sendTimer.Tick += new EventHandler(sendTimerHander);
+                    sendTimer.Interval = TimeSpan.FromMilliseconds(Convert.ToInt32(textBox_time.Text));
+                    sendTimer.Start();
+                    btn_send.Content = "sending";
+                }
             }
-            sendTimer = new DispatcherTimer();
-            sendTimer.Tick += new EventHandler(sendTimerHander);
-            sendTimer.Interval = TimeSpan.FromMilliseconds(Convert.ToInt32(textBox_time.Text));
-            sendTimer.Start(); 
+            else
+            {
+                AppendStringToLogBox("Open SerialPort First.", true);
+            }
+
         }
         private void sendTimerHander(object sender, System.EventArgs  e) {
 
-            if (!comIsClosing)
-            {
-                if (bSendTimedFlag)
+                if (!comIsClosing)
                 {
-                    ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
-                    AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
+                    if (bSendTimedFlag)
+                    {
+                        ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
+                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
+                    }
+                    else
+                    {
+                        ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
+                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
+                        btn_send.Content = "send";
+                        sendTimer.Stop();
+                    }
                 }
                 else
                 {
-                    ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
-                    AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
                     sendTimer.Stop();
-                }
-            }
-            else {
-                sendTimer.Stop();
             }
 
         }
@@ -662,6 +671,7 @@ namespace ChipseaUartHelper
 
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
+            comIsClosing = true;
             if (bDecodeFlag)
             {
                 //getDataQueueSave
@@ -695,6 +705,20 @@ namespace ChipseaUartHelper
             }
   
 
+        }
+        private bool bHexDisplayFlag = true;
+
+        private void radioButton_hex_Checked(object sender, RoutedEventArgs e)
+        {
+            bHexDisplayFlag = true;
+            Thread.Sleep(1);
+
+        }
+
+        private void radioButton_ascii_Checked(object sender, RoutedEventArgs e)
+        {
+            bHexDisplayFlag = false;
+            Thread.Sleep(1);
         }
     }
 

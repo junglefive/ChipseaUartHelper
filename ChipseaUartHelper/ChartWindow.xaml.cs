@@ -73,12 +73,12 @@ namespace ChipseaUartHelper
         }
         private void initiateDefaultValue() {
             iOriginRightShiftBits = 0;
-            iShakeCount = 5;
+            iShakeCount = 10;
             iShakeThreshold = 200;
             iAverageTimes = 4;
             iMovingLength = 8;
             iIIROrder = 6;
-            iIIRThreshold = 20;
+            iIIRThreshold = 50;
             textBox_origin.Text = iOriginRightShiftBits.ToString();
             textBox_shake_count.Text = iShakeCount.ToString();
             textBox_shake_threshold.Text = iShakeThreshold.ToString();
@@ -87,6 +87,8 @@ namespace ChipseaUartHelper
             textBox_moving_length.Text =  iMovingLength.ToString();
             textBox_iir_order.Text = iIIROrder.ToString();
             textBox_iir_threshold.Text = iIIRThreshold.ToString();
+            //
+            if (btnChangeCount == MAXMIN_ORIGIN) { appendTextToTextBoxLog("ORIGIN"); }
         }
 
         private bool bNewDataComeFlag = false;
@@ -106,9 +108,9 @@ namespace ChipseaUartHelper
             if (bNewDataComeFlag) {
                 bNewDataComeFlag = false;
                 //update text
-                textBlock_max.Text   = "Max: "+iMax;
-                textBlock_min.Text   = "Min: "+iMin;
-                textBlock_delta.Text = "D-V: "+(iMax - iMin);
+                textBlock_max.Text   = ""+iMax;
+                textBlock_min.Text   = ""+iMin;
+                textBlock_delta.Text = ""+(iMax - iMin);
                 if (plotterDisplayOrigin && dataSource_Y1_Origin != null)
                 {
                     //dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
@@ -164,11 +166,15 @@ namespace ChipseaUartHelper
 
             x1_origin++;
             idata = OriginFilter(idata, iOriginRightShiftBits);
-            if (idata > iMax) { iMax = idata; };
-            if (idata < iMin) { iMin = idata; };
+
             //if (x1_origin > PlotterDataNumber) {
             //    x1_origin = 0;
             //}
+            if (btnChangeCount == MAXMIN_ORIGIN) { updateMaxMin(idata); }
+            if (btnChangeCount == MAXMIN_SHAKE) { updateMaxMin(AntiShakeFilter(idata, iShakeCount, iShakeThreshold)); }
+            if (btnChangeCount == MAXMIN_AVERAGE) { updateMaxMin(AverageFilter(idata, iAverageTimes)); }
+            if (btnChangeCount == MAXMIN_MOVING) { updateMaxMin(MovingFilter(idata, iMovingLength)); }
+            if (btnChangeCount == MAXMIN_IIR) { updateMaxMin(IIRFilter(idata, iIIROrder, iIIRThreshold)); }
 
             if (!btn_pause_click) {
 
@@ -184,6 +190,15 @@ namespace ChipseaUartHelper
 
 
         }
+        private void updateMaxMin(int idata) {
+
+            if (idata > iMax) { iMax = idata; };
+            if (idata < iMin) { iMin = idata; };
+
+        }
+
+
+
         private int OriginFilter(int idata, int rightshift) {
 
             return idata >> rightshift;
@@ -546,6 +561,39 @@ namespace ChipseaUartHelper
             }
             catch { }
         }
+        private int btnChangeCount = 0;
+        private const int MAXMIN_ORIGIN = 0;
+        private const int MAXMIN_SHAKE = 1;
+        private const int MAXMIN_AVERAGE = 2;
+        private const int MAXMIN_MOVING = 3;
+        private const int MAXMIN_IIR = 4;
 
+        private void btn_change_Click(object sender, RoutedEventArgs e)
+        {
+            btnChangeCount++;
+            if (btnChangeCount == 5) { btnChangeCount = 0; }
+            iMax = 0;
+            iMin = 16777215;
+            textBlock_max.Text = "";
+            textBlock_min.Text = "";
+            textBlock_delta.Text = "";
+            //
+            if (btnChangeCount == MAXMIN_ORIGIN) { appendTextToTextBoxLog("ORIGIN"); }
+            if (btnChangeCount == MAXMIN_SHAKE) { appendTextToTextBoxLog("SHAKE"); }
+            if (btnChangeCount == MAXMIN_AVERAGE) { appendTextToTextBoxLog("AVERAGE"); }
+            if (btnChangeCount == MAXMIN_MOVING) { appendTextToTextBoxLog("MOVING"); }
+            if (btnChangeCount == MAXMIN_IIR) { appendTextToTextBoxLog("IIR"); }
+
+        }
+        private delegate void appendTextEventHander(string msg);
+
+        private void appendTextToTextBoxLog(string msg) {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new appendTextEventHander(appendTextHander), msg);
+        }
+        private void appendTextHander(string msg) {
+
+            textBlock_log.Text = msg;
+
+        }
     }
 }

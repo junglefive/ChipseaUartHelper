@@ -73,14 +73,7 @@
     <Compile Include="ChartWindow.xaml.cs">
       <DependentUpon>ChartWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="KitchenScaleWindow.xaml.cs">
-      <DependentUpon>KitchenScaleWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="ChartWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="KitchenScaleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

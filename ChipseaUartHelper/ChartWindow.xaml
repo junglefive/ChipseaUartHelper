@@ -6,120 +6,146 @@
         xmlns:local="clr-namespace:ChipseaUartHelper"
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" x:Name="chart_window" x:Class="ChipseaUartHelper.ChartWindow"
         mc:Ignorable="d"
-        Title="ChartWindow" Height="397" Width="1087" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
-    <Grid Background="#FFEAD5D5">
+        Title="ChartWindow" Height="419.5" Width="1097.833" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
+    <Grid Background="#FFEAD5D5" Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="81"/>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="189"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <d3:ChartPlotter Name="plotter" BorderBrush="#FF6C6868" BorderThickness="5" Padding="5" Margin="5"/>
-        <Grid Grid.Column="3" Background="#FFC3D6D6" Margin="5,10,5,5">
+        <Grid Grid.Column="1" Margin="7,10,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="62*"/>
-                <RowDefinition Height="62*"/>
-                <RowDefinition Height="62*"/>
-                <RowDefinition Height="61*"/>
-                <RowDefinition Height="62*"/>
-                <RowDefinition Height="61*"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="34"/>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="27"/>
+                <RowDefinition Height="29"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="41"/>
             </Grid.RowDefinitions>
-            <Grid Background="#FFECD7D7" MaxWidth="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Background="#FFFDC4C4" MaxWidth="70" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Grid.Row="2" Background="#FFD4CDCD" MaxWidth="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Grid.Row="3" Background="#FFE6E4C4" MaxWidth="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Margin="0,5,0,0" Grid.Row="4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35*"/>
-                    <RowDefinition Height="34*"/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Grid.Row="4" MaxWidth="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24*"/>
-                    <RowDefinition Height="23*"/>
-                </Grid.RowDefinitions>
-            </Grid>
-            <Grid Grid.Row="5" MaxWidth="70">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Button x:Name="btn_pause" Content="Pause" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Height="20" Click="btn_pause_Click" Margin="0,1,0,0"/>
-                <Button x:Name="btn_reset" Content="Reset" Margin="0,0,4,6" Grid.Row="1" Click="btn_reset_Click" Width="63" Height="23"/>
-            </Grid>
-        </Grid>
-        <Grid Grid.Column="1" Margin="5,5,0,10" MaxWidth="70">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Grid Background="#FFCBC0C0">
-                <CheckBox x:Name="checkBox_origin" Content="Origin" HorizontalAlignment="Left" Margin="0,21,0,0" VerticalAlignment="Top" Checked="checkBox_origin_Checked" Unchecked="checkBox_origin_Unchecked"/>
+            <Grid Background="#FFCBC0C0" Margin="0,-1,0,0">
+                <Grid>
+                    <CheckBox x:Name="checkBox_origin" Content="Origin" Checked="checkBox_origin_Checked" Unchecked="checkBox_origin_Unchecked" RenderTransformOrigin="0.546,0.858" Margin="0,6,34,10"/>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1" Background="#FFCFB2B2">
-                <CheckBox x:Name="checkBox_shake" Content="Shake" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,25,0,0" RenderTransformOrigin="4.789,0.25" Checked="checkBox_shake_Checked" Unchecked="checkBox_shake_Unchecked"/>
+                <CheckBox x:Name="checkBox_shake" Content="Shake" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" RenderTransformOrigin="4.789,0.25" Checked="checkBox_shake_Checked" Unchecked="checkBox_shake_Unchecked"/>
             </Grid>
             <Grid Grid.Row="3" Background="#FFF3B6B6">
-                <CheckBox x:Name="checkBox_moving" Content="Moving" Margin="0,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_moving_Checked" Unchecked="checkBox_moving_Unchecked"/>
+                <CheckBox x:Name="checkBox_moving" Content="Moving" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_moving_Checked" Unchecked="checkBox_moving_Unchecked"/>
             </Grid>
             <Grid Grid.Row="4" Background="#FFD7DEB6">
-                <CheckBox x:Name="checkBox_iir" Content="IIR" Margin="0,21,10,0" VerticalAlignment="Top" Checked="checkBox_iir_Checked" Unchecked="checkBox_iir_Unchecked"/>
-            </Grid>
-            <Grid Grid.Row="2" Background="#FFD19E9E" Margin="0,0,13,0">
-                <CheckBox x:Name="checkBox_average" Content="Average" HorizontalAlignment="Left" Margin="24.962,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked"/>
+                <CheckBox x:Name="checkBox_iir" Content="IIR" Margin="0,16.5,10,0" VerticalAlignment="Top" Checked="checkBox_iir_Checked" Unchecked="checkBox_iir_Unchecked"/>
             </Grid>
             <Grid Grid.Row="2" Background="#FFD19E9E">
-                <CheckBox x:Name="checkBox_average1" Content="Average" Margin="0,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked"/>
+                <CheckBox x:Name="checkBox_average1" Content="Average" Margin="0,4,3,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked" Height="19" BorderBrush="#FF72ACAC">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.547"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
             </Grid>
-            <Grid Grid.Row="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Button x:Name="btn_pause" Content="Pause" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="21" Click="btn_pause_Click" Margin="-1,13,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
+            <Button x:Name="btn_reset" Content="Reset" Margin="7,13,14,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C"/>
+            <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFE49B9B" Grid.Column="1" Grid.Row="5" Height="29" VerticalAlignment="Center" TextAlignment="Center" Cursor="None" IsEnabled="False"/>
+            <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="6" Background="#FFAD97DC" Grid.Column="1" VerticalAlignment="Center" Height="28" TextAlignment="Center"/>
+            <TextBlock x:Name="textBlock_delta" Grid.Row="7" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FFA6CBBF" Grid.Column="1" VerticalAlignment="Center" Height="30" TextAlignment="Center"/>
+            <Label x:Name="label" Content="MAX:" Grid.Row="5" Background="#FFCF9B9B"/>
+            <Label x:Name="label_Copy" Content="MIN:" Grid.Row="6" Background="#FFA796CB"/>
+            <Label x:Name="label_Copy1" Content="VALUE-D:" Grid.Row="7" Background="#FFA8BFBB"/>
+            <Grid Grid.Column="1" Background="#FFCFC0C0" Margin="0,-1,0,0">
+                <TextBox x:Name="textBox_origin" Margin="10,5,21,10" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White"/>
+            </Grid>
+            <Grid Grid.Column="1" Background="#FFD1B2B2" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="12*"/>
-                    <RowDefinition Height="9*"/>
-                    <RowDefinition Height="19*"/>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="13*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="textBlock_delta" Grid.Row="3" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FF93D1BD" FontSize="9"/>
-                <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFF7A5A5" FontSize="9" Grid.RowSpan="2"/>
-                <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="2" Background="#FFAD97DC" FontSize="9"/>
+                <TextBox x:Name="textBox_shake_threshold" Margin="10,0,23,0" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8EA4B9" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+                <TextBox x:Name="textBox_shake_count" Margin="10,4,23,0" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8A9DB0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
             </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Background="#FFD69F9F">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="39*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBox_average_times" Margin="10,9,23,0" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" Grid.ColumnSpan="2">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF7C8A99" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="3" Background="#FFDEBABA">
+                <TextBox x:Name="textBox_moving_length" Margin="10,10,23,4" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF758595" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="4" Background="#FFECE7B4">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="32"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="textBox_iir_order" Margin="10,0,23,0" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="21" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8496A8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+                <TextBox x:Name="textBox_iir_threshold" Margin="10,0,23,1" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="21" Grid.Row="1" VerticalAlignment="Bottom">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF748699" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <TextBlock x:Name="textBlock_log" TextWrapping="Wrap" Text="  " Background="#FFD4D1D4" Margin="0,6,0,3" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Height="17"/>
+            <Button x:Name="btn_change" Content="Change" HorizontalAlignment="Left" Margin="0,5,0,0" Grid.Row="8" VerticalAlignment="Top" Width="69" BorderBrush="#FF958F74" Click="btn_change_Click" Height="21"/>
         </Grid>
-        <TextBox x:Name="textBox_origin" Grid.Column="3" Height="19" Margin="5,47,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged"/>
-        <TextBox x:Name="textBox_shake_count" Grid.Column="3" Height="20" Margin="5,71,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged"/>
-        <TextBox x:Name="textBox_moving_length" Grid.Column="3" Height="20" Margin="7,0,8,154" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged"/>
-        <TextBox x:Name="textBox_iir_order" Grid.Column="3" Margin="7,0,8,93" TextWrapping="Wrap" Text="TextBox" RenderTransformOrigin="0.425,0.373" Height="20" VerticalAlignment="Bottom" TextChanged="textBox_iir_order_DataContextChanged"/>
-        <TextBox x:Name="textBox_average_times" Grid.Column="3" Height="19" Margin="5,149,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged"/>
-        <TextBox x:Name="textBox_shake_threshold" Grid.Column="3" Height="20" Margin="5,99,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged"/>
-        <TextBox x:Name="textBox_iir_threshold" Grid.Column="3" Height="20" Margin="7,0,8,68" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged"/>
     </Grid>
 </Window>
