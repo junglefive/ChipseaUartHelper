@@ -120,3 +120,4 @@ E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\MainWin
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.g.resources
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.Properties.Resources.resources
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csproj.GenerateResource.Cache
+E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache

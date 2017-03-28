@@ -10,14 +10,7 @@ namespace ChipseaUartHelper
     {
         private bool bRecStaus = true;//接收状态字
         public bool bComPortIsOpen;
-        private void SetAfterClose()//成功关闭串口或串口丢失后的设置
-        {
-            bComPortIsOpen = false;//串口状态设置为关闭状态 
-        }
-        private void SetComLose()//成功关闭串口或串口丢失后的设置
-        {
-            SetAfterClose();//成功关闭串口或串口丢失后的设置
-        }
+        public bool ByteMode { get; set; }
         public SerialPort CurrentSerialPort { get; set; } = new SerialPort();
         private byte[] ReceivedDataPacket { get; set; }
         public Queue<byte[]> receiveArrByteQueue { get; } = new Queue<byte[]>();
@@ -41,7 +34,7 @@ namespace ChipseaUartHelper
                 {
                     bComPortIsOpen = false;
                     bReceiveCompleted = false;
-                    throw new Exception("unable open serial port" + exception.Message);
+                    //throw new Exception("unable open serial port" + exception.Message);
                 }
                 return true;
             }
@@ -65,9 +58,11 @@ namespace ChipseaUartHelper
                     // change to char datas 
                     if (ByteMode)
                     {
+                        
                         CurrentSerialPort.Read(ReceivedDataPacket, 0, ReceivedDataPacket.Length);
                         receiveArrByteQueue.Enqueue(ReceivedDataPacket);
                         receiveArrCharQueue.Clear();//清空Char接收缓存
+                        OnSerialPortMiss(new SerialPortMissingEventArgs("test event"));
                     }
                     else
                     {
@@ -95,7 +90,16 @@ namespace ChipseaUartHelper
                 CurrentSerialPort.DiscardInBuffer(); //清接收缓存
             }
         }
+        public delegate void OnSerialPortMissingHander(object sender, SerialPortMissingEventArgs e );
+        public event OnSerialPortMissingHander OnSerialPortMissing;
+        private void OnSerialPortMiss(SerialPortMissingEventArgs e) {
+            if (this.OnSerialPortMissing != null) {
+                this.OnSerialPortMissing(this, e);
 
+            }
+
+
+        }
         public bool SendDataPacket(string dataPacket)
         {
             char[] dataPacketChar = dataPacket.ToCharArray();
@@ -138,13 +142,13 @@ namespace ChipseaUartHelper
                 }
                 else//未知原因，无法关闭串口
                 {
-                    throw new Exception("unable close serial port");
+                    //throw new Exception("unable close serial port");
+                    OnSerialPortMiss(new SerialPortMissingEventArgs("unable close serial port"));
                 }
             }
             return true;
         }
 
-        public bool ByteMode { get; set; }
 
         public bool SendDataPacket(char[] senddata)
         {
@@ -159,6 +163,27 @@ namespace ChipseaUartHelper
                 return false;
             }
             return true;
+        }
+
+        private void SetAfterClose()//成功关闭串口或串口丢失后的设置
+        {
+            bComPortIsOpen = false;//串口状态设置为关闭状态 
+        }
+        private void SetComLose()//成功关闭串口或串口丢失后的设置
+        {
+            SetAfterClose();//成功关闭串口或串口丢失后的设置
+        }
+
+        //0.定义事件传递的参数
+      
+    }
+    //0.定义事件传递的参数
+    public class SerialPortMissingEventArgs : EventArgs
+    {
+        public string msg;
+        public SerialPortMissingEventArgs(string msgString)
+        {
+            msg = msgString;
         }
     }
 }

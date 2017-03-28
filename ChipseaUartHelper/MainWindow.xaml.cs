@@ -44,11 +44,20 @@ namespace ChipseaUartHelper
             recData.SetApartmentState(ApartmentState.STA);
             recData.IsBackground = true;
             recData.Start();
+            //
+            spManager.OnSerialPortMissing += SpManager_OnSerialPortMissing;
         }
+
+        private void SpManager_OnSerialPortMissing(object sender, SerialPortMissingEventArgs e)
+        {
+            //comIsClosing = true;
+            AppendStringToLogBox(e.msg, true);//wuixao
+        }
+
         /**
-        *function:初始化串口部分
-        *by:junglefive
-        **/
+*function:初始化串口部分
+*by:junglefive
+**/
         Dictionary<string, int> dicParity = new Dictionary<string, int>();
         private void User_initiate_serialPort() {
             //serialPortNames
