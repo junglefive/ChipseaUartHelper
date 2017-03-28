@@ -73,6 +73,7 @@
     <Compile Include="ChartWindow.xaml.cs">
       <DependentUpon>ChartWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SerialPortManager.cs" />
     <Page Include="ChartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

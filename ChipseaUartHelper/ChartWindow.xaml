@@ -68,14 +68,14 @@
             <Label x:Name="label_Copy" Content="MIN:" Grid.Row="6" Background="#FFA796CB"/>
             <Label x:Name="label_Copy1" Content="VALUE-D:" Grid.Row="7" Background="#FFA8BFBB"/>
             <Grid Grid.Column="1" Background="#FFCFC0C0" Margin="0,-1,0,0">
-                <TextBox x:Name="textBox_origin" Margin="12,9" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White" TextAlignment="Center"/>
+                <TextBox x:Name="textBox_origin" Margin="12,9,12,6" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White" TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Column="1" Background="#FFD1B2B2" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="12*"/>
                     <RowDefinition Height="13*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBox_shake_threshold" Margin="12,3,12,2" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1" TextAlignment="Center">
+                <TextBox x:Name="textBox_shake_threshold" Margin="12,0,12,2" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1" TextAlignment="Center">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -84,7 +84,7 @@
                         </LinearGradientBrush>
                     </TextBox.BorderBrush>
                 </TextBox>
-                <TextBox x:Name="textBox_shake_count" Margin="12,3" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200" TextAlignment="Center">
+                <TextBox x:Name="textBox_shake_count" Margin="12,3,12,0" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200" TextAlignment="Center">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -98,7 +98,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="textBox_average_times" Margin="12,6" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" TextAlignment="Center">
+                <TextBox x:Name="textBox_average_times" Margin="12,6,12,3" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" TextAlignment="Center">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -109,7 +109,7 @@
                 </TextBox>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="3" Background="#FFF5BFBF">
-                <TextBox x:Name="textBox_moving_length" Margin="12,8" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged" TextAlignment="Center" IsTabStop="False">
+                <TextBox x:Name="textBox_moving_length" Margin="12,6,12,8" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged" TextAlignment="Center" IsTabStop="False">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -124,7 +124,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="32"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBox_iir_order" Margin="12,3" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="22" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged" TextAlignment="Center">
+                <TextBox x:Name="textBox_iir_order" Margin="12,5,12,0" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="23" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged" TextAlignment="Center">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -133,7 +133,7 @@
                         </LinearGradientBrush>
                     </TextBox.BorderBrush>
                 </TextBox>
-                <TextBox x:Name="textBox_iir_threshold" Margin="12,3" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="21" Grid.Row="1" VerticalAlignment="Bottom" TextAlignment="Center">
+                <TextBox x:Name="textBox_iir_threshold" Margin="12,0,12,4" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="23" Grid.Row="1" VerticalAlignment="Bottom" TextAlignment="Center">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>

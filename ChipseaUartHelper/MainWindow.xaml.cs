@@ -2,24 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using Microsoft.Research.DynamicDataDisplay;
-using Microsoft.Research.DynamicDataDisplay.DataSources;
-using Microsoft.Research.DynamicDataDisplay.PointMarkers;
-using Microsoft.Research.DynamicDataDisplay.Charts.Navigation;
 using Microsoft.Win32;
 using System.IO;
 
@@ -29,51 +16,32 @@ namespace ChipseaUartHelper
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
-    {
-
-        //串口相关
-        public SerialPort ComPort = new SerialPort();//声明一个串口      
+    {    
         private string[] ports;                       //可用串口数组
-        //private bool recStaus = true;                 //接收状态字
-        //private bool ComPortIsOpen = false;           //COM口开启状态字，在打开/关闭串口中使用，这里没有使用自带的ComPort.IsOpen，因为在串口突然丢失的时候，ComPort.IsOpen会自动false，逻辑混乱
-        private bool comIsClosing  =  false;
-        DispatcherTimer autoSendTick = new DispatcherTimer();//定时发送
-        //private static bool Sending = false;//正在发送数据状态字
-        //private static Thread _ComSend;//发送数据线程
-        //Queue<int> recQueue = new Queue<int>();//接收数据过程中，接收数据线程与数据处理线程直接传递的队列，先进先出
-                                                      //Window
-                  
+        private bool comIsClosing = false;
         ChartWindow chartWindow = null;
-        //TextWindow textWindow = null;
         Thread threadChartWindow = null;
-        //Thread threadTextWindow = null;
         Thread recData = null;
         Thread threadSerialPortDataRecieved = null;
         //缓存数据
         Queue<int> getDataQueueSave = new Queue<int>();
+        SerialPortManager spManager = new SerialPortManager();
         public MainWindow()
         {
             InitializeComponent();
-            
+
             threadChartWindow = new Thread(new ThreadStart(startChartWindow));
-            threadChartWindow.SetApartmentState(ApartmentState.STA);
+            threadChartWindow.SetApartmentState(ApartmentState.MTA);
             threadChartWindow.IsBackground = true;
             threadChartWindow.Start();
-
-            //threadTextWindow = new Thread(new ThreadStart(startTextWindow));
-            //threadTextWindow.SetApartmentState(ApartmentState.STA);
-            //threadTextWindow.IsBackground = true;
-            //threadTextWindow.Start();
-
-
+            //
             threadSerialPortDataRecieved = new Thread(new ThreadStart(ComPort_DataReceived));
-            threadSerialPortDataRecieved.SetApartmentState(ApartmentState.MTA);
+            threadSerialPortDataRecieved.SetApartmentState(ApartmentState.STA);
             threadSerialPortDataRecieved.IsBackground = true;
-          
             threadSerialPortDataRecieved.Start();
 
             recData = new Thread(new ThreadStart(DecodeBytes));
-            recData.SetApartmentState(ApartmentState.MTA);
+            recData.SetApartmentState(ApartmentState.STA);
             recData.IsBackground = true;
             recData.Start();
         }
@@ -124,135 +92,82 @@ namespace ChipseaUartHelper
                 box_stopBits.Items.Add(str);
             }
             //
-            ComPort.ReadBufferSize = 1024;
-           
+            //    ComPort.ReadBufferSize = 1024;
+
 
         }
         private void user_initiate_default() {
             //box_default
-            if (box_portName.Items.Count>0) {
-                box_portName.Text = box_portName.Items.GetItemAt(box_portName.Items.Count-1).ToString();
+            if (box_portName.Items.Count > 0) {
+                box_portName.Text = box_portName.Items.GetItemAt(box_portName.Items.Count - 1).ToString();
             }
             box_baudRate.Text = "9600";
             box_dataBits.Text = "8";
             box_stopBits.Text = "1";
             box_parityBits.Text = "none";
-            //btn_default
-            //取消事件触发，改用新线程处理
-            //ComPort.DataReceived += new SerialDataReceivedEventHandler(ComPort_DataReceived);
-           
             //box
             box_log.Document.Blocks.Clear();
             box_recieve.Document.Blocks.Clear();
             //btn
             radioButton_hex.IsChecked = true;
         }
-    
+
         private void AppendStringToLogBox(string str, bool newLine) {
             //if(box_log)
             if (newLine) {
                 box_log.AppendText("\n");
             }
-         
-            box_log.AppendText(DateTime.Now.TimeOfDay.ToString().Substring(0,11)+"：  "+str);
 
-            if (box_log.Document.Blocks.Count > 10) {
+            box_log.AppendText(DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + "：  " + str);
+
+            if (box_log.Document.Blocks.Count > 100) {
 
                 box_log.Document.Blocks.Remove(box_log.Document.Blocks.FirstBlock);
             }
             //box_log.Selection.Start;
             //保持lScroll在底部
             scroll_log.ScrollToBottom();
-         
-            
+
+
         }
         private void AppendStringToRecieveBox(string hex, bool newline) {
             if (box_recieve.Document.Blocks.Count > 100) {
                 box_recieve.Document.Blocks.Remove(box_recieve.Document.Blocks.FirstBlock);
             }
-            if (newline)
-            {
-                //box_recieve.AppendText("\n");
+            if (newline) { 
                 //box_recieve.AppendText(DateTime.Now.ToString() + ":  " + Convert.ToInt32(hex));
                 if (bHexDisplayFlag)
                 {
                     if (bDecodeFlag)
                     {
-                        
-                        box_recieve.AppendText("\n" +"Binary:  " +Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(24,'0')+ "    Hex:  " + hex );
+
+                        box_recieve.AppendText("\n" + "Binary:  " + Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(24, '0') + "    Hex:  " + hex);
                     }
                     else {
 
-                        box_recieve.AppendText("\n" +"Binary:  " +Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(24, '0')+ "    Hex:  " + hex  );
+                        box_recieve.AppendText("\n" + "Binary:  " + Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(24, '0') + "    Hex:  " + hex);
                     }
-                    
-                }
-                else
-                {
-                    if (bDecodeFlag)
-                    {
-                        box_recieve.AppendText("\n" + "      " + Convert.ToInt32(hex, 16));
-                    }
-                    else {
-                        try {
-                            box_recieve.AppendText("\n" + "      " + (char)(Convert.ToInt32(hex, 16)));
-                        }
-                        catch {
 
-
-                        }
-                    }
-                    
                 }
             }
-            else {
 
-                if (bHexDisplayFlag)
-                {
-                    if (bDecodeFlag)
-                    {
-                        box_recieve.AppendText("      " + Convert.ToInt32(hex, 16));
-                    }
-                    else { 
-                        box_recieve.AppendText("      " + Convert.ToString(Convert.ToInt32(hex), 16));
-                    }
-                    
-                }
-                else
-                {
-                    if (bDecodeFlag)
-                    { 
-                        box_recieve.AppendText("    " + hex);
-                    }
-                    else {
-                        box_recieve.AppendText("    " + (char)(Convert.ToInt32(hex, 16)));
-                    }
-                   
-                }
-            }
-            
             //保持lScroll在底部
             scroll_recieve.ScrollToBottom();
         }
-     
+
 
         private delegate void SendSting2EventHander(string hex, string dec);
         private void AppendDecHex(int iValue, string hex) {
 
-            this.Dispatcher.BeginInvoke(new SendSting2EventHander(AppendDecHexHander), hex, iValue.ToString()); 
+            this.Dispatcher.BeginInvoke(new SendSting2EventHander(AppendDecHexHander), hex, iValue.ToString());
+            //保持lScroll在底部
+            scroll_recieve.ScrollToBottom();
 
         }
 
         private void AppendDecHexHander(string hex, string iValue)
         {
-            
-            //box_hex.AppendText("\n");
-            //box_dec.AppendText("\n");
-            //box_dec.AppendText("" + iValue);       
-            //box_hex.AppendText("" + hex);
-            ////保持lScroll在底部
-            //scroll_dec.ScrollToBottom();
-            //scroll_hex.ScrollToBottom();
+
         }
 
 
@@ -267,49 +182,69 @@ namespace ChipseaUartHelper
         private void ComPort_DataReceived()
         {
             while (true) {
-                System.Threading.Thread.Sleep(20);
-                byte[] recBuffer;//接收缓冲区  
-                if (ComPort.IsOpen)
-                {
-                    try
-                    {
-                        recBuffer = new byte[ComPort.BytesToRead];//接收数据缓存大小
-                      
-                      //  this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), recBuffer.Length.ToString(), true);
-                        ComPort.Read(recBuffer, 0, recBuffer.Length);//读取数据  
-                        dataBytesArrQueue.Enqueue(recBuffer);//读取数据入列Enqueue（全局）  
-                    }
-                    catch
-                    {
-                        // MessageBox.Show("无法接收数据，原因未知！");
-                        this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "can't recieve data", true);
-                    }
+                System.Threading.Thread.Sleep(50);
+                if (spManager.bComPortIsOpen) {
+                       if (spManager.ByteMode && spManager.receiveArrByteQueue.Count > 0)
+                        {
+                            byte[] recBuffer = spManager.receiveArrByteQueue.Dequeue();//接收缓冲区  
+                            if (bDecodeFlag)
+                            {
+                                dataBytesArrQueue.Enqueue(recBuffer);//读取数据入列Enqueue（全局）
+                            }
+                            else
+                            {
 
+                                this.Dispatcher.Invoke(new DisplayEventHander(DataTextUpdate), BitConverter.ToString(recBuffer).Replace('-', ' ')+" ");
+                            }
+                        }
+                      else if(spManager.ByteMode == false && spManager.receiveArrCharQueue.Count > 0)
+                        {
+                            char[] charBuffer = spManager.receiveArrCharQueue.Dequeue();
+                            if (bDecodeFlag)
+                            {
+                                //nothing
+                            }
+                            else
+                            {
+                                this.Dispatcher.Invoke(new DisplayEventHander(DataTextUpdate),new string(charBuffer));
+                        }
+                    }
+ 
                 }
-                //else { MessageBox.Show("COM is Closed", "warning"); }
             }
         }
+
+        /*
+         * 
+         * DecodeBytes：解码函数
+         * 
+         * */
+
+
         byte[] dataByteArr = new byte[4];
         private void DecodeBytes() {
             while (true) {
                 if (comIsClosing == false)
                 {
-
-                    //recive =adoh+adol+adoll+parity(xor)+0xAA
                     if (dataBytesArrQueue.Count > 0)
                     {
                         byte[] tmpByteArr = (byte[])dataBytesArrQueue.Dequeue();
                         if (tmpByteArr != null)
                         {
-                            for (int k = 0; k < tmpByteArr.Length; k++)
+                            if (bDecodeFlag)
                             {
-                                dataBytesQueue.Enqueue(tmpByteArr[k]);
+                                for (int k = 0; k < tmpByteArr.Length; k++)
+                                {
+                                    dataBytesQueue.Enqueue(tmpByteArr[k]);
+                                }
                             }
                         }
 
                     }
-                    if (dataBytesQueue.Count >7)
+                    //recive = |0xAB+BA+adoh+adol+adoll+parity(xor)|
+                    if (dataBytesQueue.Count > 7)
                     {
+
                         if (bDecodeFlag) {
                             if (dataBytesQueue.Dequeue() == 0xAB)
                             {//0xAB+0xBA+DataH+DataL+DataLL+Parity
@@ -320,61 +255,36 @@ namespace ChipseaUartHelper
                                     dataByteArr[2] = dataBytesQueue.Dequeue();
                                     dataByteArr[3] = dataBytesQueue.Dequeue();
                                     if (dataBytesQueue.Dequeue() == (byte)(dataByteArr[1] ^ dataByteArr[2] ^ dataByteArr[3]))
-                                    {
-                                        // if (dataBytesQueue.Dequeue() == 0x55) {
+                                    {    
                                         //说明得到正确的数据
                                         hex = BitConverter.ToString(dataByteArr).Replace("-", string.Empty);
                                         iValue = Convert.ToInt32(hex, 16);
-                                        // this.Dispatcher.Invoke(new DataProcessEventHander(DataProcessUpdate), hex);
                                         if (chartWindow != null && bChartWindowIsOpen) { chartWindow.AddData(iValue); }
                                         getDataQueueSave.Enqueue(iValue);
-                                        //if (getDataQueueSave.Count > 1000)
-                                        //{
-                                        //    getDataQueueSave.Dequeue();
-                                        //}
                                         this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToRecieveBox), hex.Substring(2), true);
-                                        //if (textWindow != null&& bTextWindowIsOpen) { textWindow.updateSource(iValue); }
-                                        // AppendDecHex(iValue, hex);
-                                        // this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendHex), hex, true);
-                                        //Thread.Sleep(1);
-                                        //}
-                                        // Thread.Sleep(1);
                                     }
-                                    // Thread.Sleep(1);
                                 }
-                                //  Thread.Sleep(1);
-                            }//bDecodeFlag=true
-                             // Thread.Sleep(1);
-
-
+                            }
                         }
-                        else
-                        {
-                            this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToRecieveBox), ((int)dataBytesQueue.Dequeue()).ToString(), false);
-                        }
-                        // Thread.Sleep(1);
                     }
-
-
+              
                 }
-                else {
-                    Thread.Sleep(1000);
-                }
+             
             }
-
         }
+
+
+
+/*
+ *
+ */
+
         //call back
         private delegate void DisplayEventHander(string str);
-        private void DataProcessUpdate(string hex) {
-            //box_data.Add(new LineBreak());
-            //box_data.Add("0X"+hex);
-            //ChartPlotterDisplay(hex);
-            //box_data.AppendText("\n");
-            //string str = hex.Remove(0, 1);
-            //box_data.AppendText(str + "H");
-            //btn_adoh.Content = hex.Substring(0, 1);
-            //btn_adol.Content = hex.Substring(2, 3);
-            //btn_adoll.Content = hex.Substring(4, 5);
+        private void DataTextUpdate(string str) {
+            box_recieve.AppendText(str);
+            //保持lScroll在底部
+            scroll_recieve.ScrollToBottom();
 
         }
         //ChartPlotterDisplay
@@ -393,13 +303,14 @@ namespace ChipseaUartHelper
         {
             User_initiate_serialPort();
             user_initiate_default();
-          
+
 
         }
 
         private void btn_close_Click(object sender, RoutedEventArgs e)
         {
-            ComPort.Close();
+            // ComPort.Close();
+            spManager.CloseSerialPort();
             comIsClosing = true;
 
             this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "is closed.", true);
@@ -408,14 +319,14 @@ namespace ChipseaUartHelper
         private void btn_open_Click(object sender, RoutedEventArgs e)
         {
             comIsClosing = false;
-            if (ComPort.IsOpen) {
+            if (spManager.bComPortIsOpen) {
 
                 this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "is open.", true);
             }
             else
             {
 
-                if (ComPort == null) { ComPort = new SerialPort(); }
+                SerialPort ComPort = new SerialPort();
 
                 try
                 {
@@ -424,18 +335,19 @@ namespace ChipseaUartHelper
                     ComPort.DataBits = Convert.ToInt32(box_dataBits.SelectedValue.ToString());
                     ComPort.StopBits = (StopBits)Convert.ToDouble(box_stopBits.SelectedValue.ToString());
                     ComPort.Parity = (Parity)Convert.ToInt32(dicParity[box_parityBits.SelectedValue.ToString()]);
-                    ComPort.Open();
+                   // ComPort.Open();
                     comIsClosing = false;
+                    spManager.OpenSerialPort(ComPort);
                     this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "Open Successful.", true);
                 }
                 catch
                 {
-                   // MessageBox.Show("Can't Open " + ComPort.PortName, "Warnning");
-                    this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox),"Can't Open " + ComPort.PortName, true);
+                    // MessageBox.Show("Can't Open " + ComPort.PortName, "Warnning");
+                    this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "Can't Open " + ComPort.PortName, true);
                 }
 
             }
-               
+
         }
 
 
@@ -468,19 +380,17 @@ namespace ChipseaUartHelper
         }
 
         private void window_main_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {   if (chartWindow != null) {
+        { if (chartWindow != null) {
                 chartWindow.Close();
             }
             Application.Current.Shutdown();
-           
+
 
         }
-     
+
         private delegate void DoTask();
         private void startChartWindow() {
 
-            //this.Dispatcher.Invoke(new DoTask(DoMyTask));
-            //this.Dispatcher.Invoke(new DoTask(showChartWindow));
             System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DoTask(showChartWindow));
             System.Windows.Threading.Dispatcher.Run();
 
@@ -491,43 +401,27 @@ namespace ChipseaUartHelper
         {
             //在此执行你的代码
             chartWindow = new ChartWindow();
-           // chartWindow.ShowDialog();
-            //System.Windows.Threading.Dispatcher.Run();
-        }
-        private void showTextWindow()
-        {
-            //在此执行你的代码
-            //textWindow = new TextWindow();
-            // textWindow.ShowDialog();
-            System.Windows.Threading.Dispatcher.Run();
         }
 
-     
         private void btn_text_Click(object sender, RoutedEventArgs e)
         {
-        
-            
-        }
-        private void startTextWindow() {
-            //this.Dispatcher.Invoke(new DoTask(showTextWindow));
-            System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new DoTask(showTextWindow));
-            System.Windows.Threading.Dispatcher.Run();
+
 
         }
         ~MainWindow() {
 
-            ComPort = null;
+            spManager = null;
             threadChartWindow.Abort();
             //threadTextWindow.Abort();
         }
-      
+
         //private bool bTextWindowIsOpen = false;
-   
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
 
-            ComPort.Close();
+            spManager.CloseSerialPort();
             comIsClosing = true;
             //if (!bTextWindowIsOpen)
             //{
@@ -551,7 +445,7 @@ namespace ChipseaUartHelper
                 foreach (string name in ports)
                 {
 
-                    if (!box_portName.Items.Contains(name) ){
+                    if (!box_portName.Items.Contains(name)) {
                         box_portName.Items.Add(name);
                     }
                 }
@@ -560,17 +454,18 @@ namespace ChipseaUartHelper
 
         }
         private bool bDecodeFlag = false;
-   
+
 
         private void checkBox_decode_Checked(object sender, RoutedEventArgs e)
         {
             bDecodeFlag = true;
+            bHexDisplayFlag = true;
             Thread.Sleep(1);
         }
 
         private void checkBox_decode_Unchecked(object sender, RoutedEventArgs e)
         {
-            bDecodeFlag =false;
+            bDecodeFlag = false;
             Thread.Sleep(1);
         }
 
@@ -587,18 +482,19 @@ namespace ChipseaUartHelper
                 // this.window_main.AddChild(chartWindow);
                 //chartWindow.Owner = window_main;
                 //chartWindow.Show();
-               // btn_chart.Content = "Close";
+                // btn_chart.Content = "Close";
                 checkBox_decode.IsChecked = true;
+                bHexDisplayFlag = true;
                 chartWindow.ShowDialog();
             }
         }
         //发送按钮
-        private byte[] bArrSendBuffer = null;
+        private string sendStringBuffer = null;
         ////private bool bSendFlag = true;
         DispatcherTimer sendTimer = null;
         private void btn_send_Click(object sender, RoutedEventArgs e)
         {
-            if (ComPort.IsOpen) {
+            if (spManager.bComPortIsOpen) {
                 if (btn_send.Content.Equals("sending") && bSendTimedFlag)
                 {
 
@@ -607,28 +503,14 @@ namespace ChipseaUartHelper
                     AppendStringToLogBox("colse sending", true);
                 }
                 else {
-                    string[] strArr = textBox_send.Text.Split(' ');
-                    bArrSendBuffer = new byte[strArr.Length];
-                    for (int i = 0; i < strArr.Length; i++)
-                    {
-                        try
-                        {
-                            bArrSendBuffer[i] = Convert.ToByte(strArr[i], 16);
-                        }
-                        catch
-                        {
-                            // AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
-
-                        }
-
-                    }
+                    sendStringBuffer = textBox_send.Text;
                     sendTimer = new DispatcherTimer();
                     sendTimer.Tick += new EventHandler(sendTimerHander);
                     sendTimer.Interval = TimeSpan.FromMilliseconds(Convert.ToInt32(textBox_time.Text));
                     sendTimer.Start();
                     btn_send.Content = "sending";
-                }
-            }
+                 }
+              }
             else
             {
                 AppendStringToLogBox("Open SerialPort First.", true);
@@ -641,13 +523,13 @@ namespace ChipseaUartHelper
                 {
                     if (bSendTimedFlag)
                     {
-                        ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
-                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
+                   // AppendStringToLogBox("send Hex: " + sendStringBuffer, true);
+                    AppendStringToLogBox("send Hex: " + sendStringBuffer, true);
                     }
                     else
                     {
-                        ComPort.Write(bArrSendBuffer, 0, bArrSendBuffer.Length);
-                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(bArrSendBuffer), true);
+                        spManager.SendDataPacket(sendStringBuffer);
+                       // AppendStringToLogBox("send Hex: " + sendStringBuffer, true);
                         btn_send.Content = "send";
                         sendTimer.Stop();
                     }
@@ -675,7 +557,7 @@ namespace ChipseaUartHelper
             if (bDecodeFlag)
             {
                 //getDataQueueSave
-                ComPort.Close();
+                spManager.CloseSerialPort();
                 SaveFileDialog dlg = new SaveFileDialog();
                 dlg.Title = "Save text Files";
                 dlg.DefaultExt = "txt";
@@ -711,6 +593,7 @@ namespace ChipseaUartHelper
         private void radioButton_hex_Checked(object sender, RoutedEventArgs e)
         {
             bHexDisplayFlag = true;
+            spManager.ByteMode = true;
             Thread.Sleep(1);
 
         }
@@ -718,6 +601,7 @@ namespace ChipseaUartHelper
         private void radioButton_ascii_Checked(object sender, RoutedEventArgs e)
         {
             bHexDisplayFlag = false;
+            spManager.ByteMode = false;
             Thread.Sleep(1);
         }
     }
