@@ -109,7 +109,6 @@ E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\Dynamic
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Controls.xml
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\DynamicDataDisplay.Maps.xml
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\bin\Debug\ru-ru\DynamicDataDisplay.resources.dll
-E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChartWindow.g.cs
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\MainWindow.g.cs
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\App.g.cs
@@ -121,3 +120,4 @@ E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\Chipsea
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.Properties.Resources.resources
 E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csproj.GenerateResource.Cache
 E:\workspace\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache
+E:\Workspace\CS-UartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache

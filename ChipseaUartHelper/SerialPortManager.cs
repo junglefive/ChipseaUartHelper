@@ -8,13 +8,25 @@ namespace ChipseaUartHelper
 {
     public class SerialPortManager
     {
-        private bool bRecStaus = true;//接收状态字
         public bool bComPortIsOpen;
         public bool ByteMode { get; set; }
         public SerialPort CurrentSerialPort { get; set; } = new SerialPort();
-        private byte[] ReceivedDataPacket { get; set; }
         public Queue<byte[]> receiveArrByteQueue { get; } = new Queue<byte[]>();
         public Queue<char[]> receiveArrCharQueue { get; } = new Queue<char[]>();
+        public delegate void OnSerialPortMissingHander(object sender, SerialPortMissingEventArgs e); //串口丢失事件触发委托
+        public event OnSerialPortMissingHander OnSerialPortMissing;//串口丢失事件委托对象
+        /*
+         *串口丢失事件触发函数
+          **/
+        private void OnSerialPortMiss(SerialPortMissingEventArgs e)
+        {
+            if (this.OnSerialPortMissing != null)
+            {
+                this.OnSerialPortMissing(this, e);
+            }
+        }
+        /*
+         */
         public bool OpenSerialPort(SerialPort serialPortPara)
         {
             CurrentSerialPort = serialPortPara;
@@ -30,29 +42,29 @@ namespace ChipseaUartHelper
                     CurrentSerialPort.Open();
                     bComPortIsOpen = true; //串口打开状态字改为true                 
                 }
-                catch (Exception exception) //如果串口被其他占用，则无法打开
+                catch (Exception e) //如果串口被其他占用，则无法打开
                 {
                     bComPortIsOpen = false;
                     bReceiveCompleted = false;
                     //throw new Exception("unable open serial port" + exception.Message);
+                    OnSerialPortMiss(new SerialPortMissingEventArgs("unable open serial port"));
                 }
                 return true;
             }
             return true;
         }
-
-        public char[] ReceivedDataPacketChar { get; set; }
-        public bool bReceiveCompleted { get; set; }
-        public bool bReceiveException { get; set; }
+        private bool bRecStaus = true;//接收状态字
+        private byte[] ReceivedDataPacket { get; set; }
+        private char[] ReceivedDataPacketChar { get; set; }
+        private bool bReceiveCompleted { get; set; }
         private void ComReceive(object sender, SerialDataReceivedEventArgs e)
         {
             bReceiveCompleted = false;
-            bReceiveException = false;
             if (bRecStaus) //如果已经开启接收
             {
                 try
                 {
-                    Thread.Sleep(20);
+                    Thread.Sleep(50);
                     ReceivedDataPacket = new byte[CurrentSerialPort.BytesToRead];
                     ReceivedDataPacketChar = new char[CurrentSerialPort.BytesToRead];
                     // change to char datas 
@@ -62,13 +74,14 @@ namespace ChipseaUartHelper
                         CurrentSerialPort.Read(ReceivedDataPacket, 0, ReceivedDataPacket.Length);
                         receiveArrByteQueue.Enqueue(ReceivedDataPacket);
                         receiveArrCharQueue.Clear();//清空Char接收缓存
-                        OnSerialPortMiss(new SerialPortMissingEventArgs("test event"));
+                        //OnSerialPortMiss(new SerialPortMissingEventArgs("test event byte"));
                     }
                     else
                     {
-                        CurrentSerialPort.Read(ReceivedDataPacketChar, 0, CurrentSerialPort.BytesToRead);
+                        CurrentSerialPort.Read(ReceivedDataPacketChar, 0, ReceivedDataPacketChar.Length);
                         receiveArrCharQueue.Enqueue(ReceivedDataPacketChar);
                         receiveArrByteQueue.Clear();//清空Byte接收缓存
+                       // OnSerialPortMiss(new SerialPortMissingEventArgs("test event char"));
                     }
                     bReceiveCompleted = true;
                 }
@@ -80,8 +93,8 @@ namespace ChipseaUartHelper
                     }
                     else
                     {
-                        bReceiveException = true;
-                       // throw new Exception("unable to receive data");
+                        // throw new Exception("unable to receive data");
+                        OnSerialPortMiss(new SerialPortMissingEventArgs("unable close serial port"));
                     }
                 }
             }
@@ -89,16 +102,6 @@ namespace ChipseaUartHelper
             {
                 CurrentSerialPort.DiscardInBuffer(); //清接收缓存
             }
-        }
-        public delegate void OnSerialPortMissingHander(object sender, SerialPortMissingEventArgs e );
-        public event OnSerialPortMissingHander OnSerialPortMissing;
-        private void OnSerialPortMiss(SerialPortMissingEventArgs e) {
-            if (this.OnSerialPortMissing != null) {
-                this.OnSerialPortMissing(this, e);
-
-            }
-
-
         }
         public bool SendDataPacket(string dataPacket)
         {
@@ -117,6 +120,7 @@ namespace ChipseaUartHelper
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
+                OnSerialPortMiss(new SerialPortMissingEventArgs("send exception"));
                 return false;
             }
             return true;
@@ -175,7 +179,6 @@ namespace ChipseaUartHelper
         }
 
         //0.定义事件传递的参数
-      
     }
     //0.定义事件传递的参数
     public class SerialPortMissingEventArgs : EventArgs

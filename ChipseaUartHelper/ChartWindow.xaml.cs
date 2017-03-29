@@ -16,6 +16,7 @@ using Microsoft.Research.DynamicDataDisplay.DataSources;
 using Microsoft.Research.DynamicDataDisplay.PointMarkers;
 using Microsoft.Research.DynamicDataDisplay.Charts.Navigation;
 using System.Windows.Threading;
+using System.IO;
 
 namespace ChipseaUartHelper
 {
@@ -52,6 +53,8 @@ namespace ChipseaUartHelper
         private bool plotterDisplayAverage = false;
         private bool plotterDisplayMoving = false;
         private bool plotterDisplayIIR = false;
+        private FileStream fs = null;
+        StreamWriter writer = null;
         //
         public ChartWindow()
         {
@@ -64,11 +67,21 @@ namespace ChipseaUartHelper
             //
             //textBox.Text = PlotterDataNumber.ToString();
             //
-            refreshPlotterTimer.Interval = TimeSpan.FromMilliseconds(2);
+            refreshPlotterTimer.Interval = TimeSpan.FromMilliseconds(10);
             refreshPlotterTimer.Tick += new EventHandler(RefreshPlotterEventHander);
             refreshPlotterTimer.Start();
             //初始化组件值
             initiateDefaultValue();
+            //初始化文件，保存表数据
+            //try
+            //{
+            //    fs = new FileStream(".\\" + DateTime.Now.ToShortDateString() + "-ChartDataAutoSave.txt", FileMode.Create);
+            //}
+            //catch {
+            //    //创建文件失败
+            //    OnChartWindowClosing();
+            //}
+            
 
         }
         private void initiateDefaultValue() {
@@ -93,18 +106,7 @@ namespace ChipseaUartHelper
 
         private bool bNewDataComeFlag = false;
         private void RefreshPlotterEventHander(object sender, EventArgs e) {
-            //int iShakeData = 0;
-            //int iAverageData = 0;
-            //int iMovingData = 0;
-            //int iIIRData = 0;
-            //if (x1_origin== PlotterDataNumber) {
-            //dataQueue_Origin.Dequeue();
-            //dataQueue_Shake.Dequeue();
-            //dataQueue_Average.Dequeue();
-            //dataQueue_Moving.Dequeue();
-            //dataQueue_IIR.Dequeue();
-            //}
-            //IEnumerable<Point> numerator = new 
+         
             if (bNewDataComeFlag) {
                 bNewDataComeFlag = false;
                 //update text
@@ -113,7 +115,7 @@ namespace ChipseaUartHelper
                 textBlock_delta.Text = ""+(iMax - iMin);
                 if (plotterDisplayOrigin && dataSource_Y1_Origin != null)
                 {
-                    //dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
+                //dataSource_Y1_Origin.AppendMany(dataQueue_Origin);
                     dataSource_Y1_Origin.AppendAsync(Dispatcher, dataPoint_Origin);
                 }
                 //get anti-shake  
@@ -163,10 +165,10 @@ namespace ChipseaUartHelper
         private int iMax = 0;
         private int iMin = 16777215;
         private void updateDataSource(int idata) {
-
+            
             x1_origin++;
             idata = OriginFilter(idata, iOriginRightShiftBits);
-
+            
             //if (x1_origin > PlotterDataNumber) {
             //    x1_origin = 0;
             //}
@@ -179,12 +181,32 @@ namespace ChipseaUartHelper
             if (!btn_pause_click) {
 
                 bNewDataComeFlag = true;
+                int iAntiShake = AntiShakeFilter(idata, iShakeCount, iShakeThreshold);
+                int iAverage = AverageFilter(idata, iAverageTimes);
+                int iMoving = MovingFilter(idata, iMovingLength);
+                int iIIR = IIRFilter(idata, iIIROrder, iIIRThreshold);
                 //
                 dataPoint_Origin = (new Point(x1_origin, idata));
-                dataPoint_Shake = (new Point(x1_origin, AntiShakeFilter(idata,iShakeCount, iShakeThreshold)));
-                dataPoint_Average = (new Point(x1_origin, AverageFilter(idata, iAverageTimes)));
-                dataPoint_Moving = (new Point(x1_origin, MovingFilter(idata, iMovingLength)));
-                dataPoint_IIR = (new Point(x1_origin, IIRFilter(idata,iIIROrder, iIIRThreshold)));
+                dataPoint_Shake = (new Point(x1_origin, iAntiShake));
+                dataPoint_Average = (new Point(x1_origin, iAverage));
+                dataPoint_Moving = (new Point(x1_origin, iMoving));
+                dataPoint_IIR = (new Point(x1_origin, iIIR));
+                //更新数据到文档
+                if (writer != null && isClosingFlag == false)
+                {
+                    //writer.Flush();
+
+                    writer.WriteLine(idata +",  "+iAntiShake+",  "+iAverage + ",  "+iMoving+",  "+iIIR);
+                    //writer.Flush();
+                }
+                else if (writer == null && isClosingFlag == false)
+                {
+                    //string.Format("{0:yyyy-MM-dd }",System.DateTime.Now)
+                    
+                    fs = new FileStream(".\\" + "ChartDataAutoSave-" + string.Format("{0:yyyy-MM-dd }", System.DateTime.Now)+ ".txt", FileMode.Create);
+                    writer = new StreamWriter(fs, Encoding.UTF8); //得到文件写对象
+                    writer.WriteLine("Origin,   Shake,    Average,    Moving,     IIR");
+                }
 
             }//btn_pause_click
 
@@ -313,6 +335,13 @@ namespace ChipseaUartHelper
         {
          
             isClosingFlag = true;
+            //writer.Close();
+            // writer = null;
+            if (writer != null) {
+                writer.Close();
+                writer = null;
+            }
+            OnChartWindowClosing();
         }
 
         private void chart_window_Closed(object sender, EventArgs e)
@@ -443,6 +472,8 @@ namespace ChipseaUartHelper
         private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
             x1_origin = 0;
+            writer.Close();
+            writer = null;
             if (plotterDisplayOrigin == true) {
                 plotter.Children.Remove(lineOrigin);
                 dataSource_Y1_Origin = new ObservableDataSource<Point>();
@@ -594,6 +625,15 @@ namespace ChipseaUartHelper
 
             textBlock_log.Text = msg;
 
+        }
+
+        public delegate void ChartWindowClosingHander(object sender, EventArgs e);
+        public event ChartWindowClosingHander chartWindowClosing;
+        private void OnChartWindowClosing() {
+
+            if (chartWindowClosing != null) {
+                chartWindowClosing(this, new EventArgs());
+            }
         }
     }
 }
