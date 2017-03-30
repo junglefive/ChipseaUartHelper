@@ -37,10 +37,7 @@ namespace ChipseaUartHelper
         private Queue<Point> dataQueue_IIR = new Queue<Point>();
         DispatcherTimer refreshPlotterTimer = new DispatcherTimer();
         private double x1_origin = 0;
-        //private double x2_average = 0;
-        //private double x3_shake = 0;
-        //private double x4_moving = 0;
-        //private double x5_iir = 0;
+
         private bool isClosingFlag = false;
         LineGraph lineOrigin = new LineGraph();
         LineGraph lineAverage = new LineGraph();
@@ -73,16 +70,6 @@ namespace ChipseaUartHelper
             //初始化组件值
             initiateDefaultValue();
             //初始化文件，保存表数据
-            //try
-            //{
-            //    fs = new FileStream(".\\" + DateTime.Now.ToShortDateString() + "-ChartDataAutoSave.txt", FileMode.Create);
-            //}
-            //catch {
-            //    //创建文件失败
-            //    OnChartWindowClosing();
-            //}
-            
-
         }
         private void initiateDefaultValue() {
             iOriginRightShiftBits = 0;
@@ -107,7 +94,7 @@ namespace ChipseaUartHelper
         private bool bNewDataComeFlag = false;
         private void RefreshPlotterEventHander(object sender, EventArgs e) {
          
-            if (bNewDataComeFlag) {
+            if (bNewDataComeFlag && bReseting == false) {
                 bNewDataComeFlag = false;
                 //update text
                 textBlock_max.Text   = ""+iMax;
@@ -468,12 +455,17 @@ namespace ChipseaUartHelper
             plotterDisplayIIR = false;
 
         }
-
+        private bool bReseting = false;
         private void btn_reset_Click(object sender, RoutedEventArgs e)
         {
+            bReseting = true;
             x1_origin = 0;
-            writer.Close();
+            if(writer!=null){
+                writer.Close();
+            }
+           
             writer = null;
+            
             if (plotterDisplayOrigin == true) {
                 plotter.Children.Remove(lineOrigin);
                 dataSource_Y1_Origin = new ObservableDataSource<Point>();
@@ -520,6 +512,7 @@ namespace ChipseaUartHelper
             textBlock_max.Text = "";
             textBlock_min.Text = "";
             textBlock_delta.Text = "";
+            bReseting = false;
         }
 
         private int iOriginRightShiftBits = 0;
