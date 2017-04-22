@@ -308,7 +308,13 @@ namespace ChipseaUartHelper
             btn_clear.IsEnabled = true;
             btn_send.IsEnabled = false;
             btn_chart.IsEnabled = false;
-           // btn_save.IsEnabled = false;关闭串口，保留save按键
+            //打开串口相关设置使能
+            box_baudRate.IsEnabled = true;
+            box_dataBits.IsEnabled = true;
+            box_portName.IsEnabled = true;
+            box_parityBits.IsEnabled = true;
+            box_stopBits.IsEnabled = true;
+            // btn_save.IsEnabled = false;关闭串口，保留save按键
             //getDataQueueSave.Clear();暂时不清
             this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "is closed.", true);
         }
@@ -342,6 +348,11 @@ namespace ChipseaUartHelper
                    
                     spManager.OpenSerialPort(ComPort);
                     this.Dispatcher.BeginInvoke(new SendStringEventHander(AppendStringToLogBox), "Open Successful.", true);
+                    box_baudRate.IsEnabled = false;
+                    box_dataBits.IsEnabled = false;
+                    box_portName.IsEnabled = false;
+                    box_parityBits.IsEnabled = false;
+                    box_stopBits.IsEnabled = false;
                 }
                 catch
                 {
@@ -372,6 +383,7 @@ namespace ChipseaUartHelper
         {
             box_log.Document.Blocks.Clear();
             box_recieve.Document.Blocks.Clear();
+
         }
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
@@ -493,6 +505,31 @@ namespace ChipseaUartHelper
                 chartWindow.ShowDialog();
             }
         }
+        /// <summary>
+        /// 字符串转16进制字节数组
+        /// </summary>
+        /// <param name="hexString"></param>
+        /// <returns></returns>
+        public  byte[] strToToHexByte(string hexStr)
+        {
+                string hexString = hexStr;
+                hexString = hexString.Replace(" ", "");
+               // if ((hexString.Length % 2) != 0)
+                  //  hexString += " ";
+                byte[] returnBytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < returnBytes.Length; i++)
+                try
+                {
+                    returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+                }
+                catch(Exception ex) {
+                    AppendStringToLogBox("Parse Input Hex data Erro", true);
+                }
+                    
+                return returnBytes;
+
+          
+        }
         //发送按钮
         private string sendStringBuffer = null;
         ////private bool bSendFlag = true;
@@ -530,8 +567,10 @@ namespace ChipseaUartHelper
                     {
                             if (spManager.ByteMode)
                             {
-                                byte[] sendBytesBuffer = Encoding.Default.GetBytes(sendStringBuffer);
-                                AppendStringToLogBox("send Hex: " + BitConverter.ToString(sendBytesBuffer), true);
+                        //byte[] sendBytesBuffer = Encoding.Default.GetBytes(sendStringBuffer);
+                        byte[] sendBytesBuffer = strToToHexByte(sendStringBuffer);
+                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(sendBytesBuffer), true);
+
                                 spManager.SendDataPacket(sendBytesBuffer);
                             }
                             else {
@@ -543,8 +582,9 @@ namespace ChipseaUartHelper
                     {
                         if (spManager.ByteMode)
                         {
-                            byte[] sendBytesBuffer = Encoding.Default.GetBytes(sendStringBuffer);
-                            AppendStringToLogBox("send Hex: " + BitConverter.ToString(sendBytesBuffer), true);
+                        //  byte[] sendBytesBuffer = Encoding.Default.GetBytes(sendStringBuffer);
+                        byte[] sendBytesBuffer = strToToHexByte(sendStringBuffer);
+                        AppendStringToLogBox("send Hex: " + BitConverter.ToString(sendBytesBuffer), true);
                             spManager.SendDataPacket(sendBytesBuffer);
                         }
                         else
@@ -639,7 +679,9 @@ namespace ChipseaUartHelper
 
         private void textBox_send_TextChanged(object sender, TextChangedEventArgs e)
         {
+          
             sendStringBuffer = textBox_send.Text;
+            
         }
     }
 

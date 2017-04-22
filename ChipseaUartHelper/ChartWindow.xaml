@@ -10,7 +10,7 @@
     <Grid Background="#FFEAD5D5" Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="189"/>
+            <ColumnDefinition Width="165"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>

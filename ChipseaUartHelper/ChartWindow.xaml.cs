@@ -466,43 +466,43 @@ namespace ChipseaUartHelper
            
             writer = null;
             
+                dataSource_Y1_Origin = new ObservableDataSource<Point>();
             if (plotterDisplayOrigin == true) {
                 plotter.Children.Remove(lineOrigin);
-                dataSource_Y1_Origin = new ObservableDataSource<Point>();
                 lineOrigin = plotter.AddLineGraph(dataSource_Y1_Origin, Colors.Gray, 2, "Origin");
             }
 
             //plotterDisplayOrigin = true;
             //plotter.Children.Remove(lineShake);
+                dataSource_Y2_Shake = new ObservableDataSource<Point>();
             if (plotterDisplayShake == true) {
                 plotter.Children.Remove(lineShake);
-                dataSource_Y2_Shake = new ObservableDataSource<Point>();
                 lineShake = plotter.AddLineGraph(dataSource_Y2_Shake, Colors.HotPink, 2, "Shake");
             }
 
             //plotterDisplayShake = true;
             //
+                dataSource_Y3_Average = new ObservableDataSource<Point>();
             if (plotterDisplayAverage == true) {
                 plotter.Children.Remove(lineAverage);
-                dataSource_Y3_Average = new ObservableDataSource<Point>();
                 lineAverage = plotter.AddLineGraph(dataSource_Y3_Average, Colors.LimeGreen, 2, "Average");
             }
 
 
             //plotterDisplayAverage = true;
             //
+                dataSource_Y4_Moving = new ObservableDataSource<Point>();
             if (plotterDisplayMoving == true) {
                 plotter.Children.Remove(lineMoving);
-                dataSource_Y4_Moving = new ObservableDataSource<Point>();
                 lineMoving = plotter.AddLineGraph(dataSource_Y4_Moving, Colors.Brown, 2, "Moving");
             }
 
 
             //plotterDisplayMoving = false;
             //if (dataSource_Y5_IIR == null)
+                dataSource_Y5_IIR = new ObservableDataSource<Point>();
             if (plotterDisplayIIR == true) {
                 plotter.Children.Remove(lineIIR);
-                dataSource_Y5_IIR = new ObservableDataSource<Point>();
                 lineIIR = plotter.AddLineGraph(dataSource_Y5_IIR, Colors.DodgerBlue, 2, "IIR");
             }
            
@@ -520,7 +520,6 @@ namespace ChipseaUartHelper
         {
             try
             {
-
             iOriginRightShiftBits = Convert.ToInt32(textBox_origin.Text);
             }
             catch { }
@@ -531,7 +530,6 @@ namespace ChipseaUartHelper
             try
             {
             iShakeCount = Convert.ToInt32(textBox_shake_count.Text);
-
             }
             catch { }
         }
@@ -540,7 +538,6 @@ namespace ChipseaUartHelper
         {
             try
             {
-
             iShakeThreshold = Convert.ToInt32(textBox_shake_threshold.Text);
             }
             catch { }
@@ -551,7 +548,6 @@ namespace ChipseaUartHelper
             try
             {
             iAverageTimes = Convert.ToInt32(textBox_average_times.Text);
-
             }
             catch { }
         }
@@ -560,7 +556,6 @@ namespace ChipseaUartHelper
         {
             try
             {
-
             iMovingLength = Convert.ToInt32(textBox_moving_length.Text);
             }
             catch { }
@@ -570,7 +565,6 @@ namespace ChipseaUartHelper
         {
             try
             {
-
             iIIROrder = Convert.ToInt32(textBox_iir_order.Text);
             }
             catch { }
@@ -580,7 +574,6 @@ namespace ChipseaUartHelper
         {
             try
             {
-
             iIIRThreshold = Convert.ToInt32(textBox_iir_threshold);
             }
             catch { }
