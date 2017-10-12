@@ -1,0 +1,150 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChipseaUartHelper"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" x:Name="chart_window" x:Class="ChipseaUartHelper.ChartWindow"
+        mc:Ignorable="d"
+        Title="ChartWindow" Height="419.5" Width="1097.833" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
+    <Grid Background="#FFEAD5D5" Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="165"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <d3:ChartPlotter Name="plotter" BorderBrush="#FF6C6868" BorderThickness="5" Padding="5" Margin="5"/>
+        <Grid Grid.Column="1" Margin="7,10,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="34"/>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="27"/>
+                <RowDefinition Height="29"/>
+                <RowDefinition Height="33"/>
+                <RowDefinition Height="38"/>
+            </Grid.RowDefinitions>
+            <Grid Background="#FFCBC0C0" Margin="0,-1,0,0">
+                <Grid>
+                    <CheckBox x:Name="checkBox_origin" Content="Origin" Checked="checkBox_origin_Checked" Unchecked="checkBox_origin_Unchecked" RenderTransformOrigin="0.546,0.858" Margin="0,6,0,10"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Background="#FFCFB2B2">
+                <CheckBox x:Name="checkBox_shake" Content="Shake" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" RenderTransformOrigin="4.789,0.25" Checked="checkBox_shake_Checked" Unchecked="checkBox_shake_Unchecked"/>
+            </Grid>
+            <Grid Grid.Row="3" Background="#FFF3B6B6">
+                <CheckBox x:Name="checkBox_moving" Content="Moving" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_moving_Checked" Unchecked="checkBox_moving_Unchecked"/>
+            </Grid>
+            <Grid Grid.Row="4" Background="#FFD7DEB6">
+                <CheckBox x:Name="checkBox_iir" Content="IIR" Margin="0,16.5,0,0" VerticalAlignment="Top" Checked="checkBox_iir_Checked" Unchecked="checkBox_iir_Unchecked"/>
+            </Grid>
+            <Grid Grid.Row="2" Background="#FFD19E9E">
+                <CheckBox x:Name="checkBox_average1" Content="Average" Margin="0,4,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked" Height="19" BorderBrush="#FF72ACAC">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.547"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+            </Grid>
+            <Button x:Name="btn_pause" Content="Pause" VerticalAlignment="Top" Height="21" Click="btn_pause_Click" Margin="0,10,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
+            <Button x:Name="btn_reset" Content="Reset" Margin="0,0,0,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C" HorizontalAlignment="Left" Width="74" Height="21" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFE49B9B" Grid.Column="1" Grid.Row="5" Height="29" VerticalAlignment="Center" TextAlignment="Center" Cursor="None" IsEnabled="False"/>
+            <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="6" Background="#FFAD97DC" Grid.Column="1" VerticalAlignment="Center" Height="28" TextAlignment="Center"/>
+            <TextBlock x:Name="textBlock_delta" Grid.Row="7" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FFA6CBBF" Grid.Column="1" VerticalAlignment="Center" Height="30" TextAlignment="Center"/>
+            <Label x:Name="label" Content="MAX:" Grid.Row="5" Background="#FFCF9B9B"/>
+            <Label x:Name="label_Copy" Content="MIN:" Grid.Row="6" Background="#FFA796CB"/>
+            <Label x:Name="label_Copy1" Content="VALUE-D:" Grid.Row="7" Background="#FFA8BFBB"/>
+            <Grid Grid.Column="1" Background="#FFCFC0C0" Margin="0,-1,0,0">
+                <TextBox x:Name="textBox_origin" Margin="12,9,12,6" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White" TextAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Column="1" Background="#FFD1B2B2" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="12*"/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="textBox_shake_threshold" Margin="12,0,12,2" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1" TextAlignment="Center">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8EA4B9" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+                <TextBox x:Name="textBox_shake_count" Margin="12,3,12,0" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200" TextAlignment="Center">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8A9DB0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Background="#FFD69F9F">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBox_average_times" Margin="12,6,12,3" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" TextAlignment="Center">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF7C8A99" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="3" Background="#FFF5BFBF">
+                <TextBox x:Name="textBox_moving_length" Margin="12,6,12,8" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged" TextAlignment="Center" IsTabStop="False">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF758595" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="4" Background="#FFD4D1B0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="32"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="textBox_iir_order" Margin="12,5,12,0" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="23" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged" TextAlignment="Center">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF8496A8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+                <TextBox x:Name="textBox_iir_threshold" Margin="12,0,12,4" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="23" Grid.Row="1" VerticalAlignment="Bottom" TextAlignment="Center">
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                            <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                            <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                            <GradientStop Color="#FF748699" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+            </Grid>
+            <TextBlock x:Name="textBlock_log" TextWrapping="Wrap" Text="  " Background="#FFD4D1D4" Margin="0,5,0,6" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Height="22" TextAlignment="Center"/>
+            <Button x:Name="btn_change" Content="Next" Margin="0,5,0,0" Grid.Row="8" VerticalAlignment="Top" BorderBrush="#FF958F74" Click="btn_change_Click" Height="22"/>
+        </Grid>
+    </Grid>
+</Window>

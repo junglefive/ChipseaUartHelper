@@ -1,0 +1,77 @@
+﻿<Window x:Class="ChipseaUartHelper.UartCmdWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChipseaUartHelper"
+        mc:Ignorable="d"
+        Title="UartCmdWindow" Height="329.053" Width="1005.5" ShowInTaskbar="False" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid Margin="0,0,2,2">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,10,9.5,0.5" OpacityMask="#FFDAD6D6" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="158*"/>
+                <ColumnDefinition Width="564*"/>
+                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="49*"/>
+                <ColumnDefinition Width="82*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="44*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="24*"/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="combox_cmd1" Margin="12,9,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFE4C2C2" ScrollViewer.CanContentScroll="True" Background="{x:Null}" AcceptsTab="True">
+
+            </TextBox>
+            <Button x:Name="btn_send1" Content="Send" HorizontalAlignment="Left" Margin="11.5,10,0,3.5" Width="52" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="1" Click="btn_send1_Click" RenderTransformOrigin="0.519,0.747"/>
+            <TextBlock x:Name="txt_log" Grid.Column="2" HorizontalAlignment="Center" Margin="10,2.5,69.5,6" Grid.Row="6" Text="TextBlock" VerticalAlignment="Center" Width="555" Height="28" Foreground="#FF8A8181" Padding="5" TextWrapping="WrapWithOverflow" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="combox_cmd2" Margin="12,12.5,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFECBDBD" ScrollViewer.CanContentScroll="True" Background="{x:Null}">
+
+            </TextBox>
+            <TextBox x:Name="combox_cmd3" Margin="12,8,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="3" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFDAACAC" ScrollViewer.CanContentScroll="True" Background="{x:Null}"/>
+            <TextBox x:Name="combox_cmd4" Margin="12,11.5,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFD5B0B0" ScrollViewer.CanContentScroll="True" Background="{x:Null}"/>
+            <TextBox x:Name="combox_cmd5" Margin="12,12,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFDC8383" ScrollViewer.CanContentScroll="True" Background="{x:Null}">
+
+            </TextBox>
+            <Button x:Name="btn_send2" Content="Send" HorizontalAlignment="Left" Margin="11.5,12.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="2" Click="btn_send2_Click"/>
+            <Button x:Name="btn_send3" Content="Send" HorizontalAlignment="Left" Margin="11.5,8,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="3" Click="btn_send3_Click"/>
+            <Button x:Name="btn_send4" Content="Send" HorizontalAlignment="Left" Margin="11.5,11.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="4" Click="btn_send4_Click"/>
+            <Button x:Name="btn_send5" Content="Send" HorizontalAlignment="Left" Margin="11.5,12,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="5" Click="btn_send5_Click"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="10,9,0,0" Grid.Row="1" TextWrapping="Wrap" Text="OKOK - Unlock" VerticalAlignment="Top" Width="138" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,12.5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="OKOK - QueryUser" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="OKOK - GotFat" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,11.5,0,0" Grid.Row="4" TextWrapping="Wrap" Text="MCU-&gt;BLE-&gt;APP" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,12,0,0" Grid.Row="5" TextWrapping="Wrap" Text="Query - BleState" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,9,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,14.5,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,11.5,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="4" Grid.ColumnSpan="2"/>
+            <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,8,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="3" Grid.ColumnSpan="2"/>
+            <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,12,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="5" Grid.ColumnSpan="2"/>
+            <Button x:Name="btn_send666" Content="Loop Send All" HorizontalAlignment="Left" Margin="21.5,2.5,0,0" VerticalAlignment="Top" Width="180" Height="30" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="3" Click="btn_send666_Click"/>
+            <CheckBox x:Name="check_t1" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,15,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="check_t1_Checked" Unchecked="check_t1_Unchecked" Height="16" Width="16"/>
+            <CheckBox x:Name="check_t2" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,20.5,0,0" Grid.Row="2" VerticalAlignment="Top" Checked="check_t2_Checked" Unchecked="check_t2_Unchecked" Height="16" Width="16"/>
+            <CheckBox x:Name="check_t3" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,18,0,0" Grid.Row="3" VerticalAlignment="Top" Checked="check_t3_Checked" Unchecked="check_t3_Unchecked" Height="14" Width="16"/>
+            <CheckBox x:Name="check_t4" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,17.5,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="check_t4_Checked" Unchecked="check_t4_Unchecked" Height="14" Width="16"/>
+            <CheckBox x:Name="check_t5" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,18,0,0" Grid.Row="5" VerticalAlignment="Top" Checked="check_t5_Checked" Unchecked="check_t5_Unchecked" Height="14" Width="16"/>
+            <TextBox x:Name="txt_t1" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="9.5,9,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txt_t2" Grid.Column="5" HorizontalAlignment="Left" Height="26" Margin="9.5,12.5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txt_t3" Grid.Column="5" HorizontalAlignment="Left" Height="26" Margin="9.5,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txt_t4" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="9.5,9.5,0,0" Grid.Row="4" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txt_t5" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="9.5,12,0,0" Grid.Row="5" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,2.5,0,0" Grid.Row="6" TextWrapping="Wrap" Text="Sending：" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

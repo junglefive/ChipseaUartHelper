@@ -1,0 +1,115 @@
+﻿<Window x:Class="ChipseaUartHelper.FrequencyFixTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChipseaUartHelper"
+        mc:Ignorable="d"
+        Title="FrequencyFixTestWindow" Height="324" Width="779" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
+    <Grid Margin="0,0,2,0" Background="#FFE2E0E0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="210*"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="0"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="622*"/>
+            <ColumnDefinition Width="118*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" Background="#FFCCDCE6" Grid.Row="1" Grid.Column="1" Padding="2" Margin="2" BorderBrush="#FFDC7E7E">
+            <Grid Margin="-1,-1,0,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="radioButton0"  Tag = "0" Content="2.402G" HorizontalAlignment="Left" Margin="2,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="69" IsChecked="True" Checked="radioButton_Checked" Grid.ColumnSpan="2"/>
+                <RadioButton x:Name="radioButton1"  Tag = "1" Content="2.404G" HorizontalAlignment="Left" Margin="2,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton2"  Tag = "2" Content="2.406G" HorizontalAlignment="Left" Margin="2.04,15.698,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="62" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton3"  Tag = "3" Content="2.408G" HorizontalAlignment="Left" Margin="2,17.999,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton4"  Tag = "4" Content="2.410G" HorizontalAlignment="Left" Margin="2.04,15.696,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton5"  Tag = "5" Content="2.412G" HorizontalAlignment="Left" Margin="1,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="1" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton6"  Tag = "6" Content="2.414G" HorizontalAlignment="Left" Margin="1,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="1" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton7"  Tag = "7" Content="2.416G" HorizontalAlignment="Left" Margin="-1,15.698,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Width="64" Grid.Row="2" Checked="radioButton_Checked" Grid.Column="1"/>
+                <RadioButton x:Name="radioButton8"  Tag = "8" Content="2.418G" HorizontalAlignment="Left" Margin="0,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="1" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton9"  Tag = "9" Content="2.420G" HorizontalAlignment="Left" Margin="1,15.697,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="1" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton10" Tag = "10" Content="2.422G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="2" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton11" Tag = "11" Content="2.424G" HorizontalAlignment="Left" Margin="6,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="2" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton12" Tag = "12" Content="2.426G" HorizontalAlignment="Left" Margin="6,15.698,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="2" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton13" Tag = "13" Content="2.428G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="2" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton14" Tag = "14" Content="2.430G" HorizontalAlignment="Left" Margin="6,15.696,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="2" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton15" Tag = "15" Content="2.432G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="3" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton16" Tag = "16" Content="2.434G" HorizontalAlignment="Left" Margin="5,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="3" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton17" Tag = "17" Content="2.436G" HorizontalAlignment="Left" Margin="4.96,15.697,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="3" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton18" Tag = "18" Content="2.438G" HorizontalAlignment="Left" Margin="5,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="3" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton19" Tag = "19" Content="2.440G" HorizontalAlignment="Left" Margin="4.96,15.695,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="3" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton20" Tag = "20" Content="2.442G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="4" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton21" Tag = "21" Content="2.444G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="4" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton22" Tag = "22" Content="2.446G" HorizontalAlignment="Left" Margin="3.92,15.696,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="4" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton23" Tag = "23" Content="2.448G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="4" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton24" Tag = "24" Content="2.450G" HorizontalAlignment="Left" Margin="6,15.694,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="4" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton25" Tag = "25" Content="2.452G" HorizontalAlignment="Left" Margin="7.081,18,-1.04,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="5" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton26" Tag = "26" Content="2.4540G" HorizontalAlignment="Left" Margin="6.041,20.999,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="5" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton27" Tag = "27" Content="2.456G" HorizontalAlignment="Left" Margin="4.96,15.695,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="5" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton28" Tag = "28" Content="2.458G" HorizontalAlignment="Left" Margin="4.96,17.999,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="5" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton29" Tag = "29" Content="2.460G" HorizontalAlignment="Left" Margin="4.96,15.693,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="5" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton30" Tag = "30" Content="2.462G" HorizontalAlignment="Left" Margin="6.04,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="6" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton31" Tag = "31" Content="2.464G" HorizontalAlignment="Left" Margin="6,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="6" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton32" Tag = "32" Content="2.466G" HorizontalAlignment="Left" Margin="3.919,15.694,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="6" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton33" Tag = "33" Content="2.468G" HorizontalAlignment="Left" Margin="6,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="6" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton34" Tag = "34" Content="2.470G" HorizontalAlignment="Left" Margin="6,15.698,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="6" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton35" Tag = "35" Content="2.472G" HorizontalAlignment="Left" Margin="5,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="7" Width="64" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton36" Tag = "36" Content="2.474G" HorizontalAlignment="Left" Margin="4.96,20.053,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="7" Width="64" Grid.Row="1" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton37" Tag = "37" Content="2.476G" HorizontalAlignment="Left" Margin="4.96,18.999,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="7" Width="64" Grid.Row="2" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton38" Tag = "38" Content="2.478G" HorizontalAlignment="Left" Margin="5,17.999,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="7" Width="64" Grid.Row="3" Checked="radioButton_Checked"/>
+                <RadioButton x:Name="radioButton39" Tag = "39" Content="2.480G" HorizontalAlignment="Left" Margin="4.96,18.751,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.24,0.786" Grid.Column="7" Width="64" Grid.Row="4" Checked="radioButton_Checked"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="#FFAAA3A3" BorderThickness="1" Grid.Column="2" Background="#FFE2DBDB" Grid.Row="1" Padding="1" Margin="7,2,2,2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="button_help" Content="Help" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="4" RenderTransformOrigin="0.448,-0.25"/>
+                <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="3" Click="button_reset_Click"/>
+                <Button x:Name="button_clear" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="2"/>
+                <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="1" Click="button_send_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFFD8B8B" Offset="0.084"/>
+                            <GradientStop Color="#FFEEC5C5" Offset="0.393"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <RadioButton x:Name="radioButton_tx" Content="Tx" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF38282" IsChecked="True"/>
+                <RadioButton x:Name="radioButton_rx" Content="Rx" HorizontalAlignment="Left" Margin="61,17,0,0" VerticalAlignment="Top" Background="#FFF56565"/>
+            </Grid>
+        </Border>
+        <ScrollViewer x:Name="scroll_log" Grid.Column="1" Grid.Row="2" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Margin="2,10,97,10" Padding="1" Background="#FFF5D1F9" Grid.ColumnSpan="2">
+            <TextBlock x:Name="textBlock" Text="TextBlock" TextWrapping="Wrap" Height="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </ScrollViewer>
+        <Label x:Name="label" Content="Chipsea-BLE" Grid.Column="2" Grid.Row="2" Background="#FFF37070" Margin="21,8,0,12" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="82" Height="25"/>
+    </Grid>
+</Window>

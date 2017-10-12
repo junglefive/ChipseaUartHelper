@@ -1,0 +1,38 @@
+﻿<Window x:Class="ChipseaUartHelper.GetXorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChipseaUartHelper"
+        mc:Ignorable="d"
+        Title="GetXorWindow" Height="197.334" Width="659.751" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FFFBF5F5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="207*"/>
+                <ColumnDefinition Width="218*"/>
+                <ColumnDefinition Width="192*"/>
+                <ColumnDefinition Width="16*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="txt_input" Height="40" Margin="0,4,4,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Grid.Column="1" Padding="1"/>
+            <TextBox x:Name="txt_result" HorizontalAlignment="Left" Height="36" Margin="0,10.5,0,0" TextWrapping="Wrap" Text="Result" VerticalAlignment="Top" Width="176" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFB3ADAB" Grid.Row="3" Grid.Column="1" Foreground="#FFF93509" TextDecorations="{x:Null}" Padding="1"/>
+            <Button Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.131,1.122" Background="#FFF9C0C0" Click="Button_Click" Height="36" Margin="0,10.5,61.5,0" Grid.Row="3" Grid.Column="2"/>
+            <Button Content="Bitxor" HorizontalAlignment="Right" VerticalAlignment="Top" Width="156" RenderTransformOrigin="0.131,1.122" Background="#FFF9C0C0" Click="Button_Click_1" Height="36" Margin="0,10.5,4,0" Grid.Row="3" Grid.Column="3"/>
+            <TextBox x:Name="txt_output" Height="40" Margin="0,3,4,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Padding="1" Grid.Column="1"/>
+        </Grid>
+
+    </Grid>
+</Window>
