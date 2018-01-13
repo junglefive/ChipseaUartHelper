@@ -97,10 +97,13 @@ namespace ChipseaUartHelper
         private void AppendStringToLogBox(string str, bool newLine) {
             //if(box_log)
             if (newLine) {
-                box_log.AppendText("\n");
+                box_log.AppendText(DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + str + "\n");
             }
-
-            box_log.AppendText(DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + "：  " + str);
+            else
+            {
+                box_log.AppendText(DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ":  " + str );
+            }
+            
 
             if (box_log.Document.Blocks.Count > 100) {
 
@@ -207,7 +210,7 @@ namespace ChipseaUartHelper
         byte[] dataByteArr = new byte[4];
         private void DecodeBytes() {
             while (true) {
-                Thread.Sleep(10);
+                //Thread.Sleep(10);
                 if (comIsClosing == false)
                 {
                     if (dataBytesArrQueue.Count > 0)
@@ -367,11 +370,11 @@ namespace ChipseaUartHelper
 
         private void btn_help_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("https://git.coding.net/junglefive/ChipseaUartHelper.git", "Link");
+            MessageBox.Show("https://git.coding.net/junglefive/ChipseaUartHelper.git", "GitHub");
         }
         private void btn_Version_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("V1.1.6", "version");
+            MessageBox.Show("v1.2", "版本号");
         }
         private void richTextBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -519,10 +522,10 @@ namespace ChipseaUartHelper
             //this.Dispatcher.BeginInvoke(new NoParaDelegateEventHander(updatateSendList));
            
             if (spManager.bComPortIsOpen) {
-                if (btn_send.Content.Equals("sending") && bSendTimedFlag)
+                if (btn_send.Content.Equals("发送中") && bSendTimedFlag)
                 {
 
-                    btn_send.Content = "send";
+                    btn_send.Content = "发送数据";
             
                     sendTimer.Stop();
                     AppendStringToLogBox("colse sending", true);
@@ -535,7 +538,7 @@ namespace ChipseaUartHelper
                         sendTimer.Tick += new EventHandler(sendTimerHander);
                         sendTimer.Interval = TimeSpan.FromMilliseconds(Convert.ToInt32(textBox_time.Text));
                         sendTimer.Start();
-                        btn_send.Content = "sending";
+                        btn_send.Content = "发送中";
                     }
                  }
               }
@@ -558,7 +561,14 @@ namespace ChipseaUartHelper
         private byte[] PreviousSendBytes;
         private void sendTimerHander(object sender, System.EventArgs  e) {
             comboBox_send.Items.Refresh();
-            sendStringBuffer = comboBox_send.Text;
+            if (B_Auto_Enter_Flag)
+            {
+                sendStringBuffer = comboBox_send.Text+'\n';
+            }
+            else
+            {
+                sendStringBuffer = comboBox_send.Text;
+            }
             if (!comIsClosing)
                 {
                     if (bSendTimedFlag)
@@ -611,7 +621,7 @@ namespace ChipseaUartHelper
                         }
                         else {
                             spManager.SendDataPacket(sendStringBuffer);
-                            AppendStringToLogBox("send Stirng: " + sendStringBuffer, true);
+                            AppendStringToLogBox("send String: " + sendStringBuffer, true);
                         }
                     }
                     else
@@ -633,13 +643,13 @@ namespace ChipseaUartHelper
                             spManager.SendDataPacket(sendStringBuffer);
                             AppendStringToLogBox("send Stirng: " + sendStringBuffer, true);
                         }
-                        btn_send.Content = "send";
+                        btn_send.Content = "发送数据";
                             sendTimer.Stop();
                         }
                 }
                 else
                 {
-                    btn_send.Content = "send";
+                    btn_send.Content = "发送数据";
                     sendTimer.Stop();
             }
             bSendingFlag = false;
@@ -716,13 +726,13 @@ namespace ChipseaUartHelper
 
                 try {
                     double b = Convert.ToInt32(textBox_time.Text);
-                    if (b >= 10)
+                    if (b >= 1)
                     {
                         sendTimer.Interval = TimeSpan.FromMilliseconds(b);
                     }
                     else {
-                        b = 10;
-                        MessageBox.Show("输入大于10的数字/ms","warning");
+                        b = 1;
+                        MessageBox.Show("输入大于1的数字/ms","提示");
                        // sendTimer.Interval = TimeSpan.FromMilliseconds(b);
                     }
                 }
@@ -752,14 +762,23 @@ namespace ChipseaUartHelper
 
         private void btn_configSerialPort_Click(object sender, RoutedEventArgs e)
         {
+            spManager.CloseSerialPort();
+            comIsClosing = true;
+            btn_close.IsEnabled = false;
+            btn_clear.IsEnabled = true;
+            btn_send.IsEnabled = false;
+            btn_chart.IsEnabled = false;
+            btn_FFT.IsEnabled = false;
+            btn_cmd.IsEnabled = false;
+            btn_getXor.IsEnabled = false;
             InitSerialport initSerialPortWindow = new InitSerialport(ComPort);
             initSerialPortWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             if ((bool)initSerialPortWindow.ShowDialog()) {
                 ComPort = initSerialPortWindow.ComPort;
                
             }
-            btn_configSerialPort.Content = ComPort.BaudRate;
-            AppendStringToLogBox("Chosed:  "+ "SerialPort: " + ComPort.PortName + "  " + "Baudrate: " + ComPort.BaudRate + "  " + "Databit: " + ComPort.DataBits + "  " + "Parity: " + ComPort.Parity + "  " + "Stopbit: " + ComPort.StopBits, true);
+            //btn_configSerialPort.Content = ComPort.BaudRate;
+           // AppendStringToLogBox("Chosed:  "+ "SerialPort: " + ComPort.PortName + "  " + "Baudrate: " + ComPort.BaudRate + "  " + "Databit: " + ComPort.DataBits + "  " + "Parity: " + ComPort.Parity + "  " + "Stopbit: " + ComPort.StopBits, true);
             btn_open.IsEnabled = true;
             textBox_status_com.Text = "SerialPort: " + ComPort.PortName + "  " + "Baudrate: " + ComPort.BaudRate + "  " + "Databit: " + ComPort.DataBits + "  " + "Parity: " + ComPort.Parity + "  " + "Stopbit: " + ComPort.StopBits;
             //  btn_clear.IsEnabled = true;
@@ -839,6 +858,19 @@ namespace ChipseaUartHelper
         {
 
         }
+
+        public bool B_Auto_Enter_Flag = false;
+        private void checkBox_auto_enter_Checked(object sender, RoutedEventArgs e)
+        {
+            B_Auto_Enter_Flag = true;
+        }
+
+        private void checkBox_auto_enter_Unchecked(object sender, RoutedEventArgs e)
+        {
+            B_Auto_Enter_Flag = false;
+        }
+
+
     }
 
 }

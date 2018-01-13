@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipseaUartHelper"
         mc:Ignorable="d"
-        Title="Configer" Height="293.293" Width="390.943" ShowInTaskbar="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Opacity="0.9" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow">
+        Title="串口参数初始化" Height="293.293" Width="390.943" ShowInTaskbar="False" ScrollViewer.VerticalScrollBarVisibility="Disabled" Opacity="0.9" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow">
     <Grid Background="#FFF1F1F1" Margin="0,0,0,5">
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
@@ -24,11 +24,11 @@
             <ColumnDefinition Width="120*"/>
             <ColumnDefinition Width="27*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="label_Copy2" Content="PortName" RenderTransformOrigin="0.436,2.185" Margin="14,6,9.5,3.5" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" ScrollViewer.CanContentScroll="True" Background="{x:Null}" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFCB9D9D"/>
-        <Label x:Name="label_Copy" Content="BaudRate" Margin="14,6.5,9.5,3" Foreground="#FF080808" Background="{x:Null}" Grid.Row="1" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFD88F8F"/>
-        <Label x:Name="label_Copy1" Content="DataBits" Margin="14,5,9.5,4.5" Grid.Row="2" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFC78484"/>
-        <Label x:Name="label_Copy3" Content="ParityBits" Margin="14,5.5,9.5,5" Grid.Row="3" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" BorderBrush="#FFB87E7E" BorderThickness="0,0,0,1"/>
-        <Label x:Name="label_Copy4" Content="StopBits" Margin="14,5,9.5,5" Grid.Row="4" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" RenderTransformOrigin="0.486,0.135" BorderThickness="0,0,0,1" BorderBrush="#FFE84D4D"/>
+        <Label x:Name="label_Copy2" Content="端    口    名" RenderTransformOrigin="0.436,2.185" Margin="14,6,9.5,3.5" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" ScrollViewer.CanContentScroll="True" Background="{x:Null}" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFCB9D9D" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label x:Name="label_Copy" Content="波    特    率" Margin="14,6.5,9.5,3" Foreground="#FF080808" Background="{x:Null}" Grid.Row="1" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFD88F8F" HorizontalAlignment="Center"/>
+        <Label x:Name="label_Copy1" Content="数    据    位" Margin="14,5,9.5,4.5" Grid.Row="2" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="#FFC78484" HorizontalAlignment="Center"/>
+        <Label x:Name="label_Copy3" Content="校    验    位" Margin="14,5.5,9.5,5" Grid.Row="3" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" BorderBrush="#FFB87E7E" BorderThickness="0,0,0,1" HorizontalAlignment="Center"/>
+        <Label x:Name="label_Copy4" Content="停    止    位" Margin="14,5,9.5,5" Grid.Row="4" Foreground="#FF080808" Background="{x:Null}" Grid.Column="1" RenderTransformOrigin="0.486,0.135" BorderThickness="0,0,0,1" BorderBrush="#FFE84D4D" HorizontalAlignment="Center"/>
         <ComboBox x:Name="box_baudRate" Margin="10.5,6.5,8.5,3" Background="{x:Null}" BorderBrush="#FFE07676" Grid.Column="2" Grid.Row="1" SelectionChanged="box_SelectionChanged" IsEditable="True" />
         <ComboBox x:Name="box_dataBits" Margin="10.5,5,8.5,4.5" Background="{x:Null}" BorderBrush="#FFEA7070" Grid.Column="2" Grid.Row="2" SelectionChanged="box_SelectionChanged" IsEditable="True" />
         <ComboBox x:Name="box_parityBits" Margin="10.5,5.5,8.5,5" BorderBrush="#FFEA8282" Background="{x:Null}" Grid.Row="3" Grid.Column="2" RenderTransformOrigin="0.595,2" SelectionChanged="box_SelectionChanged" />
