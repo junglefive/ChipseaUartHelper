@@ -349,11 +349,11 @@ namespace ChipseaUartHelper
             if (!btn_pause_click)
             {
                 btn_pause_click = true;
-                btn_pause.Content = "pausing";
+                btn_pause.Content = "Pausing";
             }
             else {
                 btn_pause_click = false;
-                btn_pause.Content = "pause";
+                btn_pause.Content = "Pause";
             }
                 
         }

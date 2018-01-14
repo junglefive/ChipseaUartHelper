@@ -35,20 +35,20 @@
             </Grid.RowDefinitions>
             <Grid Background="#FFCBC0C0" Margin="0,-1,0,0">
                 <Grid>
-                    <CheckBox x:Name="checkBox_origin" Content="Origin" Checked="checkBox_origin_Checked" Unchecked="checkBox_origin_Unchecked" RenderTransformOrigin="0.546,0.858" Margin="0,6,0,10"/>
+                    <CheckBox x:Name="checkBox_origin" Content="Origin" Checked="checkBox_origin_Checked" Unchecked="checkBox_origin_Unchecked" RenderTransformOrigin="0.546,0.858" Margin="0,6,0,10" ToolTip="原始值"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Background="#FFCFB2B2">
-                <CheckBox x:Name="checkBox_shake" Content="Shake" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" RenderTransformOrigin="4.789,0.25" Checked="checkBox_shake_Checked" Unchecked="checkBox_shake_Unchecked"/>
+                <CheckBox x:Name="checkBox_shake" Content="Shake" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" RenderTransformOrigin="4.789,0.25" Checked="checkBox_shake_Checked" Unchecked="checkBox_shake_Unchecked" ToolTip="阈值（防抖)"/>
             </Grid>
             <Grid Grid.Row="3" Background="#FFF3B6B6">
-                <CheckBox x:Name="checkBox_moving" Content="Moving" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_moving_Checked" Unchecked="checkBox_moving_Unchecked"/>
+                <CheckBox x:Name="checkBox_moving" Content="Moving" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_moving_Checked" Unchecked="checkBox_moving_Unchecked" ToolTip="滑动滤波"/>
             </Grid>
             <Grid Grid.Row="4" Background="#FFD7DEB6">
-                <CheckBox x:Name="checkBox_iir" Content="IIR" Margin="0,16.5,0,0" VerticalAlignment="Top" Checked="checkBox_iir_Checked" Unchecked="checkBox_iir_Unchecked"/>
+                <CheckBox x:Name="checkBox_iir" Content="IIR" Margin="0,16.5,0,0" VerticalAlignment="Top" Checked="checkBox_iir_Checked" Unchecked="checkBox_iir_Unchecked" ToolTip="一阶延迟阈值滤波"/>
             </Grid>
             <Grid Grid.Row="2" Background="#FFD19E9E">
-                <CheckBox x:Name="checkBox_average1" Content="Average" Margin="0,4,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked" Height="19" BorderBrush="#FF72ACAC">
+                <CheckBox x:Name="checkBox_average1" Content="Average" Margin="0,4,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.902,0.375" Checked="checkBox_average_Checked" Unchecked="checkBox_average_Unchecked" Height="19" BorderBrush="#FF72ACAC" ToolTip="平均滤波">
                     <CheckBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -59,23 +59,23 @@
                     </CheckBox.RenderTransform>
                 </CheckBox>
             </Grid>
-            <Button x:Name="btn_pause" Content="暂停" VerticalAlignment="Top" Height="21" Click="btn_pause_Click" Margin="0,11,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
-            <Button x:Name="btn_reset" Content="复位" Margin="0,0,0,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C" HorizontalAlignment="Left" Width="74" Height="21" VerticalAlignment="Bottom"/>
-            <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFE49B9B" Grid.Column="1" Grid.Row="5" Height="29" VerticalAlignment="Center" TextAlignment="Center" Cursor="None" IsEnabled="False"/>
-            <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="6" Background="#FFAD97DC" Grid.Column="1" VerticalAlignment="Center" Height="28" TextAlignment="Center"/>
-            <TextBlock x:Name="textBlock_delta" Grid.Row="7" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FFA6CBBF" Grid.Column="1" VerticalAlignment="Center" Height="30" TextAlignment="Center"/>
+            <Button x:Name="btn_pause" Content="Pause" VerticalAlignment="Top" Height="21" Click="btn_pause_Click" Margin="0,11,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
+            <Button x:Name="btn_reset" Content="Reset" Margin="0,0,0,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C" HorizontalAlignment="Left" Width="74" Height="21" VerticalAlignment="Bottom"/>
+            <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFE49B9B" Grid.Column="1" Grid.Row="5" Height="29" VerticalAlignment="Center" TextAlignment="Center" Cursor="None" IsEnabled="False" ToolTip="最大值"/>
+            <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="6" Background="#FFAD97DC" Grid.Column="1" VerticalAlignment="Center" Height="28" TextAlignment="Center" ToolTip="最小值"/>
+            <TextBlock x:Name="textBlock_delta" Grid.Row="7" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FFA6CBBF" Grid.Column="1" VerticalAlignment="Center" Height="30" TextAlignment="Center" ToolTip="变化值"/>
             <Label x:Name="label" Content="MAX:" Grid.Row="5" Background="#FFCF9B9B"/>
             <Label x:Name="label_Copy" Content="MIN:" Grid.Row="6" Background="#FFA796CB"/>
             <Label x:Name="label_Copy1" Content="VALUE-D:" Grid.Row="7" Background="#FFA8BFBB"/>
             <Grid Grid.Column="1" Background="#FFCFC0C0" Margin="0,-1,0,0">
-                <TextBox x:Name="textBox_origin" Margin="12,9,12,6" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White" TextAlignment="Center"/>
+                <TextBox x:Name="textBox_origin" Margin="12,9,12,6" TextWrapping="Wrap" Text="0" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_origin_DataContextChanged" BorderBrush="#FFB0C7AD" Background="White" TextAlignment="Center" ToolTip="将原始值右移位数"/>
             </Grid>
             <Grid Grid.Column="1" Background="#FFD1B2B2" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="12*"/>
                     <RowDefinition Height="13*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBox_shake_threshold" Margin="12,0,12,2" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1" TextAlignment="Center">
+                <TextBox x:Name="textBox_shake_threshold" Margin="12,0,12,2" TextWrapping="Wrap" Text="200" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_threshold_DataContextChanged" Height="20" VerticalAlignment="Bottom" UndoLimit="5" Grid.Row="1" TextAlignment="Center" ToolTip="防抖阈值">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -84,7 +84,7 @@
                         </LinearGradientBrush>
                     </TextBox.BorderBrush>
                 </TextBox>
-                <TextBox x:Name="textBox_shake_count" Margin="12,3,12,0" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200" TextAlignment="Center">
+                <TextBox x:Name="textBox_shake_count" Margin="12,3,12,0" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_shake_count_DataContextChanged" UndoLimit="200" TextAlignment="Center" ToolTip="防抖次数">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -98,7 +98,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="textBox_average_times" Margin="12,6,12,3" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" TextAlignment="Center">
+                <TextBox x:Name="textBox_average_times" Margin="12,6,12,3" TextWrapping="Wrap" Text="4" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_average_times_DataContextChanged" TextAlignment="Center" ToolTip="平均次数">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -109,7 +109,7 @@
                 </TextBox>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="3" Background="#FFF5BFBF">
-                <TextBox x:Name="textBox_moving_length" Margin="12,6,12,8" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged" TextAlignment="Center" IsTabStop="False">
+                <TextBox x:Name="textBox_moving_length" Margin="12,6,12,8" TextWrapping="Wrap" Text="8" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_moving_length_DataContextChanged" TextAlignment="Center" IsTabStop="False" ToolTip="滑动级数">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -124,7 +124,7 @@
                     <RowDefinition/>
                     <RowDefinition Height="32"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBox_iir_order" Margin="12,5,12,0" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="23" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged" TextAlignment="Center">
+                <TextBox x:Name="textBox_iir_order" Margin="12,5,12,0" TextWrapping="Wrap" Text="6" RenderTransformOrigin="0.425,0.373" Height="23" VerticalAlignment="Top" TextChanged="textBox_iir_order_DataContextChanged" TextAlignment="Center" ToolTip="加权系数（1/2^n）">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -133,7 +133,7 @@
                         </LinearGradientBrush>
                     </TextBox.BorderBrush>
                 </TextBox>
-                <TextBox x:Name="textBox_iir_threshold" Margin="12,0,12,4" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="23" Grid.Row="1" VerticalAlignment="Bottom" TextAlignment="Center">
+                <TextBox x:Name="textBox_iir_threshold" Margin="12,0,12,4" TextWrapping="Wrap" Text="50" RenderTransformOrigin="0.425,0.373" TextChanged="textBox_iir_threshold_DataContextChanged" Height="23" Grid.Row="1" VerticalAlignment="Bottom" TextAlignment="Center" ToolTip="跳变阈值">
                     <TextBox.BorderBrush>
                         <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                             <GradientStop Color="#FFABADB3" Offset="0.05"/>
