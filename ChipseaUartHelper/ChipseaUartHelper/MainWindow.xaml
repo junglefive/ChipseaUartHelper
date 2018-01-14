@@ -43,8 +43,8 @@
 
 
 
-        <ScrollViewer x:Name="scroll_log" Grid.ColumnSpan="3" Grid.Row="10" Grid.RowSpan="3" Margin="0,2.5,4.5,0.5">
-            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFF9F9F9" BorderThickness="2" Padding="0,5,0,8" BorderBrush="#FFC7C1C1" Margin="0,5">
+        <ScrollViewer x:Name="scroll_log" Grid.ColumnSpan="2" Grid.Row="10" Grid.RowSpan="3" Margin="0,2.5,4.5,0.5" Grid.Column="1">
+            <RichTextBox x:Name="box_log" UndoLimit="0" Background="#FFF9F9F9" BorderThickness="2" Padding="0,5,0,8" BorderBrush="#FFC7C1C1" Margin="0,5" TextChanged="box_log_TextChanged">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
@@ -70,7 +70,7 @@
             <Menu x:Name="menu"  DockPanel.Dock="Top" Padding="2" RenderTransformOrigin="0.459,-2.75" Background="{x:Null}" Foreground="#FF727171">
                 <MenuItem Header="_工具" Foreground="#FF524C4C" Margin="2,0,0,0">
                     <MenuItem Header="_清空发送下拉列表"  Click="btn_clearSendLog_Click" />
-        
+
 
                 </MenuItem>
                 <MenuItem Header="_关于" Padding="7,1,8,1" Foreground="#FF393232" Margin="10,0,0,0" Click="MenuItem_Click">
@@ -80,10 +80,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TextBlock x:Name="textBox_status_tx" Grid.Column="3" HorizontalAlignment="Left" Height="14" Grid.Row="13" TextWrapping="Wrap" Text="发送：0 Bytes" VerticalAlignment="Top" Width="90" Foreground="#FF585151" Margin="119.5,11.5,0,0" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="textBox_status_rx" Grid.Column="3" HorizontalAlignment="Left" Height="14" Grid.Row="13" TextWrapping="Wrap" Text="接收：0 Bytes" VerticalAlignment="Top" Width="116" Foreground="#FF635858" Margin="3.5,11.5,0,0"/>
         <TextBlock x:Name="textBox_status_com" Grid.Column="1" Grid.Row="13" TextWrapping="Wrap" Text="串口信息" Foreground="#FF575050" VerticalAlignment="Center" Margin="0,9.5,4.5,7" Grid.ColumnSpan="2" Height="16"/>
-        <Grid Grid.Column="3" Grid.Row="2" Background="#FFECBCBC" Margin="11.5,10,10.5,4">
+        <Grid Grid.Column="3" Grid.Row="2" Background="#FFECBCBC" Margin="11.5,10,10.5,0" Height="36" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="88*"/>
                 <ColumnDefinition Width="91*"/>
@@ -92,7 +90,7 @@
             <RadioButton x:Name="radioButton_hex" Content="十六进制" Margin="13.5,6,10,0" VerticalAlignment="Top" Checked="radioButton_hex_Checked" Height="15" Grid.Column="1" IsChecked="True" Foreground="#FF1B0202"/>
 
         </Grid>
-        <GridSplitter x:Name="gridSplitter3" Grid.Column="2" HorizontalAlignment="Stretch" Grid.RowSpan="15" Background="#FFFFF8F8" Margin="0.5,0"/>
+        <GridSplitter x:Name="gridSplitter3" Grid.Column="2" HorizontalAlignment="Stretch" Grid.RowSpan="15" Background="#FFC4C4B7" Margin="0.5,0"/>
         <Grid Grid.Column="8" HorizontalAlignment="Left" Height="26" Margin="180.5,8,-370.5,0" Grid.Row="9" VerticalAlignment="Top" Width="190">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="31*"/>
@@ -127,7 +125,15 @@
             </TextBox>
             <CheckBox x:Name="checkBox_decode" Content="解码使能" Checked="checkBox_decode_Checked" Unchecked="checkBox_decode_Unchecked" RenderTransformOrigin="0.662,-1.938" Foreground="#FFBD38B1" Background="{x:Null}" BorderBrush="#FFE2BEBE" ToolTip="0xC5 0x03 H M L Hexor" Grid.Column="1" Margin="10.5,7,0,7"/>
         </Grid>
-        <Button x:Name="btn_configSerialPort" Content="配置串口" Grid.Column="3" HorizontalAlignment="Left" Margin="11.5,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="184" Height="32" Click="btn_configSerialPort_Click"/>
+        <Button x:Name="btn_configSerialPort" Content="配置串口" Grid.Column="3" Grid.Row="3" Click="btn_configSerialPort_Click" Margin="11.5,10,10.5,10"/>
+        <Grid Grid.Column="3" Height="23" Margin="9.5,7.5,12.5,0" Grid.Row="13" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="89*"/>
+                <ColumnDefinition Width="93*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="textBox_status_rx" Height="17" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF635858" Margin="9,2,105,0" Grid.ColumnSpan="2" FontSize="10"><Run Text="接收：0 Bytes"/></TextBlock>
+            <TextBlock x:Name="textBox_status_tx" Height="14" TextWrapping="Wrap" Text="发送：0 Bytes" VerticalAlignment="Top" Foreground="#FF585151" Margin="100,2,14,0" Grid.ColumnSpan="2" FontSize="10"/>
+        </Grid>
 
 
 

@@ -869,7 +869,10 @@ namespace ChipseaUartHelper
             B_Auto_Enter_Flag = false;
         }
 
+        private void box_log_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 
 }

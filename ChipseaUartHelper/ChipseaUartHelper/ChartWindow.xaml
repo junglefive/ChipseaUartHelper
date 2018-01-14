@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChipseaUartHelper"
         xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0" x:Name="chart_window" x:Class="ChipseaUartHelper.ChartWindow"
         mc:Ignorable="d"
-        Title="ChartWindow" Height="419.5" Width="1097.833" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
+        Title="实时绘图窗口" Height="419.5" Width="1097.833" Loaded="chart_window_Loaded" Closing="chart_window_Closing" Closed="chart_window_Closed">
     <Grid Background="#FFEAD5D5" Margin="0,0,2,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -59,8 +59,8 @@
                     </CheckBox.RenderTransform>
                 </CheckBox>
             </Grid>
-            <Button x:Name="btn_pause" Content="Pause" VerticalAlignment="Top" Height="21" Click="btn_pause_Click" Margin="0,10,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
-            <Button x:Name="btn_reset" Content="Reset" Margin="0,0,0,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C" HorizontalAlignment="Left" Width="74" Height="21" VerticalAlignment="Bottom"/>
+            <Button x:Name="btn_pause" Content="暂停" VerticalAlignment="Top" Height="21" Click="btn_pause_Click" Margin="0,11,0,0" Grid.Row="9" BorderBrush="#FFB2AB99"/>
+            <Button x:Name="btn_reset" Content="复位" Margin="0,0,0,7" Grid.Row="9" Click="btn_reset_Click" Grid.Column="1" BorderBrush="#FFB4AD9C" HorizontalAlignment="Left" Width="74" Height="21" VerticalAlignment="Bottom"/>
             <TextBlock x:Name="textBlock_max" TextWrapping="Wrap" Text="MAX" Background="#FFE49B9B" Grid.Column="1" Grid.Row="5" Height="29" VerticalAlignment="Center" TextAlignment="Center" Cursor="None" IsEnabled="False"/>
             <TextBlock x:Name="textBlock_min" TextWrapping="Wrap" Text="MIN" Grid.Row="6" Background="#FFAD97DC" Grid.Column="1" VerticalAlignment="Center" Height="28" TextAlignment="Center"/>
             <TextBlock x:Name="textBlock_delta" Grid.Row="7" TextWrapping="Wrap" Text="DELTA" Foreground="#FFC71C1C" Background="#FFA6CBBF" Grid.Column="1" VerticalAlignment="Center" Height="30" TextAlignment="Center"/>
@@ -143,7 +143,7 @@
                     </TextBox.BorderBrush>
                 </TextBox>
             </Grid>
-            <TextBlock x:Name="textBlock_log" TextWrapping="Wrap" Text="  " Background="#FFD4D1D4" Margin="0,5,0,6" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Height="22" TextAlignment="Center"/>
+            <TextBlock x:Name="textBlock_log" TextWrapping="Wrap" Text="  " Background="#FFCECFC9" Margin="0,5,0,7" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Height="22" TextAlignment="Center"/>
             <Button x:Name="btn_change" Content="Next" Margin="0,5,0,0" Grid.Row="8" VerticalAlignment="Top" BorderBrush="#FF958F74" Click="btn_change_Click" Height="22"/>
         </Grid>
     </Grid>

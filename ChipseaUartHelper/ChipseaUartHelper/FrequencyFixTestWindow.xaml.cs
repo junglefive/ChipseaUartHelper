@@ -58,10 +58,10 @@ namespace ChipseaUartHelper
             
         }
         void updateChannel() {
-            textBlock.Text = "chosed: " + (2402 + 2 * channel +"    ");
+            textBlock.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + "选择了-> " + (2402 + 2 * channel +"    ");
         }
         void updatelog() {
-            textBlock.Text += "sending: "+ BitConverter.ToString(sendBytes)+"    ";
+            textBlock.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + "发送了-> " + BitConverter.ToString(sendBytes)+"    ";
             scroll_log.ScrollToRightEnd();
         }
 
@@ -69,6 +69,11 @@ namespace ChipseaUartHelper
         {
             button_reset.Content = "HEHE";
 
+        }
+
+        private void button_clear_Click(object sender, RoutedEventArgs e)
+        {
+            textBlock.Text = "";
         }
     }
 }

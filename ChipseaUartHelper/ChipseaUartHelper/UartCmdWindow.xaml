@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipseaUartHelper"
         mc:Ignorable="d"
-        Title="UartCmdWindow" Height="329.053" Width="1005.5" ShowInTaskbar="False" ResizeMode="NoResize" Closing="Window_Closing">
-    <Grid Margin="0,0,2,2">
+        Title="串口多命令发送窗口" Height="329.053" Width="1005.5" ShowInTaskbar="False" ResizeMode="NoResize" Closing="Window_Closing" Background="#FFDAD8D8">
+    <Grid Margin="0,0,2,2" Background="#FFF4E4E4">
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Margin="10,10,9.5,0.5" OpacityMask="#FFDAD6D6" Background="White">
+        <Grid Margin="10,10,9.5,0.5" OpacityMask="#FFDAD6D6" Background="#FFECECEC">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="158*"/>

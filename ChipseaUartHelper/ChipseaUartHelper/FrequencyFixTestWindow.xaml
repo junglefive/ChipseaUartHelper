@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipseaUartHelper"
         mc:Ignorable="d"
-        Title="FrequencyFixTestWindow" Height="324" Width="779" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
+        Title="定频测试窗口" Height="324" Width="779" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
     <Grid Margin="0,0,2,0" Background="#FFE2E0E0">
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
@@ -92,10 +92,10 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="button_help" Content="Help" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="4" RenderTransformOrigin="0.448,-0.25"/>
-                <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="3" Click="button_reset_Click"/>
-                <Button x:Name="button_clear" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="2"/>
-                <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="1" Click="button_send_Click">
+                <Button x:Name="button_help" Content="帮助" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="4" RenderTransformOrigin="0.448,-0.25" IsEnabled="False"/>
+                <Button x:Name="button_reset" Content="复位" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="3" Click="button_reset_Click" IsEnabled="False"/>
+                <Button x:Name="button_clear" Content="清空" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="2" Click="button_clear_Click"/>
+                <Button x:Name="button_send" Content="发送" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Height="24" Grid.Row="1" Click="button_send_Click">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFFD8B8B" Offset="0.084"/>
@@ -110,6 +110,6 @@
         <ScrollViewer x:Name="scroll_log" Grid.Column="1" Grid.Row="2" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Margin="2,10,97,10" Padding="1" Background="#FFF5D1F9" Grid.ColumnSpan="2">
             <TextBlock x:Name="textBlock" Text="TextBlock" TextWrapping="Wrap" Height="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </ScrollViewer>
-        <Label x:Name="label" Content="Chipsea-BLE" Grid.Column="2" Grid.Row="2" Background="#FFF37070" Margin="21,8,0,12" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="82" Height="25"/>
+        <Label x:Name="label" Content="Chipsea-BLE" Grid.Column="2" Grid.Row="2" Background="#FFF37070" Margin="21,9.5,0,9.5" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Width="82" Height="26"/>
     </Grid>
 </Window>
