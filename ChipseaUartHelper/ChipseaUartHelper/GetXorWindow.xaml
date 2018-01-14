@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipseaUartHelper"
         mc:Ignorable="d"
-        Title="GetXorWindow" Height="197.334" Width="659.751" ResizeMode="NoResize" ShowInTaskbar="False">
+        Title="HEX亦或校验码生成器" Height="259.834" Width="661.751" ShowInTaskbar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,24 +14,25 @@
         <Grid Background="#FFFBF5F5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="22*"/>
-                <ColumnDefinition Width="207*"/>
-                <ColumnDefinition Width="218*"/>
-                <ColumnDefinition Width="192*"/>
+                <ColumnDefinition Width="177*"/>
+                <ColumnDefinition Width="190*"/>
+                <ColumnDefinition Width="249*"/>
                 <ColumnDefinition Width="16*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="45*"/>
-                <RowDefinition Height="55*"/>
-                <RowDefinition Height="48*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="54*"/>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="47*"/>
+                <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="txt_input" Height="40" Margin="0,4,4,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Grid.Column="1" Padding="1"/>
-            <TextBox x:Name="txt_result" HorizontalAlignment="Left" Height="36" Margin="0,10.5,0,0" TextWrapping="Wrap" Text="Result" VerticalAlignment="Top" Width="176" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFB3ADAB" Grid.Row="3" Grid.Column="1" Foreground="#FFF93509" TextDecorations="{x:Null}" Padding="1"/>
-            <Button Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.131,1.122" Background="#FFF9C0C0" Click="Button_Click" Height="36" Margin="0,10.5,61.5,0" Grid.Row="3" Grid.Column="2"/>
-            <Button Content="Bitxor" HorizontalAlignment="Right" VerticalAlignment="Top" Width="156" RenderTransformOrigin="0.131,1.122" Background="#FFF9C0C0" Click="Button_Click_1" Height="36" Margin="0,10.5,4,0" Grid.Row="3" Grid.Column="3"/>
-            <TextBox x:Name="txt_output" Height="40" Margin="0,3,4,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Padding="1" Grid.Column="1"/>
+            <TextBox x:Name="txt_input_parsed" Grid.Row="2" TextWrapping="Wrap" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Grid.Column="1" Padding="1" TextChanged="txt_input_TextChanged" IsEnabled="False" Margin="0,5"/>
+            <TextBox x:Name="txt_result" Height="36" Margin="0,11,0,0" TextWrapping="Wrap" Text="0x00" VerticalAlignment="Top" HorizontalContentAlignment="Center" BorderBrush="#FFB3ADAB" Grid.Row="3" Grid.Column="1" Foreground="#FFF93509" TextDecorations="{x:Null}" Padding="1" VerticalContentAlignment="Center" ToolTip="亦或值" TextAlignment="Justify"/>
+            <Button Content="清空界面" VerticalAlignment="Top" RenderTransformOrigin="0.131,1.122" Background="#FFF9C0C0" Click="Button_Click" Height="36" Margin="10,11,0,0" Grid.Row="3" Grid.Column="3"/>
+            <TextBox x:Name="txt_output" Grid.Row="4" TextWrapping="Wrap" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Padding="1" Grid.Column="1" Margin="0,5"/>
+            <TextBox x:Name="txt_Current_Cnt" Height="36" Margin="10,11,0,0" TextWrapping="Wrap" Text="共输入: 0 字节" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="#FFB3ADAB" Grid.Row="3" Grid.Column="2" Foreground="#FF625C5B" TextDecorations="{x:Null}" Padding="1" IsEnabled="False"/>
+            <TextBox x:Name="txt_input" Grid.Row="1" TextWrapping="Wrap" VerticalContentAlignment="Center" BorderBrush="#FF97B0FC" Grid.ColumnSpan="3" Grid.Column="1" Padding="1" TextChanged="txt_input_TextChanged" ToolTip="支持格式如：C5 01 80 44（两个byte之间允许空格） " Margin="0,5"/>
         </Grid>
 
     </Grid>

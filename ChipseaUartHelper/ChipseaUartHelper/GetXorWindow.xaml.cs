@@ -42,13 +42,13 @@ namespace ChipseaUartHelper
             return result;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            byte[] arrByte = strToToHexByte(txt_input.Text);
-            string strResult = getXor(arrByte).ToString("X2");
-            txt_result.Text ="0x"+ strResult;
-           txt_output.Text = bytesToString(arrByte) + strResult;
-        }
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    byte[] arrByte = strToToHexByte(txt_input.Text);
+        //    string strResult =getXor(arrByte).ToString("X2");
+        //    txt_result.Text ="亦或值: 0x"+ strResult;
+        //   txt_output.Text = bytesToString(arrByte) + strResult;
+        //}
         public byte getXor(byte[] xorBytes) {
             byte result = 0x00;
             foreach (byte tmp in xorBytes) {
@@ -72,13 +72,26 @@ namespace ChipseaUartHelper
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Parse Input Hex data Erro", "Erro");
-                  
+                    MessageBox.Show("数据解析错误，请重新输入", "错误");
+                byte[] arryByte = new byte[1];
+                arryByte[0] = 0x00;
+                txt_input.Text = " ";
+                return arryByte;
                 }
 
             return returnBytes;
 
 
+        }
+
+        private void txt_input_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            byte[] arrByte = strToToHexByte(txt_input.Text);
+            txt_input_parsed.Text = bytesToString(arrByte);
+            txt_Current_Cnt.Text = "共输入: " + arrByte.Length.ToString() + " 字节";
+            string strResult = getXor(arrByte).ToString("X2");
+            txt_result.Text = "0x" + strResult;
+            txt_output.Text = bytesToString(arrByte) + strResult;
         }
     }
 }

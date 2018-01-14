@@ -36,8 +36,8 @@
             <TextBox x:Name="combox_cmd1" Margin="12,9,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFE4C2C2" ScrollViewer.CanContentScroll="True" Background="{x:Null}" AcceptsTab="True">
 
             </TextBox>
-            <Button x:Name="btn_send1" Content="Send" HorizontalAlignment="Left" Margin="11.5,10,0,3.5" Width="52" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="1" Click="btn_send1_Click" RenderTransformOrigin="0.519,0.747"/>
-            <TextBlock x:Name="txt_log" Grid.Column="2" HorizontalAlignment="Center" Margin="10,2.5,69.5,6" Grid.Row="6" Text="TextBlock" VerticalAlignment="Center" Width="555" Height="28" Foreground="#FF8A8181" Padding="5" TextWrapping="WrapWithOverflow" Grid.ColumnSpan="2"/>
+            <Button x:Name="btn_send1" Content="发送" HorizontalAlignment="Left" Margin="11.5,10,0,3.5" Width="52" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="1" Click="btn_send1_Click" RenderTransformOrigin="0.519,0.747"/>
+            <TextBlock x:Name="txt_log" Grid.Column="2" HorizontalAlignment="Center" Margin="10,2.5,69.5,6" Grid.Row="6" Text="TextBlock" VerticalAlignment="Center" Width="555" Height="28" Foreground="#FF8A8181" Padding="5" TextWrapping="WrapWithOverflow" Grid.ColumnSpan="2" FontSize="10"/>
             <TextBox x:Name="combox_cmd2" Margin="12,12.5,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="2" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFECBDBD" ScrollViewer.CanContentScroll="True" Background="{x:Null}">
 
             </TextBox>
@@ -46,10 +46,10 @@
             <TextBox x:Name="combox_cmd5" Margin="12,12,0.5,0" Height="28" Text="10 00 00 c5 01 81 45" Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" VerticalAlignment="Top"  BorderBrush="#FFDC8383" ScrollViewer.CanContentScroll="True" Background="{x:Null}">
 
             </TextBox>
-            <Button x:Name="btn_send2" Content="Send" HorizontalAlignment="Left" Margin="11.5,12.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="2" Click="btn_send2_Click"/>
-            <Button x:Name="btn_send3" Content="Send" HorizontalAlignment="Left" Margin="11.5,8,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="3" Click="btn_send3_Click"/>
-            <Button x:Name="btn_send4" Content="Send" HorizontalAlignment="Left" Margin="11.5,11.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="4" Click="btn_send4_Click"/>
-            <Button x:Name="btn_send5" Content="Send" HorizontalAlignment="Left" Margin="11.5,12,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="5" Click="btn_send5_Click"/>
+            <Button x:Name="btn_send2" Content="发送" HorizontalAlignment="Left" Margin="11.5,12.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="2" Click="btn_send2_Click"/>
+            <Button x:Name="btn_send3" Content="发送" HorizontalAlignment="Left" Margin="11.5,8,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="3" Click="btn_send3_Click"/>
+            <Button x:Name="btn_send4" Content="发送" HorizontalAlignment="Left" Margin="11.5,11.5,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="4" Click="btn_send4_Click"/>
+            <Button x:Name="btn_send5" Content="发送" HorizontalAlignment="Left" Margin="11.5,12,0,0" VerticalAlignment="Top" Width="52" Height="28" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="5" Click="btn_send5_Click"/>
             <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="10,9,0,0" Grid.Row="1" TextWrapping="Wrap" Text="OKOK - Unlock" VerticalAlignment="Top" Width="138" VerticalContentAlignment="Center"/>
             <TextBox HorizontalAlignment="Left" Height="28" Margin="10,12.5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="OKOK - QueryUser" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
             <TextBox HorizontalAlignment="Left" Height="28" Margin="10,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="OKOK - GotFat" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
@@ -60,7 +60,7 @@
             <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,11.5,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="4" Grid.ColumnSpan="2"/>
             <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,8,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="3" Grid.ColumnSpan="2"/>
             <Label Content="ms" Grid.Column="5" HorizontalAlignment="Left" Margin="81.5,12,0,0" VerticalAlignment="Top" Height="24" Width="30" Grid.Row="5" Grid.ColumnSpan="2"/>
-            <Button x:Name="btn_send666" Content="Loop Send All" HorizontalAlignment="Left" Margin="21.5,2.5,0,0" VerticalAlignment="Top" Width="180" Height="30" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="3" Click="btn_send666_Click"/>
+            <Button x:Name="btn_send666" Content="循环发送已选择数据" HorizontalAlignment="Left" Margin="11.5,0.5,0,0" VerticalAlignment="Top" Width="180" Height="30" BorderBrush="#FFD3A4A4" Background="#FFD4B5B5" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="3" Click="btn_send666_Click"/>
             <CheckBox x:Name="check_t1" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,15,0,0" Grid.Row="1" VerticalAlignment="Top" Checked="check_t1_Checked" Unchecked="check_t1_Unchecked" Height="16" Width="16"/>
             <CheckBox x:Name="check_t2" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,20.5,0,0" Grid.Row="2" VerticalAlignment="Top" Checked="check_t2_Checked" Unchecked="check_t2_Unchecked" Height="16" Width="16"/>
             <CheckBox x:Name="check_t3" Grid.Column="4" HorizontalAlignment="Left" Margin="14.5,18,0,0" Grid.Row="3" VerticalAlignment="Top" Checked="check_t3_Checked" Unchecked="check_t3_Unchecked" Height="14" Width="16"/>
@@ -71,7 +71,7 @@
             <TextBox x:Name="txt_t3" Grid.Column="5" HorizontalAlignment="Left" Height="26" Margin="9.5,8,0,0" Grid.Row="3" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
             <TextBox x:Name="txt_t4" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="9.5,9.5,0,0" Grid.Row="4" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
             <TextBox x:Name="txt_t5" Grid.Column="5" HorizontalAlignment="Left" Height="28" Margin="9.5,12,0,0" Grid.Row="5" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="62" VerticalContentAlignment="Center"/>
-            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,2.5,0,0" Grid.Row="6" TextWrapping="Wrap" Text="Sending：" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="28" Margin="10,2.5,0,0" Grid.Row="6" TextWrapping="Wrap" Text="当前已发送记录" VerticalAlignment="Top" Width="138" Grid.Column="1" VerticalContentAlignment="Center" IsEnabled="False" TextAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

@@ -282,4 +282,3 @@ C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\C
 C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csproj.GenerateResource.Cache
 C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.exe
 C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.pdb
-C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Debug\ChipseaUartHelper.csprojResolveAssemblyReference.cache

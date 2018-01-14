@@ -94,31 +94,31 @@ namespace ChipseaUartHelper
         {
 
             spManager.SendDataPacket(strToToHexByte(combox_cmd1.Text.ToString()));
-            txt_log.Text = " " + combox_cmd1.Text.ToString();
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + combox_cmd1.Text.ToString();
 
         }
         private void btn_send2_Click(object sender, RoutedEventArgs e)
         {
             spManager.SendDataPacket(strToToHexByte(combox_cmd2.Text.ToString()));
-            txt_log.Text = " " + combox_cmd2.Text.ToString();
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + combox_cmd2.Text.ToString();
         }
 
         private void btn_send3_Click(object sender, RoutedEventArgs e)
         {
             spManager.SendDataPacket(strToToHexByte(combox_cmd3.Text.ToString()));
-            txt_log.Text = " " + combox_cmd3.Text.ToString();
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + combox_cmd3.Text.ToString();
         }
 
         private void btn_send4_Click(object sender, RoutedEventArgs e)
         {
             spManager.SendDataPacket(strToToHexByte(combox_cmd4.Text.ToString()));
-            txt_log.Text = " " + combox_cmd4.Text.ToString();
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + combox_cmd4.Text.ToString();
         }
 
         private void btn_send5_Click(object sender, RoutedEventArgs e)
         {
             spManager.SendDataPacket(strToToHexByte(combox_cmd5.Text.ToString()));
-            txt_log.Text = " " + combox_cmd5.Text.ToString();
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + combox_cmd5.Text.ToString();
 
         }
         Thread thread = null;
@@ -175,7 +175,7 @@ namespace ChipseaUartHelper
                        
                     }
                     else {
-                        MessageBox.Show("Please checked one More CMD","warnnig");
+                        MessageBox.Show("请先选择一组或多组命令。","提示");
                     }
                     
                 }
@@ -188,7 +188,7 @@ namespace ChipseaUartHelper
         void SendStringBySerialPort(string str) {
             //spManager.SendDataPacket(strToToHexByte(combox_cmd5.Text.ToString()));
             spManager.SendDataPacket(strToToHexByte(str));
-            txt_log.Text = "sending: " + str;
+            txt_log.Text = DateTime.Now.TimeOfDay.ToString().Substring(0, 11) + ": " + str;
         }
         /// <summary>
         /// /////////////////////////////////////////////

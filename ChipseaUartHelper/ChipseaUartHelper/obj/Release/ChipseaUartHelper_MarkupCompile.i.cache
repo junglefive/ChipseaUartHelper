@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Release\
+C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\obj\Release\
 ChipseaUartHelper
 none
 false
 TRACE
-E:\Workspace\CSUartHelper\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\App.xaml
-2-1386078664
+C:\Users\admin\Documents\junglefive\github\ChipseaUartHelper\ChipseaUartHelper\ChipseaUartHelper\App.xaml
+6811204560
 
-101726730637
-172035913430
-ChartWindow.xaml;MainWindow.xaml;
+15-1802393674
+14131803051
+ChartWindow.xaml;FrequencyFixTestWindow.xaml;GetXorWindow.xaml;InitSerialport.xaml;MainWindow.xaml;UartCmdWindow.xaml;
 
 True
 

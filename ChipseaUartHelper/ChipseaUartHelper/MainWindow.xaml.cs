@@ -55,8 +55,8 @@ namespace ChipseaUartHelper
             //
             comboBox_send.ItemsSource = TextSendList;
             //
-            textBox_status_tx.Text = "Tx: " + "0" + " Bytes";
-            textBox_status_rx.Text = "Rx: " + "0" + " Bytes";
+            textBox_status_tx.Text = "发送: " + "0" + " Bytes";
+            textBox_status_rx.Text = "接收: " + "0" + " Bytes";
             textBox_status_com.Text = "";
             //---------
             fs = new FileStream(".\\" + "UserSendLog.list", FileMode.OpenOrCreate);
@@ -127,20 +127,19 @@ namespace ChipseaUartHelper
                     if (bDecodeFlag)
                     {
 
-                        box_recieve.AppendText("\n" + "#Binary:  " + Convert.ToString(Convert.ToInt32(str, 16), 2).PadLeft(24, '0') + "   #Hex:  " + str+ "   #Dec: "+ Convert.ToInt32(str, 16));
+                        box_recieve.AppendText("\n" +DateTime.Now.TimeOfDay.ToString().Substring(0, 12) + ":"+ "#BIN:  " + Convert.ToString(Convert.ToInt32(str, 16), 2).PadLeft(24, '0') + "   #HEX:  " + str+ "   #DEC: "+ Convert.ToInt32(str, 16));
                     }
                 }
             }
             else {
                 box_recieve.AppendText(str);
-
             }
 
             //保持lScroll在底部
             scroll_recieve.ScrollToBottom();
         }
         private void updateRxByteCount(int Count) {
-            textBox_status_rx.Text = "Rx:  " + Count + " Bytes";
+            textBox_status_rx.Text = "接收:  " + Count + " Bytes";
 
         }
 
@@ -288,7 +287,7 @@ namespace ChipseaUartHelper
             btn_chart.IsEnabled = false;
             btn_FFT.IsEnabled = false;
             btn_cmd.IsEnabled = false;
-            btn_getXor.IsEnabled = false;
+           // btn_getXor.IsEnabled = false;
             //打开串口相关设置使能
             // btn_save.IsEnabled = false;关闭串口，保留save按键
             //getDataQueueSave.Clear();暂时不清
@@ -306,7 +305,7 @@ namespace ChipseaUartHelper
             btn_cmd.IsEnabled = true;
             btn_FFT.IsEnabled = true;
        
-            btn_getXor.IsEnabled = true;
+          //  btn_getXor.IsEnabled = true;
             
             if (spManager.bComPortIsOpen) {
 
@@ -346,11 +345,11 @@ namespace ChipseaUartHelper
             dataBytesQueue.Clear();
             getDataQueueSave.Clear();
             ClearOherFlag();
-            comboBox_sendCount.Text = "0";
+            comboBox_sendCount.Text = "共 0 帧";
             RecieveByteCount = 0;
             SendByteCount = 0;
-            textBox_status_tx.Text = "Tx: " + "0" + " Bytes";
-            textBox_status_rx.Text = "Rx: " + "0" + " Bytes";
+            textBox_status_tx.Text = "发送: " + "0" + " Bytes";
+            textBox_status_rx.Text = "接收: " + "0" + " Bytes";
         }
 
         private void btn_reset_Click(object sender, RoutedEventArgs e)
@@ -575,7 +574,7 @@ namespace ChipseaUartHelper
                     {
                         byte[] sendBytesBuffer;
                         SendStringCounter++;
-                        comboBox_sendCount.Text = SendStringCounter.ToString();
+                        comboBox_sendCount.Text = "共 "+SendStringCounter.ToString()+" 帧";
                            
                         if (spManager.ByteMode){
                         //byte[] sendBytesBuffer = Encoding.Default.GetBytes(sendStringBuffer);
@@ -770,7 +769,7 @@ namespace ChipseaUartHelper
             btn_chart.IsEnabled = false;
             btn_FFT.IsEnabled = false;
             btn_cmd.IsEnabled = false;
-            btn_getXor.IsEnabled = false;
+           // btn_getXor.IsEnabled = false;
             InitSerialport initSerialPortWindow = new InitSerialport(ComPort);
             initSerialPortWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             if ((bool)initSerialPortWindow.ShowDialog()) {
@@ -778,7 +777,7 @@ namespace ChipseaUartHelper
                
             }
             //btn_configSerialPort.Content = ComPort.BaudRate;
-           // AppendStringToLogBox("Chosed:  "+ "SerialPort: " + ComPort.PortName + "  " + "Baudrate: " + ComPort.BaudRate + "  " + "Databit: " + ComPort.DataBits + "  " + "Parity: " + ComPort.Parity + "  " + "Stopbit: " + ComPort.StopBits, true);
+            AppendStringToLogBox("已选择:  "+ "" + ComPort.PortName + " ， " + ComPort.BaudRate + "  ", true);
             btn_open.IsEnabled = true;
             textBox_status_com.Text = "SerialPort: " + ComPort.PortName + "  " + "Baudrate: " + ComPort.BaudRate + "  " + "Databit: " + ComPort.DataBits + "  " + "Parity: " + ComPort.Parity + "  " + "Stopbit: " + ComPort.StopBits;
             //  btn_clear.IsEnabled = true;
