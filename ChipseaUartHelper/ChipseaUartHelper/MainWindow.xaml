@@ -99,7 +99,7 @@
         </Grid>
         <Button x:Name="btn_close" IsEnabled="False" Content="关闭串口" Click="btn_close_Click" Background="#FFCDC0C0" BorderThickness="1"  RenderTransformOrigin="0.16,0.6" BorderBrush="#FFFD8888" Grid.Column="3" Margin="11.5,8,10.5,12" Grid.Row="6"/>
         <Button x:Name="btn_send" IsEnabled="False" Content="发送数据" Background="#FF9ACFAF" RenderTransformOrigin="0.298,-0.407" BorderThickness="1" BorderBrush="#FFF58E7E" Click="btn_send_Click" Grid.Column="3" Margin="11.5,8,10.5,18" Grid.Row="8"/>
-        <Button x:Name="btn_getXor" Content="亦或校验"  Background="#FFA3D2E8" BorderThickness="1" BorderBrush="#FF50AAA6" RenderTransformOrigin="0.551,2.37" Click="btn_getXor_Click" Grid.Column="3" Margin="9.5,9.5,12.5,2.5" Grid.Row="12"/>
+        <Button x:Name="btn_getXor" Content="异或校验"  Background="#FFA3D2E8" BorderThickness="1" BorderBrush="#FF50AAA6" RenderTransformOrigin="0.551,2.37" Click="btn_getXor_Click" Grid.Column="3" Margin="9.5,9.5,12.5,2.5" Grid.Row="12"/>
         <Button x:Name="btn_chart" IsEnabled="False" Content="实时绘图" Background="#FFCFB1B1" Click="btn_chart_Click" BorderThickness="1" BorderBrush="#FF3E859B" Grid.Column="3" Margin="11.5,10,10.5,7.5" Grid.Row="9"/>
         <Grid Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="0,10,0,0" Grid.Row="9" VerticalAlignment="Top" Width="586" ToolTip="定时发送次数">
             <Grid.ColumnDefinitions>
