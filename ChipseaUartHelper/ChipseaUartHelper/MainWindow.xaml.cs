@@ -62,7 +62,7 @@ namespace ChipseaUartHelper
             fs = new FileStream(".\\" + "UserSendLog.list", FileMode.OpenOrCreate);
             writer = new StreamWriter(fs, Encoding.UTF8); //得到文件写对象
             reader = new StreamReader(fs, Encoding.UTF8); //读文件对象
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 string str = reader.ReadLine();
                 if(str != null){
                     if (!TextSendList.Contains(str)) {
@@ -721,25 +721,27 @@ namespace ChipseaUartHelper
 
         private void textBox_time_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (sendTimer != null) {
-
-                try {
+             if (bSendTimedFlag) {
+                try
+                {
                     double b = Convert.ToInt32(textBox_time.Text);
                     if (b >= 1)
                     {
                         sendTimer.Interval = TimeSpan.FromMilliseconds(b);
                     }
-                    else {
+                    else
+                    {
                         b = 1;
-                        MessageBox.Show("输入大于1的数字/ms","提示");
-                       // sendTimer.Interval = TimeSpan.FromMilliseconds(b);
+                        MessageBox.Show("输入大于1的数字/ms", "提示");
+                        // sendTimer.Interval = TimeSpan.FromMilliseconds(b);
                     }
                 }
-                catch {
+                catch
+                {
 
                 }
             }
-             
+           
         }
         private bool SendDataAutoPlusFlag = false;
         private void checkBox_AutoPlus_Checked(object sender, RoutedEventArgs e)
